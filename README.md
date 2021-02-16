@@ -1,0 +1,2 @@
+# LiveActionRPG
+use iBeacon tech
