@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1075357782913",
+    "project_id": "liveactionrpg-c2f75",
+    "storage_bucket": "liveactionrpg-c2f75.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1075357782913:android:3792578b9753c6ebd30e80",
+        "android_client_info": {
+          "package_name": "com.liveactionrpg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1075357782913-0hm9f9utts2bg5jj462k1se8jvc30dd1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5rVytrrpGnOVwakB8wkRPswPgYPTMtoI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1075357782913-0hm9f9utts2bg5jj462k1se8jvc30dd1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1075357782913-qesh8rgk78jait2nu08kdi5simfq6g94.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.LiveActionRPG"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
