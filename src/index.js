@@ -1,4 +1,10 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 
-export const app = () => <View />;
+export default function App() {
+  return (
+    <View>
+      <Text>INDEX</Text>
+    </View>
+  );
+}
