@@ -319,6 +319,8 @@ PODS:
     - React-Core (= 0.63.4)
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
+  - ReactNativeBeaconsManager (1.1.0):
+    - React
   - RNFBApp (10.8.0):
     - Firebase/CoreOnly (~> 7.6.0)
     - React-Core
@@ -379,6 +381,7 @@ DEPENDENCIES:
   - React-RCTText (from `../node_modules/react-native/Libraries/Text`)
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - ReactNativeBeaconsManager (from `../node_modules/react-native-beacons-manager`)
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -458,6 +461,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  ReactNativeBeaconsManager:
+    :path: "../node_modules/react-native-beacons-manager"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   RNGestureHandler:
@@ -513,6 +518,7 @@ SPEC CHECKSUMS:
   React-RCTText: 5c51df3f08cb9dedc6e790161195d12bac06101c
   React-RCTVibration: ae4f914cfe8de7d4de95ae1ea6cc8f6315d73d9d
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
+  ReactNativeBeaconsManager: dd0b01841445881989af5be9ab83153d1cdaa6b7
   RNFBApp: 97b618641633d6d23187a9d0537c3893482c483f
   RNGestureHandler: 5e58135436aacc1c5d29b75547d3d2b9430d052c
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
@@ -522,4 +528,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: a3f93bc11e237308d1f721db6c9cdb248da40eb5
 
-COCOAPODS: 1.10.0.beta.2
+COCOAPODS: 1.10.1
