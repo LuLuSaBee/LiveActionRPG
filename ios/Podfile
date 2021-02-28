@@ -8,6 +8,8 @@ target 'LiveActionRPG' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'RCTSystemSetting', :path => '../node_modules/react-native-system-setting'
+
   target 'LiveActionRPGTests' do
     inherit! :complete
     # Pods for testing

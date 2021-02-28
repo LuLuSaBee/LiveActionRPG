@@ -23,7 +23,6 @@ export default class BeaconsDemo extends Component {
     // list of desired UUID to range (Note: these will be section headers in the listview rendered):
     rangedBeaconsUUIDMap: {
       [UUID.toUpperCase()]: [],
-      //   [OTHER_UUID.toUpperCase()]: [],
     },
     // React Native ListViews datasources initialization
     rangingDataSource: [
