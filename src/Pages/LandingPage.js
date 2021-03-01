@@ -3,6 +3,8 @@ import {View} from 'react-native';
 import InputBox from '../Elements/InputBox';
 import Styles from '../Styles/landingPage.css';
 import {LandingPageData as PageData} from '../data.scoure';
+import Button from '../Elements/Button';
+import {replaceToPlayerHome} from '../utils/routerAction';
 
 export default class LandingPage extends React.Component {
   constructor() {
@@ -12,11 +14,11 @@ export default class LandingPage extends React.Component {
     };
   }
 
-  onChangeTeamName(text) {
+  onChangeTeamName = (text) => {
     this.setState({
       teamName: text,
     });
-  }
+  };
 
   render() {
     const {teamNamePH} = PageData;
@@ -34,6 +36,11 @@ export default class LandingPage extends React.Component {
               textAlign: 'center',
               onChangeText: (text) => this.onChangeTeamName(text),
             }}
+          />
+          <Button
+            text={'進入'}
+            onPress={replaceToPlayerHome}
+            style={{width: 80}}
           />
         </View>
       </View>

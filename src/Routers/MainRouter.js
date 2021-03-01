@@ -18,7 +18,7 @@ export default class MainRouter extends React.Component {
             component={LandingPage}
             hideNavBar
           />
-          <Scene key={routerKey.PlayerHome} component={PlayerHome} />
+          <Scene key={routerKey.PlayerHome} component={PlayerHome} hideNavBar />
         </Stack>
       </Router>
     );
