@@ -16,9 +16,8 @@ export default class MainRouter extends React.Component {
       <Router>
         <Scene key="root" hideNavBar>
           <Tabs key={routerKey.Tabs}>
-            <Scene
+            <Stack
               key={routerKey.PlayerHome}
-              component={PlayerHome}
               tabBarLabel={TabData.playerHome}
               title={TabData.playerHome}
               icon={(e) => (
@@ -26,8 +25,9 @@ export default class MainRouter extends React.Component {
                   source={TabData.playerHomeIcon}
                   focused={e.focused}
                 />
-              )}
-            />
+              )}>
+              <Scene key={routerKey.PlayerHome} component={PlayerHome} />
+            </Stack>
             <Scene
               key={routerKey.LandingPage}
               component={LandingPage}

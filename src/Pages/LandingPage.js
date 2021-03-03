@@ -1,9 +1,9 @@
 import React from 'react';
 import {View} from 'react-native';
-import InputBox from '../Elements/InputBox';
 import Styles from '../Styles/landingPage.css';
 import {LandingPageData as PageData} from '../data.source';
-import Button from '../Elements/Button';
+import InputBox from '../Views/Elements/InputBox';
+import Button from '../Views/Elements/Button';
 import {replaceToTabs} from '../utils/routerAction';
 
 export default class LandingPage extends React.Component {
