@@ -2,9 +2,9 @@ import React from 'react';
 import {View} from 'react-native';
 import InputBox from '../Elements/InputBox';
 import Styles from '../Styles/landingPage.css';
-import {LandingPageData as PageData} from '../data.scoure';
+import {LandingPageData as PageData} from '../data.source';
 import Button from '../Elements/Button';
-import {replaceToPlayerHome} from '../utils/routerAction';
+import {replaceToTabs} from '../utils/routerAction';
 
 export default class LandingPage extends React.Component {
   constructor() {
@@ -37,11 +37,7 @@ export default class LandingPage extends React.Component {
               onChangeText: (text) => this.onChangeTeamName(text),
             }}
           />
-          <Button
-            text={'進入'}
-            onPress={replaceToPlayerHome}
-            style={{width: 80}}
-          />
+          <Button text={'進入'} onPress={replaceToTabs} style={{width: 80}} />
         </View>
       </View>
     );

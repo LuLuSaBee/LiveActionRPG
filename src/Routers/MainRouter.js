@@ -1,8 +1,10 @@
 import React from 'react';
-import {Router, Scene, Stack} from 'react-native-router-flux';
-import {routerKey} from '../data.scoure';
+import {Image} from 'react-native';
+import {Router, Scene, Stack, Tabs} from 'react-native-router-flux';
+import {routerKey, TabData} from '../data.source';
 import LandingPage from '../Pages/LandingPage';
 import PlayerHome from '../Pages/PlayerHome';
+import TabViewIcon from '../utils/TabViewIcon';
 
 export default class MainRouter extends React.Component {
   constructor() {
@@ -12,14 +14,35 @@ export default class MainRouter extends React.Component {
   render() {
     return (
       <Router>
-        <Stack key="root">
-          <Scene
-            key={routerKey.LandingPage}
-            component={LandingPage}
-            hideNavBar
-          />
-          <Scene key={routerKey.PlayerHome} component={PlayerHome} hideNavBar />
-        </Stack>
+        <Scene key="root" hideNavBar>
+          <Tabs key={routerKey.Tabs}>
+            <Scene
+              key={routerKey.PlayerHome}
+              component={PlayerHome}
+              tabBarLabel={TabData.playerHome}
+              title={TabData.playerHome}
+              icon={(e) => (
+                <TabViewIcon
+                  source={TabData.playerHomeIcon}
+                  focused={e.focused}
+                />
+              )}
+            />
+            <Scene
+              key={routerKey.LandingPage}
+              component={LandingPage}
+              tabBarLabel={TabData.backpackPage}
+              title={TabData.backpackPage}
+              icon={(e) => (
+                <TabViewIcon
+                  source={TabData.backpackPageIcon}
+                  focused={e.focused}
+                />
+              )}
+            />
+          </Tabs>
+          <Scene key={routerKey.LandingPage} component={LandingPage} />
+        </Scene>
       </Router>
     );
   }
