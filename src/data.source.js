@@ -3,6 +3,7 @@ export const routerKey = {
   LandingPage: 'LandingPage',
   PlayerHome: 'PlayerHome',
   BackpackPage: 'BackpackPage',
+  InformationPage: 'InformationPage',
 };
 
 export const LandingPageData = {
