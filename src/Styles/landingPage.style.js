@@ -5,7 +5,7 @@ const centerVH = {justifyContent: 'center', alignItems: 'center'};
 export default StyleSheet.create({
   page: {
     flex: 1,
-    backgroundColor: '#69B0AC',
+    backgroundColor: '#4F6D7A',
     ...centerVH,
   },
   inputContainer: {
