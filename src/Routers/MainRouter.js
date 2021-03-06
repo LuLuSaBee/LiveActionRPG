@@ -20,11 +20,11 @@ export default class MainRouter extends React.Component {
             <Scene
               key={routerKey.InformationPage}
               component={InformationPage}
-              tabBarLabel={TabData.InformationPage}
-              title={TabData.InformationPage}
+              tabBarLabel={TabData.informationPage}
+              title={TabData.informationPage}
               icon={(e) => (
                 <TabViewIcon
-                  source={TabData.InformationPageIcon}
+                  source={TabData.informationPageIcon}
                   focused={e.focused}
                 />
               )}

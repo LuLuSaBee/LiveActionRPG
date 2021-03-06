@@ -21,14 +21,14 @@ export const TabData = {
     normal: require('./assets/backpack.png'),
     seleted: require('./assets/backpack-seleted.png'),
   },
-  InformationPage: '資訊',
-  InformationPageIcon: {
+  informationPage: '資訊',
+  informationPageIcon: {
     normal: require('./assets/info.png'),
     seleted: require('./assets/info-seleted.png'),
   },
   iconStyle: {
-    height: '50%',
-    width: '50%',
+    height: '60%',
+    width: '60%',
     resizeMode: 'contain',
   },
 };
