@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 
 export default StyleSheet.create({
   page: {
@@ -22,5 +22,40 @@ export default StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  progressBox: {
+    flex: 0.1,
+  },
+  progressInfoTitle: {
+    marginBottom: 10,
+  },
+  progressInfo: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 5,
+  },
+  progressBar: {
+    width: '100%',
+    flex: 0.85,
+  },
+  progressNumber: {
+    width: '100%',
+    flex: 0.15,
+    marginLeft: 10,
+    fontSize: Dimensions.get('window').width * 0.04,
+    fontFamily: 'Euphemia UCAS',
+  },
+  timeLeftBox: {
+    flex: 0.2,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  timerNumber: {
+    fontSize: Dimensions.get('window').width * 0.14,
+    fontFamily: 'Euphemia UCAS',
+  },
+  supportRoom: {
+    flex: 0.7,
   },
 });

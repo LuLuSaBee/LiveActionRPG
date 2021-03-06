@@ -60,3 +60,5 @@ buck-out/
 
 
 scaning.psd
+
+package-lock.json

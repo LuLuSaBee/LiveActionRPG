@@ -32,3 +32,15 @@ export const TabData = {
     resizeMode: 'contain',
   },
 };
+
+export const InformationPageData = {
+  progress: {
+    title: '遊戲完成度',
+  },
+  timeLeft: {
+    title: '剩餘時間',
+  },
+  supportRoom: {
+    title: '支援',
+  },
+};
