@@ -21,9 +21,14 @@ export const TabData = {
     normal: require('./assets/backpack.png'),
     seleted: require('./assets/backpack-seleted.png'),
   },
+  InformationPage: '資訊',
+  InformationPageIcon: {
+    normal: require('./assets/info.png'),
+    seleted: require('./assets/info-seleted.png'),
+  },
   iconStyle: {
-    height: '65%',
-    width: '65%',
+    height: '50%',
+    width: '50%',
     resizeMode: 'contain',
   },
 };

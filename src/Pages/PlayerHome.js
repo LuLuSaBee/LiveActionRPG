@@ -1,17 +1,18 @@
 import React from 'react';
 import {View} from 'react-native';
-import BeaconScanner from '../utils/BeaconScanner';
+import ScaningView from '../Views/ScaningView';
 
+import BeaconScanner from '../utils/BeaconScanner';
 const beaconScanner = new BeaconScanner();
 
 export default class PlayerHome extends React.Component {
   constructor() {
     super();
     this.state = {
-      beacons: [],
+      beaconData: null,
     };
 
-    beaconScanner.initBeacon();
+    // beaconScanner.initBeacon();
   }
 
   openBeacon() {
@@ -23,12 +24,25 @@ export default class PlayerHome extends React.Component {
   }
 
   getBeacon(beacon) {
-    this.setState({
-      beacons: beacon,
-    });
+    // this.setState({
+    //   beaconData: beacon,
+    // });
+    console.log('--------------');
+    console.log(beacon);
+    console.log('--------------');
   }
 
   render() {
-    return <View></View>;
+    const {beaconData} = this.state;
+
+    return (
+      <View>
+        <ScaningView
+          beaconData={beaconData}
+          openBeacon={this.openBeacon}
+          closeBeacon={this.closeBeacon}
+        />
+      </View>
+    );
   }
 }
