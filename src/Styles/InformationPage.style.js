@@ -1,5 +1,6 @@
 import {StyleSheet, Dimensions} from 'react-native';
 
+const borderRadius = 10;
 export default StyleSheet.create({
   page: {
     height: '100%',
@@ -16,12 +17,11 @@ export default StyleSheet.create({
     minHeight: '10%',
     marginBottom: 20,
     marginHorizontal: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
+    padding: 10,
     backgroundColor: 'white',
-    borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: borderRadius,
   },
   progressBox: {
     flex: 0.1,
@@ -57,5 +57,35 @@ export default StyleSheet.create({
   },
   supportRoom: {
     flex: 0.7,
+    padding: 5,
+  },
+  room: {
+    flex: 1,
+    backgroundColor: '#91AA9D',
+    height: '100%',
+    width: '100%',
+    borderRadius: borderRadius,
+  },
+  roomHeader: {
+    borderTopLeftRadius: borderRadius,
+    borderTopRightRadius: borderRadius,
+    backgroundColor: '#193441',
+    justifyContent: 'center',
+    alignItems: 'center',
+    maxHeight: 40,
+    flex: 0.15,
+  },
+  roomTitle: {
+    color: 'white',
+    fontSize: 20,
+  },
+  roomBody: {
+    flex: 0.7,
+  },
+  roomfooter: {
+    flex: 0.15,
+    borderBottomLeftRadius: borderRadius,
+    borderBottomRightRadius: borderRadius,
+    backgroundColor: '#193441',
   },
 });
