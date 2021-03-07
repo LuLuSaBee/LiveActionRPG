@@ -1,5 +1,11 @@
 import React from 'react';
-import {View, Text, KeyboardAvoidingView, TextInput} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import Styles from '../Styles/InformationPage.style';
 import InfoBox from '../Views/Elements/InfoBox';
 import {InformationPageData as pageData} from '../data.source';
@@ -45,7 +51,6 @@ export default class InformationPage extends React.Component {
 
     return (
       <KeyboardAwareScrollView
-        style={{backgroundColor: '#4c69a5'}}
         resetScrollToCoords={{x: 0, y: 0}}
         contentContainerStyle={Styles.page}
         scrollEnabled={false}>
@@ -90,14 +95,20 @@ export default class InformationPage extends React.Component {
                   </Text>
                 </View>
                 <View style={Styles.roomBody}>
-                  <View style={{height: '100%', flex: 1}}>
+                  <ScrollView style={{height: '100%', flex: 1}}>
                     <Text>12346</Text>
-                  </View>
+                  </ScrollView>
                 </View>
-                <View style={Styles.roomfooter}>
-                  <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                  />
+                <View style={Styles.roomFooter}>
+                  <View style={Styles.footerContainer}>
+                    <TouchableOpacity style={Styles.roomFunc}>
+                      <Text>132</Text>
+                    </TouchableOpacity>
+                    <TextInput style={Styles.roomInput} />
+                    <TouchableOpacity style={Styles.roomSubmit}>
+                      <Text>132</Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
             }
