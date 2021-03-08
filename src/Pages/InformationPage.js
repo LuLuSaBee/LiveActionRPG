@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Styles from '../Styles/InformationPage.style';
 import InfoBox from '../Views/Elements/InfoBox';
-import {InformationPageData as pageData} from '../data.source';
+import {informationPageData as pageData} from '../data.source';
 import * as Progress from 'react-native-progress';
 import moment from 'moment';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -62,7 +62,7 @@ export default class InformationPage extends React.Component {
                 boxStyle={[Styles.box, Styles.progressBox]}
                 content={[
                   <View style={Styles.progressInfoTitle} key={'word'}>
-                    <Text>{pageData.progress.title}</Text>
+                    <Text style={Styles.text}>{pageData.progress.title}</Text>
                   </View>,
                   <View style={Styles.progressInfo} key={'bar'}>
                     <View style={Styles.progressBar}>
@@ -84,7 +84,9 @@ export default class InformationPage extends React.Component {
               <InfoBox
                 boxStyle={[Styles.box, Styles.timeLeftBox]}
                 content={[
-                  <Text key={'title'}>{pageData.timeLeft.title}</Text>,
+                  <Text key={'title'} style={Styles.text}>
+                    {pageData.timeLeft.title}
+                  </Text>,
                   <Text key={'timerNumber'} style={[Styles.timerNumber]}>
                     {moment(timeLeft).format('HH:mm:ss')}
                   </Text>,
@@ -95,28 +97,30 @@ export default class InformationPage extends React.Component {
                 content={
                   <View style={Styles.room}>
                     <View style={Styles.roomHeader}>
-                      <Text style={Styles.roomTitle}>
+                      <Text style={[Styles.roomTitle, Styles.text]}>
                         {pageData.supportRoom.title}
                       </Text>
                     </View>
                     <ScrollView style={Styles.roomBody}>
-                      <Text>12346</Text>
+                      <Text style={Styles.text}>12346</Text>
                     </ScrollView>
-                    <ScrollView horizontal={true} style={{maxHeight: 35}}>
+                    <ScrollView
+                      horizontal={true}
+                      style={Styles.supportSuggsetion}>
                       <TouchableOpacity style={Styles.supportOption}>
-                        <Text>12345</Text>
+                        <Text style={Styles.text}>12345</Text>
                       </TouchableOpacity>
                     </ScrollView>
                     <View style={Styles.roomFooter}>
                       <View style={Styles.footerContainer}>
                         <TouchableOpacity style={Styles.roomFunc}>
-                          <Text>132</Text>
+                          <Text style={Styles.text}>plugins</Text>
                         </TouchableOpacity>
                         <View style={Styles.roomInput}>
                           <TextInput style={Styles.inputBox} />
                         </View>
                         <TouchableOpacity style={Styles.roomSubmit}>
-                          <Text>132</Text>
+                          <Text style={Styles.text}>Submit</Text>
                         </TouchableOpacity>
                       </View>
                     </View>

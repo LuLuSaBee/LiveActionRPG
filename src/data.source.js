@@ -6,34 +6,35 @@ export const routerKey = {
   InformationPage: 'InformationPage',
 };
 
-export const LandingPageData = {
+export const landingPageData = {
   teamNamePH: '請輸入團隊名稱',
 };
 
 export const TabData = {
-  playerHome: '讀取器',
-  playerHomeIcon: {
-    normal: require('./assets/scan.png'),
-    seleted: require('./assets/scan-seleted.png'),
+  PlayerHome: {
+    title: '讀取器',
+    icon: {
+      normal: require('./assets/scan.png'),
+      seleted: require('./assets/scan-seleted.png'),
+    },
   },
-  backpackPage: '背包',
-  backpackPageIcon: {
-    normal: require('./assets/backpack.png'),
-    seleted: require('./assets/backpack-seleted.png'),
+  BackpackPage: {
+    title: '背包',
+    icon: {
+      normal: require('./assets/backpack.png'),
+      seleted: require('./assets/backpack-seleted.png'),
+    },
   },
-  informationPage: '資訊',
-  informationPageIcon: {
-    normal: require('./assets/info.png'),
-    seleted: require('./assets/info-seleted.png'),
-  },
-  iconStyle: {
-    height: '60%',
-    width: '60%',
-    resizeMode: 'contain',
+  InformationPage: {
+    title: '資訊',
+    icon: {
+      normal: require('./assets/info.png'),
+      seleted: require('./assets/info-seleted.png'),
+    },
   },
 };
 
-export const InformationPageData = {
+export const informationPageData = {
   progress: {
     title: '遊戲完成度',
   },
@@ -43,4 +44,10 @@ export const InformationPageData = {
   supportRoom: {
     title: '支援',
   },
+};
+
+import {ifIphoneX} from 'react-native-iphone-x-helper';
+export const defaultTheme = {
+  backgroundColor: '#efefef',
+  ...ifIphoneX({marginTop: 0}, {marginTop: 10}),
 };

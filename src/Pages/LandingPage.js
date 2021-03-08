@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import Styles from '../Styles/landingPage.style';
-import {LandingPageData as PageData} from '../data.source';
+import {landingPageData as PageData} from '../data.source';
 import InputBox from '../Views/Elements/InputBox';
 import Button from '../Views/Elements/Button';
 import {replaceToTabs} from '../utils/routerAction';

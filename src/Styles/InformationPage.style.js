@@ -1,21 +1,22 @@
 import {StyleSheet, Dimensions} from 'react-native';
+import {defaultTheme} from '../data.source';
 
 const borderRadius = 10;
 export default StyleSheet.create({
   page: {
     height: '100%',
-    backgroundColor: '#efefef',
+    backgroundColor: defaultTheme.backgroundColor,
   },
   container: {
     flex: 1,
     width: '100%',
     flexDirection: 'column',
-    marginTop: 20,
+    marginTop: defaultTheme.marginTop,
   },
   box: {
     width: 'auto',
     minHeight: '10%',
-    marginBottom: 20,
+    marginBottom: 10,
     marginHorizontal: 10,
     padding: 10,
     backgroundColor: 'white',
@@ -110,6 +111,9 @@ export default StyleSheet.create({
   roomSubmit: {
     flex: 0.2,
   },
+  supportSuggsetion: {
+    maxHeight: 33,
+  },
   supportOption: {
     borderRadius: 50,
     backgroundColor: 'white',
@@ -118,5 +122,8 @@ export default StyleSheet.create({
     alignItems: 'center',
     margin: 5,
     height: 25,
+  },
+  text: {
+    fontSize: 20,
   },
 });
