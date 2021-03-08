@@ -80,10 +80,10 @@ export default StyleSheet.create({
     fontSize: 15,
   },
   roomBody: {
-    flex: 0.7,
+    flex: 0.65,
   },
   roomFooter: {
-    flex: 0.15,
+    flex: 0.2,
     borderBottomLeftRadius: borderRadius,
     borderBottomRightRadius: borderRadius,
     backgroundColor: '#193441',
@@ -93,16 +93,29 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
   },
-  roomFunc: {
-    flex: 0.15,
-  },
-  roomInput: {
-    flex: 0.65,
-    height: 40,
-    borderWidth: 1,
-    borderColor: 'white',
-  },
-  roomSubmit: {
-    flex: 0.2,
+  // roomFunc: {
+  //   flex: 0.15,
+  // },
+  // roomInput: {
+  //   flex: 0.65,
+  //   backgroundColor: 'white',
+  //   borderRadius: 5,
+  //   marginVertical: 5,
+  //   justifyContent: 'center',
+  // },
+  // inputBox: {
+  //   marginHorizontal: 10,
+  //   fontSize: 18,
+  // },
+  // roomSubmit: {
+  //   flex: 0.2,
+  // },
+  supportOption: {
+    borderRadius: 50,
+    backgroundColor: 'white',
+    paddingHorizontal: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 5,
   },
 });

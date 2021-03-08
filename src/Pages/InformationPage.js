@@ -50,71 +50,78 @@ export default class InformationPage extends React.Component {
     const {timeLeft, progressPersent} = this.state;
 
     return (
-      <KeyboardAwareScrollView
-        resetScrollToCoords={{x: 0, y: 0}}
-        contentContainerStyle={Styles.page}
-        scrollEnabled={false}>
-        <View style={Styles.container}>
-          <InfoBox
-            boxStyle={[Styles.box, Styles.progressBox]}
-            content={[
-              <View style={Styles.progressInfoTitle} key={'word'}>
-                <Text>{pageData.progress.title}</Text>
-              </View>,
-              <View style={Styles.progressInfo} key={'bar'}>
-                <View style={Styles.progressBar}>
-                  <Progress.Bar
-                    key={1}
-                    progress={progressPersent / 100}
-                    width={null}
-                    height={20}
-                    borderRadius={40}
-                    animationType={'timing'}
-                  />
-                </View>
-                <Text style={Styles.progressNumber}>{progressPersent}%</Text>
-              </View>,
-            ]}
-          />
-          <InfoBox
-            boxStyle={[Styles.box, Styles.timeLeftBox]}
-            content={[
-              <Text key={'title'}>{pageData.timeLeft.title}</Text>,
-              <Text key={'timerNumber'} style={[Styles.timerNumber]}>
-                {moment(timeLeft).format('HH:mm:ss')}
-              </Text>,
-            ]}
-          />
-          <InfoBox
-            boxStyle={[Styles.box, Styles.supportRoom]}
-            content={
-              <View style={Styles.room}>
-                <View style={Styles.roomHeader}>
-                  <Text style={Styles.roomTitle}>
-                    {pageData.supportRoom.title}
-                  </Text>
-                </View>
-                <View style={Styles.roomBody}>
-                  <ScrollView style={{height: '100%', flex: 1}}>
+      <View style={Styles.page}>
+        <KeyboardAwareScrollView
+          resetScrollToCoords={{x: 0, y: 0}}
+          contentContainerStyle={Styles.page}
+          scrollEnabled={false}>
+          <View style={Styles.container}>
+            <InfoBox
+              boxStyle={[Styles.box, Styles.progressBox]}
+              content={[
+                <View style={Styles.progressInfoTitle} key={'word'}>
+                  <Text>{pageData.progress.title}</Text>
+                </View>,
+                <View style={Styles.progressInfo} key={'bar'}>
+                  <View style={Styles.progressBar}>
+                    <Progress.Bar
+                      key={1}
+                      progress={progressPersent / 100}
+                      width={null}
+                      height={20}
+                      borderRadius={40}
+                      animationType={'timing'}
+                    />
+                  </View>
+                  <Text style={Styles.progressNumber}>{progressPersent}%</Text>
+                </View>,
+              ]}
+            />
+            <InfoBox
+              boxStyle={[Styles.box, Styles.timeLeftBox]}
+              content={[
+                <Text key={'title'}>{pageData.timeLeft.title}</Text>,
+                <Text key={'timerNumber'} style={[Styles.timerNumber]}>
+                  {moment(timeLeft).format('HH:mm:ss')}
+                </Text>,
+              ]}
+            />
+            <InfoBox
+              boxStyle={[Styles.box, Styles.supportRoom]}
+              content={
+                <View style={Styles.room}>
+                  <View style={Styles.roomHeader}>
+                    <Text style={Styles.roomTitle}>
+                      {pageData.supportRoom.title}
+                    </Text>
+                  </View>
+                  <ScrollView style={Styles.roomBody}>
                     <Text>12346</Text>
                   </ScrollView>
-                </View>
-                <View style={Styles.roomFooter}>
-                  <View style={Styles.footerContainer}>
-                    <TouchableOpacity style={Styles.roomFunc}>
-                      <Text>132</Text>
-                    </TouchableOpacity>
-                    <TextInput style={Styles.roomInput} />
-                    <TouchableOpacity style={Styles.roomSubmit}>
-                      <Text>132</Text>
-                    </TouchableOpacity>
+                  <View style={Styles.roomFooter}>
+                    <View style={Styles.footerContainer}>
+                      {/* <TouchableOpacity style={Styles.roomFunc}>
+                        <Text>132</Text>
+                      </TouchableOpacity>
+                      <View style={Styles.roomInput}>
+                        <TextInput style={Styles.inputBox} />
+                      </View>
+                      <TouchableOpacity style={Styles.roomSubmit}>
+                        <Text>132</Text>
+                      </TouchableOpacity> */}
+                      <ScrollView horizontal={true}>
+                        <TouchableOpacity style={Styles.supportOption}>
+                          <Text>12345</Text>
+                        </TouchableOpacity>
+                      </ScrollView>
+                    </View>
                   </View>
                 </View>
-              </View>
-            }
-          />
-        </View>
-      </KeyboardAwareScrollView>
+              }
+            />
+          </View>
+        </KeyboardAwareScrollView>
+      </View>
     );
   }
 }
