@@ -5,6 +5,7 @@ import {
   TextInput,
   ScrollView,
   TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import Styles from '../Styles/InformationPage.style';
 import InfoBox from '../Views/Elements/InfoBox';
@@ -51,76 +52,80 @@ export default class InformationPage extends React.Component {
 
     return (
       <View style={Styles.page}>
-        <KeyboardAwareScrollView
-          resetScrollToCoords={{x: 0, y: 0}}
-          contentContainerStyle={Styles.page}
-          scrollEnabled={false}>
-          <View style={Styles.container}>
-            <InfoBox
-              boxStyle={[Styles.box, Styles.progressBox]}
-              content={[
-                <View style={Styles.progressInfoTitle} key={'word'}>
-                  <Text>{pageData.progress.title}</Text>
-                </View>,
-                <View style={Styles.progressInfo} key={'bar'}>
-                  <View style={Styles.progressBar}>
-                    <Progress.Bar
-                      key={1}
-                      progress={progressPersent / 100}
-                      width={null}
-                      height={20}
-                      borderRadius={40}
-                      animationType={'timing'}
-                    />
-                  </View>
-                  <Text style={Styles.progressNumber}>{progressPersent}%</Text>
-                </View>,
-              ]}
-            />
-            <InfoBox
-              boxStyle={[Styles.box, Styles.timeLeftBox]}
-              content={[
-                <Text key={'title'}>{pageData.timeLeft.title}</Text>,
-                <Text key={'timerNumber'} style={[Styles.timerNumber]}>
-                  {moment(timeLeft).format('HH:mm:ss')}
-                </Text>,
-              ]}
-            />
-            <InfoBox
-              boxStyle={[Styles.box, Styles.supportRoom]}
-              content={
-                <View style={Styles.room}>
-                  <View style={Styles.roomHeader}>
-                    <Text style={Styles.roomTitle}>
-                      {pageData.supportRoom.title}
+        <SafeAreaView>
+          <KeyboardAwareScrollView
+            resetScrollToCoords={{x: 0, y: 0}}
+            contentContainerStyle={Styles.page}
+            scrollEnabled={false}>
+            <View style={Styles.container}>
+              <InfoBox
+                boxStyle={[Styles.box, Styles.progressBox]}
+                content={[
+                  <View style={Styles.progressInfoTitle} key={'word'}>
+                    <Text>{pageData.progress.title}</Text>
+                  </View>,
+                  <View style={Styles.progressInfo} key={'bar'}>
+                    <View style={Styles.progressBar}>
+                      <Progress.Bar
+                        key={1}
+                        progress={progressPersent / 100}
+                        width={null}
+                        height={20}
+                        borderRadius={40}
+                        animationType={'timing'}
+                      />
+                    </View>
+                    <Text style={Styles.progressNumber}>
+                      {progressPersent}%
                     </Text>
-                  </View>
-                  <ScrollView style={Styles.roomBody}>
-                    <Text>12346</Text>
-                  </ScrollView>
-                  <View style={Styles.roomFooter}>
-                    <View style={Styles.footerContainer}>
-                      {/* <TouchableOpacity style={Styles.roomFunc}>
-                        <Text>132</Text>
+                  </View>,
+                ]}
+              />
+              <InfoBox
+                boxStyle={[Styles.box, Styles.timeLeftBox]}
+                content={[
+                  <Text key={'title'}>{pageData.timeLeft.title}</Text>,
+                  <Text key={'timerNumber'} style={[Styles.timerNumber]}>
+                    {moment(timeLeft).format('HH:mm:ss')}
+                  </Text>,
+                ]}
+              />
+              <InfoBox
+                boxStyle={[Styles.box, Styles.supportRoom]}
+                content={
+                  <View style={Styles.room}>
+                    <View style={Styles.roomHeader}>
+                      <Text style={Styles.roomTitle}>
+                        {pageData.supportRoom.title}
+                      </Text>
+                    </View>
+                    <ScrollView style={Styles.roomBody}>
+                      <Text>12346</Text>
+                    </ScrollView>
+                    <ScrollView horizontal={true} style={{maxHeight: 35}}>
+                      <TouchableOpacity style={Styles.supportOption}>
+                        <Text>12345</Text>
                       </TouchableOpacity>
-                      <View style={Styles.roomInput}>
-                        <TextInput style={Styles.inputBox} />
-                      </View>
-                      <TouchableOpacity style={Styles.roomSubmit}>
-                        <Text>132</Text>
-                      </TouchableOpacity> */}
-                      <ScrollView horizontal={true}>
-                        <TouchableOpacity style={Styles.supportOption}>
-                          <Text>12345</Text>
+                    </ScrollView>
+                    <View style={Styles.roomFooter}>
+                      <View style={Styles.footerContainer}>
+                        <TouchableOpacity style={Styles.roomFunc}>
+                          <Text>132</Text>
                         </TouchableOpacity>
-                      </ScrollView>
+                        <View style={Styles.roomInput}>
+                          <TextInput style={Styles.inputBox} />
+                        </View>
+                        <TouchableOpacity style={Styles.roomSubmit}>
+                          <Text>132</Text>
+                        </TouchableOpacity>
+                      </View>
                     </View>
                   </View>
-                </View>
-              }
-            />
-          </View>
-        </KeyboardAwareScrollView>
+                }
+              />
+            </View>
+          </KeyboardAwareScrollView>
+        </SafeAreaView>
       </View>
     );
   }

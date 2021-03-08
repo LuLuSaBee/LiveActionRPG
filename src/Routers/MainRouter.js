@@ -7,6 +7,7 @@ import BackpackPage from '../Pages/BackpackPage';
 import InformationPage from '../Pages/InformationPage';
 import TabViewIcon from '../utils/TabViewIcon';
 
+import CustomTabBar from '../CustomTabBar';
 export default class MainRouter extends React.Component {
   constructor() {
     super();
@@ -16,7 +17,10 @@ export default class MainRouter extends React.Component {
     return (
       <Router>
         <Scene key="root" hideNavBar>
-          <Tabs key={routerKey.Tabs} showLabel={false}>
+          <Tabs
+            key={routerKey.Tabs}
+            showLabel={true}
+            tabBarComponent={CustomTabBar}>
             <Scene
               key={routerKey.InformationPage}
               component={InformationPage}
@@ -28,6 +32,7 @@ export default class MainRouter extends React.Component {
                   focused={e.focused}
                 />
               )}
+              hideNavBar
             />
             <Stack
               key={routerKey.PlayerHome}
@@ -39,7 +44,8 @@ export default class MainRouter extends React.Component {
                   focused={e.focused}
                 />
               )}
-              initial>
+              initial
+              hideNavBar>
               <Scene key={routerKey.PlayerHome} component={PlayerHome} />
             </Stack>
             <Scene
@@ -53,6 +59,7 @@ export default class MainRouter extends React.Component {
                   focused={e.focused}
                 />
               )}
+              hideNavBar
             />
           </Tabs>
           <Scene key={routerKey.LandingPage} component={LandingPage} />

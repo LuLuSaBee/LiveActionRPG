@@ -93,23 +93,23 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
   },
-  // roomFunc: {
-  //   flex: 0.15,
-  // },
-  // roomInput: {
-  //   flex: 0.65,
-  //   backgroundColor: 'white',
-  //   borderRadius: 5,
-  //   marginVertical: 5,
-  //   justifyContent: 'center',
-  // },
-  // inputBox: {
-  //   marginHorizontal: 10,
-  //   fontSize: 18,
-  // },
-  // roomSubmit: {
-  //   flex: 0.2,
-  // },
+  roomFunc: {
+    flex: 0.15,
+  },
+  roomInput: {
+    flex: 0.65,
+    backgroundColor: 'white',
+    borderRadius: 5,
+    marginVertical: 5,
+    justifyContent: 'center',
+  },
+  inputBox: {
+    marginHorizontal: 10,
+    fontSize: 18,
+  },
+  roomSubmit: {
+    flex: 0.2,
+  },
   supportOption: {
     borderRadius: 50,
     backgroundColor: 'white',
@@ -117,5 +117,6 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     margin: 5,
+    height: 25,
   },
 });
