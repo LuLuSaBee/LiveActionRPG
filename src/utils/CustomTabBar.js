@@ -13,14 +13,17 @@ export default class CustomTabBar extends React.Component {
         <View style={Styles.view}>
           {state.routes.map((element) => (
             <TouchableOpacity
-              activeOpacity={0}
+              activeOpacity={1}
               key={element.key}
-              onTouchStart={() =>
+              onPress={() =>
                 element.key === routerKey.PlayerHome
-                  ? console.log('click')
+                  ? console.log('scan click')
                   : Actions[element.key]()
               }
-              style={Styles.iconButton}>
+              style={[
+                Styles.iconButton,
+                element.key === routerKey.PlayerHome ? Styles.scanIconView : {},
+              ]}>
               <View style={Styles.iconView}>
                 <TabViewIcon
                   source={TabData[element.key].icon}

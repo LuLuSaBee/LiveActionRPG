@@ -21,14 +21,24 @@ export default StyleSheet.create({
     flex: 0.3,
     width: '100%',
     height: '100%',
-    borderWidth: 10,
   },
   iconView: {
-    justifyContent: 'center',
+    flex: 1,
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  scanIconView: {
+    borderWidth: isIphoneX() ? 8 : 5,
+    borderColor: defaultTheme.backgroundColor,
+    borderRadius: 100,
+    maxWidth: (isIphoneX() ? 80 : 60) * 1.2,
+    marginHorizontal: '5%',
+    minHeight: '120%',
+    marginTop: -5,
   },
   iconStyle: {
-    height: isIphoneX() ? '70%' : '75%',
+    height: isIphoneX() ? '55%' : '65%',
+    width: isIphoneX() ? '55%' : '65%',
     resizeMode: 'contain',
   },
 });
