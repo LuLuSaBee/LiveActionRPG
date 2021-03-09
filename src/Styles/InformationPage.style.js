@@ -94,14 +94,12 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
   },
-  roomFunc: {
-    flex: 0.15,
-  },
   roomInput: {
-    flex: 0.65,
+    flex: 0.8,
     backgroundColor: 'white',
     borderRadius: 5,
     marginVertical: 5,
+    marginHorizontal: 10,
     justifyContent: 'center',
   },
   inputBox: {
@@ -110,6 +108,12 @@ export default StyleSheet.create({
   },
   roomSubmit: {
     flex: 0.2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 10,
+    marginVertical: 5,
+    borderRadius: 5,
+    backgroundColor: 'red',
   },
   supportSuggsetion: {
     maxHeight: 33,

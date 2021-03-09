@@ -113,14 +113,11 @@ export default class InformationPage extends React.Component {
                     </ScrollView>
                     <View style={Styles.roomFooter}>
                       <View style={Styles.footerContainer}>
-                        <TouchableOpacity style={Styles.roomFunc}>
-                          <Text style={Styles.text}>plugins</Text>
-                        </TouchableOpacity>
                         <View style={Styles.roomInput}>
                           <TextInput style={Styles.inputBox} />
                         </View>
                         <TouchableOpacity style={Styles.roomSubmit}>
-                          <Text style={Styles.text}>Submit</Text>
+                          <Text style={Styles.text}>發送</Text>
                         </TouchableOpacity>
                       </View>
                     </View>
