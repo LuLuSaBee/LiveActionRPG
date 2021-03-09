@@ -59,6 +59,7 @@ buck-out/
 /ios/Pods/
 
 
-scaning.psd
+*.psd
 
 package-lock.json
+src/fakeindex.js

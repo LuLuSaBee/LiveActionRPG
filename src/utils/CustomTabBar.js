@@ -17,7 +17,7 @@ export default class CustomTabBar extends React.Component {
               key={element.key}
               onPress={() =>
                 element.key === routerKey.PlayerHome
-                  ? console.log('scan click')
+                  ? this.props.OpenModalize()
                   : Actions[element.key]()
               }
               style={[
