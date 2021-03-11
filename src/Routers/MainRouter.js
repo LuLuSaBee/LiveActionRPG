@@ -7,7 +7,7 @@ import InformationPage from '../Pages/InformationPage';
 import CustomTabBar from '../utils/CustomTabBar';
 import {Animated, View} from 'react-native';
 
-import BeaconModal from '../Views/BeaconModal';
+import NPCModal from '../Views/NPCModal';
 
 export default function MainRouter() {
   const [modalizeRef, setModalizeRef] = useState(useRef(null));
@@ -45,7 +45,7 @@ export default function MainRouter() {
           <Scene key={routerKey.LandingPage} component={LandingPage} />
         </Scene>
       </Router>
-      <BeaconModal animated={animated} setModalizeRef={setModalizeRef} />
+      <NPCModal animated={animated} setModalizeRef={setModalizeRef} />
     </>
   );
 }
