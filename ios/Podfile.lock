@@ -323,14 +323,23 @@ PODS:
     - React-jsi (= 0.63.4)
   - ReactNativeBeaconsManager (1.1.0):
     - React
-  - RNFBApp (10.8.1):
+  - ReactNativeNavigation (7.11.3):
+    - React-Core
+    - React-RCTImage
+    - React-RCTText
+    - ReactNativeNavigation/Core (= 7.11.3)
+  - ReactNativeNavigation/Core (7.11.3):
+    - React-Core
+    - React-RCTImage
+    - React-RCTText
+  - RNFBApp (10.8.0):
     - Firebase/CoreOnly (~> 7.6.0)
     - React-Core
   - RNGestureHandler (1.10.3):
     - React-Core
   - RNReanimated (1.13.2):
     - React-Core
-  - RNScreens (2.18.1):
+  - RNScreens (2.17.1):
     - React-Core
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -385,6 +394,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - ReactNativeBeaconsManager (from `../node_modules/react-native-beacons-manager`)
+  - ReactNativeNavigation (from `../node_modules/react-native-navigation`)
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -468,6 +478,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   ReactNativeBeaconsManager:
     :path: "../node_modules/react-native-beacons-manager"
+  ReactNativeNavigation:
+    :path: "../node_modules/react-native-navigation"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   RNGestureHandler:
@@ -525,13 +537,14 @@ SPEC CHECKSUMS:
   React-RCTVibration: ae4f914cfe8de7d4de95ae1ea6cc8f6315d73d9d
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
   ReactNativeBeaconsManager: dd0b01841445881989af5be9ab83153d1cdaa6b7
-  RNFBApp: 02bde3edecf2e9694b908a5d3504e03449980f20
+  ReactNativeNavigation: 906b631a6847c26cacf5cb3791566f1fe205c65c
+  RNFBApp: 97b618641633d6d23187a9d0537c3893482c483f
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
-  RNScreens: f7ad633b2e0190b77b6a7aab7f914fad6f198d8d
+  RNScreens: b6c9607e6fe47c1b6e2f1910d2acd46dd7ecea3a
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 7fad8cfc37f4cc179f2979e75bb73986351d25c5
+PODFILE CHECKSUM: 58f8b398688dde8c239679fa27be3f6e9a0c9169
 
 COCOAPODS: 1.10.1

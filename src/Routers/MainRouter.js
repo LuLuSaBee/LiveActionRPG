@@ -1,19 +1,19 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {Router, Scene, Tabs} from 'react-native-router-flux';
 import {routerKey} from '../data.source';
 import LandingPage from '../Pages/LandingPage';
-import PlayerHome from '../Pages/PlayerHome';
 import BackpackPage from '../Pages/BackpackPage';
 import InformationPage from '../Pages/InformationPage';
 import CustomTabBar from '../utils/CustomTabBar';
-import {Modalize} from 'react-native-modalize';
-import {Text} from 'react-native';
+import {Animated, View} from 'react-native';
+
+import BeaconModal from '../Views/BeaconModal';
 
 export default function MainRouter() {
-  const modalizeRef = useRef(null);
+  const [modalizeRef, setModalizeRef] = useState(useRef(null));
+  const animated = useRef(new Animated.Value(0)).current;
   const openModalize = () => {
-    var _a;
-    (_a = modalizeRef.current) === null || _a === void 0 ? void 0 : _a.open();
+    modalizeRef.current.open();
   };
 
   return (
@@ -24,7 +24,7 @@ export default function MainRouter() {
             key={routerKey.Tabs}
             showLabel={true}
             tabBarComponent={(props) => (
-              <CustomTabBar {...props} OpenModalize={openModalize} />
+              <CustomTabBar {...props} openModalize={openModalize} />
             )}>
             <Scene
               key={routerKey.InformationPage}
@@ -32,8 +32,8 @@ export default function MainRouter() {
               hideNavBar
             />
             <Scene
-              key={routerKey.PlayerHome}
-              component={PlayerHome}
+              key={routerKey.ScanningView}
+              component={<View />}
               hideNavBar
             />
             <Scene
@@ -45,9 +45,7 @@ export default function MainRouter() {
           <Scene key={routerKey.LandingPage} component={LandingPage} />
         </Scene>
       </Router>
-      <Modalize ref={modalizeRef}>
-        <Text>123456789</Text>
-      </Modalize>
+      <BeaconModal animated={animated} setModalizeRef={setModalizeRef} />
     </>
   );
 }

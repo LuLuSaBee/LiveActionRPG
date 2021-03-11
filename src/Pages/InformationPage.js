@@ -32,19 +32,18 @@ export default class InformationPage extends React.Component {
   interval = 1000;
 
   componentDidMount() {
-    this.timer = setInterval(() => {
-      const {timeLeft, progressPersent} = this.state;
-      this.setState({
-        timeLeft: timeLeft + this.interval,
-        // progressPersent: progressPersent + 5,
-      });
-      // console.log('--------------');
-      // console.log(timeLeft);
-      // console.log('--------------');
-
-      if (timeLeft !== 0) return;
-      clearInterval(this.timer);
-    }, this.interval);
+    // this.timer = setInterval(() => {
+    //   const {timeLeft, progressPersent} = this.state;
+    //   this.setState({
+    //     timeLeft: timeLeft + this.interval,
+    //     // progressPersent: progressPersent + 5,
+    //   });
+    //   // console.log('--------------');
+    //   // console.log(timeLeft);
+    //   // console.log('--------------');
+    //   if (timeLeft !== 0) return;
+    //   clearInterval(this.timer);
+    // }, this.interval);
   }
 
   render() {

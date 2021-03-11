@@ -16,20 +16,22 @@ export default class CustomTabBar extends React.Component {
               activeOpacity={1}
               key={element.key}
               onPress={() =>
-                element.key === routerKey.PlayerHome
-                  ? this.props.OpenModalize()
+                element.key === routerKey.ScanningView
+                  ? this.props.openModalize(true)
                   : Actions[element.key]()
               }
               style={[
                 Styles.iconButton,
-                element.key === routerKey.PlayerHome ? Styles.scanIconView : {},
+                element.key === routerKey.ScanningView
+                  ? Styles.scanIconView
+                  : {},
               ]}>
               <View style={Styles.iconView}>
                 <TabViewIcon
                   source={TabData[element.key].icon}
                   iconStyle={Styles.iconStyle}
                   focused={
-                    element.key === routerKey.PlayerHome
+                    element.key === routerKey.ScanningView
                       ? false
                       : this.props.navigation._childrenNavigation[
                           element.key

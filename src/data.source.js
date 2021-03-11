@@ -1,7 +1,7 @@
 export const routerKey = {
   Tabs: 'Tabs',
   LandingPage: 'LandingPage',
-  PlayerHome: 'PlayerHome',
+  ScanningView: 'ScanningView',
   BackpackPage: 'BackpackPage',
   InformationPage: 'InformationPage',
 };
@@ -11,8 +11,7 @@ export const landingPageData = {
 };
 
 export const TabData = {
-  PlayerHome: {
-    title: '讀取器',
+  ScanningView: {
     icon: {
       normal: require('./assets/scan.png'),
       seleted: require('./assets/scan-seleted.png'),
