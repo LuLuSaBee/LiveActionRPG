@@ -5,13 +5,12 @@ import LandingPage from '../Pages/LandingPage';
 import BackpackPage from '../Pages/BackpackPage';
 import InformationPage from '../Pages/InformationPage';
 import CustomTabBar from '../utils/CustomTabBar';
-import {Animated, View} from 'react-native';
+import {View} from 'react-native';
 
-import NPCModal from '../Views/NPCModal';
+import NPCModal from '../Pages/NPCModal';
 
 export default function MainRouter() {
   const [modalizeRef, setModalizeRef] = useState(useRef(null));
-  const animated = useRef(new Animated.Value(0)).current;
   const openModalize = () => {
     modalizeRef.current.open();
   };
@@ -45,7 +44,7 @@ export default function MainRouter() {
           <Scene key={routerKey.LandingPage} component={LandingPage} />
         </Scene>
       </Router>
-      <NPCModal animated={animated} setModalizeRef={setModalizeRef} />
+      <NPCModal setModalizeRef={setModalizeRef} />
     </>
   );
 }
