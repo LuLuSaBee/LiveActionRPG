@@ -1,15 +1,19 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
+import Styles from '../Styles/BackpackPage.style';
+import InfoBox from '../Views/Elements/InfoBox';
 
 export default class BackpackPage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
   render() {
     return (
-      <View>
-        <Text>背包</Text>
+      <View style={Styles.page}>
+        <View style={Styles.container}>
+          <InfoBox />
+        </View>
       </View>
     );
   }

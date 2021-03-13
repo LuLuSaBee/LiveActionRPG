@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {isIphoneX} from 'react-native-iphone-x-helper';
 
 export default StyleSheet.create({
   container: {
@@ -11,12 +12,13 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   dialogueText: {
-    fontSize: 20,
+    fontSize: isIphoneX() ? 20 : 18,
     fontWeight: '600',
   },
   optionView: {
     flex: 0.75,
     alignItems: 'center',
+    marginTop: 10,
   },
   optionButton: {
     borderRadius: 50,
@@ -26,7 +28,7 @@ export default StyleSheet.create({
     marginTop: 10,
   },
   optionText: {
-    fontSize: 18,
+    fontSize: isIphoneX() ? 18 : 15,
     textAlign: 'center',
     margin: 10,
   },

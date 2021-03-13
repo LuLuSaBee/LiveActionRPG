@@ -4,7 +4,7 @@ export default StyleSheet.create({
   container: {
     flex: 0.45,
     height: '100%',
-    width: '75%',
+    width: '60%',
     backgroundColor: 'white',
     alignSelf: 'center',
     marginBottom: 20,

@@ -1,5 +1,4 @@
 import Beacons from 'react-native-beacons-manager';
-import SystemSetting from 'react-native-system-setting';
 
 const uuid = 'EC092F7C-C3A3-7B2E-B647-E5BE44D75DD8';
 const identifier = '666666';
@@ -10,18 +9,6 @@ export default class BeaconScanner {
 
   constructor() {
     Beacons.requestAlwaysAuthorization();
-  }
-
-  //   async isBluetoothEnable() {
-  //     return await SystemSetting.isBluetoothEnabled().then((enable) => {
-  //       return enable;
-  //     });
-  //   }
-
-  switchBluetooth() {
-    return SystemSetting.switchBluetooth(() => {
-      return true;
-    });
   }
 
   initBeacon() {

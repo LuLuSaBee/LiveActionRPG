@@ -23,6 +23,7 @@ export default class BeaconsDemo extends Component {
     // list of desired UUID to range (Note: these will be section headers in the listview rendered):
     rangedBeaconsUUIDMap: {
       [UUID.toUpperCase()]: [],
+      //   [OTHER_UUID.toUpperCase()]: [],
     },
     // React Native ListViews datasources initialization
     rangingDataSource: [
@@ -33,7 +34,7 @@ export default class BeaconsDemo extends Component {
     ],
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const {identifier, uuid} = this.state;
 
     Beacons.requestAlwaysAuthorization();
@@ -49,9 +50,6 @@ export default class BeaconsDemo extends Component {
 
     // update location to ba able to monitor:
     Beacons.startUpdatingLocation();
-  }
-
-  componentDidMount() {
     //
     // component state aware here - attach events
     //
