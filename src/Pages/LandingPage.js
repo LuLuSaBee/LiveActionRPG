@@ -1,14 +1,16 @@
 import React from 'react';
-import {View} from 'react-native';
+import {Text, View} from 'react-native';
 import Styles from '../Styles/landingPage.style';
 import {landingPageData as PageData} from '../data.source';
 import InputBox from '../Views/Elements/InputBox';
 import Button from '../Views/Elements/Button';
 import {replaceToTabs} from '../utils/routerAction';
+import {connect} from 'react-redux';
+import * as actionCreators from '../redux/actions';
 
-export default class LandingPage extends React.Component {
-  constructor() {
-    super();
+class LandingPage extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
       teamName: '',
     };
@@ -19,6 +21,14 @@ export default class LandingPage extends React.Component {
       teamName: text,
     });
   };
+
+  onInToClick = () => {
+    const {teamName} = this.state;
+    this.initReduxState();
+    // replaceToTabs();
+  };
+
+  initReduxState = () => {};
 
   render() {
     const {teamNamePH} = PageData;
@@ -37,9 +47,15 @@ export default class LandingPage extends React.Component {
               onChangeText: (text) => this.onChangeTeamName(text),
             }}
           />
-          <Button text={'進入'} onPress={replaceToTabs} style={{width: 80}} />
+          <Button
+            text={'進入'}
+            onPress={this.onInToClick}
+            style={{width: 80}}
+          />
         </View>
       </View>
     );
   }
 }
+
+export default connect((store) => store, actionCreators)(LandingPage);

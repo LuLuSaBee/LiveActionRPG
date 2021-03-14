@@ -13,13 +13,14 @@ import {informationPageData as pageData} from '../data.source';
 import * as Progress from 'react-native-progress';
 import moment from 'moment';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {connect} from 'react-redux';
+import * as actionCreators from '../redux/actions';
 /*
 進度
 時間
 聊天室
 */
-
-export default class InformationPage extends React.Component {
+class InformationPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -130,3 +131,5 @@ export default class InformationPage extends React.Component {
     );
   }
 }
+
+export default connect((store) => store, actionCreators)(InformationPage);
