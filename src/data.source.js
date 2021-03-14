@@ -51,6 +51,7 @@ export const defaultTheme = {
   ...ifIphoneX({marginTop: 0}, {marginTop: 10}),
 };
 
+export const ckeckPointList = [1001, 1002, 1003, 1004, 1005, 2001, 2002];
 export const storyData = {
   1001: {
     name: '耶穌',

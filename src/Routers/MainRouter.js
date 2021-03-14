@@ -5,8 +5,6 @@ import LandingPage from '../Pages/LandingPage';
 import BackpackPage from '../Pages/BackpackPage';
 import InformationPage from '../Pages/InformationPage';
 import CustomTabBar from '../utils/CustomTabBar';
-import {View} from 'react-native';
-
 import NPCModal from '../Pages/NPCModal';
 
 export default function MainRouter() {
@@ -18,7 +16,8 @@ export default function MainRouter() {
   return (
     <>
       <Router>
-        <Scene key="root" hideNavBar modal>
+        <Scene key="root" hideNavBar>
+          <Scene key={routerKey.LandingPage} component={LandingPage} />
           <Tabs
             key={routerKey.Tabs}
             showLabel={true}
@@ -30,18 +29,13 @@ export default function MainRouter() {
               component={InformationPage}
               hideNavBar
             />
-            <Scene
-              key={routerKey.ScanningView}
-              component={<View />}
-              hideNavBar
-            />
+            <Scene key={routerKey.ScanningView} component={<></>} hideNavBar />
             <Scene
               key={routerKey.BackpackPage}
               component={BackpackPage}
               hideNavBar
             />
           </Tabs>
-          <Scene key={routerKey.LandingPage} component={LandingPage} />
         </Scene>
       </Router>
       <NPCModal setModalizeRef={setModalizeRef} />

@@ -25,7 +25,7 @@ class LandingPage extends React.Component {
   onInToClick = () => {
     const {teamName} = this.state;
     this.initReduxState();
-    // replaceToTabs();
+    replaceToTabs();
   };
 
   initReduxState = () => {};
