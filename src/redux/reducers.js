@@ -3,6 +3,7 @@ import {
   UPDATE_TIMELEFT,
   ADD_STORYRECORD,
   INIT_STORYRECORD,
+  SET_USERID,
 } from './actions';
 import {combineReducers} from 'redux';
 
@@ -35,10 +36,20 @@ const storyRecord = (state = [], action) => {
   }
 };
 
+const userID = (state = '', action) => {
+  switch (action.type) {
+    case SET_USERID:
+      return action.userID;
+    default:
+      return state;
+  }
+};
+
 const rootReducer = combineReducers({
   checkPoint,
   timeLeft,
   storyRecord,
+  userID,
 });
 
 export default rootReducer;

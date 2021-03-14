@@ -7,12 +7,13 @@ import Button from '../Views/Elements/Button';
 import {replaceToTabs} from '../utils/routerAction';
 import {connect} from 'react-redux';
 import * as actionCreators from '../redux/actions';
+import {checkIsUser} from '../utils/firebaseActions';
 
 class LandingPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      teamName: '',
+      teamName: 'TestTeam1',
     };
   }
 
@@ -22,13 +23,27 @@ class LandingPage extends React.Component {
     });
   };
 
-  onInToClick = () => {
+  onInToClick = async () => {
     const {teamName} = this.state;
-    this.initReduxState();
-    replaceToTabs();
+    const user = await checkIsUser(teamName);
+    if (user.type === undefined) {
+      console.log('--------------');
+      console.log('用戶不存在');
+      console.log('--------------');
+    } else {
+      this.initReduxState(user);
+      replaceToTabs();
+    }
   };
 
-  initReduxState = () => {};
+  initReduxState = async (user) => {
+    // console.log('--------------');
+    // console.log(user);
+    // console.log(this.props);
+    // console.log('--------------');
+    const {uid} = user;
+    this.props.setUserID(uid);
+  };
 
   render() {
     const {teamNamePH} = PageData;
@@ -52,6 +67,7 @@ class LandingPage extends React.Component {
             onPress={this.onInToClick}
             style={{width: 80}}
           />
+          <Text>{this.props.userID}</Text>
         </View>
       </View>
     );
