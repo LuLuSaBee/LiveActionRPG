@@ -7,11 +7,11 @@ export default StyleSheet.create({
     padding: 10,
     paddingTop: 20,
   },
-  dialogueView: {
+  lineView: {
     flex: 0.25,
     alignItems: 'center',
   },
-  dialogueText: {
+  lineText: {
     fontSize: isIphoneX() ? 20 : 18,
     fontWeight: '600',
   },

@@ -17,7 +17,7 @@ export default function NPCModal(props) {
       'https://upload.wikimedia.org/wikipedia/commons/7/7e/Walters_Gallery.jpg',
   });
   const [conversation, setConversation] = useState({
-    dialogue:
+    line:
       '謝謝你，你幫了我一個大忙，這樣我就不用冒著風險去賣畫了，我把畫放在修復室裡，真的是太謝謝你了。',
     options: [
       '我是來找遺失的蒙娜麗莎的',
