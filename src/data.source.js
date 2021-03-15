@@ -43,6 +43,9 @@ export const informationPageData = {
   },
   supportRoom: {
     title: '支援',
+    submit: '發送',
+    placeholder: '請輸入...',
+    supportItems: ['1', '3', '3'],
   },
 };
 
@@ -82,7 +85,7 @@ export const storyData = {
     ],
   },
   1004: {
-    name: '雕像',
+    name: '摩艾石像',
     img: '',
     story: [
       '（哼歌）',
