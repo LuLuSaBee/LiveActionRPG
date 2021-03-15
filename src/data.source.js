@@ -4,6 +4,7 @@ export const routerKey = {
   ScanningView: 'ScanningView',
   BackpackPage: 'BackpackPage',
   InformationPage: 'InformationPage',
+  StoryRecordPage: 'StoryRecordPage',
 };
 
 export const landingPageData = {
@@ -43,6 +44,12 @@ export const informationPageData = {
   supportRoom: {
     title: '支援',
   },
+};
+
+export const storyRecordPageData = {
+  title: '美術館事件簿',
+  left: require('./assets/book.png'),
+  right: require('./assets/right-arrow.png'),
 };
 
 import {ifIphoneX} from 'react-native-iphone-x-helper';

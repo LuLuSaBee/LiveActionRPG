@@ -8,3 +8,11 @@ export function navToLandingPage(props) {
 export function replaceToTabs(props) {
   Actions.replace(routerKey.Tabs, {...props});
 }
+
+export function pushToStoryRecordPage(props) {
+  Actions.push(routerKey.StoryRecordPage, {...props});
+}
+
+export function pop() {
+  Actions.pop();
+}

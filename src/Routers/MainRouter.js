@@ -4,6 +4,7 @@ import {routerKey} from '../data.source';
 import LandingPage from '../Pages/LandingPage';
 import BackpackPage from '../Pages/BackpackPage';
 import InformationPage from '../Pages/InformationPage';
+import StoryRecordPage from '../Pages/StoryRecordPage';
 import CustomTabBar from '../utils/CustomTabBar';
 import NPCModal from '../Pages/NPCModal';
 
@@ -23,7 +24,8 @@ export default function MainRouter() {
             showLabel={true}
             tabBarComponent={(props) => (
               <CustomTabBar {...props} openModalize={openModalize} />
-            )}>
+            )}
+            hideNavBar>
             <Scene
               key={routerKey.InformationPage}
               component={InformationPage}
@@ -36,6 +38,7 @@ export default function MainRouter() {
               hideNavBar
             />
           </Tabs>
+          <Scene key={routerKey.StoryRecordPage} component={StoryRecordPage} />
         </Scene>
       </Router>
       <NPCModal setModalizeRef={setModalizeRef} />
