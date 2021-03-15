@@ -26,7 +26,6 @@ class InformationPage extends React.Component {
     super(props);
     this.state = {
       price: 0,
-      progressPersent: 10,
       timeLeft: moment(),
       message: '',
     };
@@ -36,10 +35,10 @@ class InformationPage extends React.Component {
 
   componentDidMount() {
     // this.timer = setInterval(() => {
-    //   const {timeLeft, progressPersent} = this.state;
+    //   const {timeLeft, progress} = this.state;
     //   this.setState({
     //     timeLeft: timeLeft + this.interval,
-    //     // progressPersent: progressPersent + 5,
+    //     // progress: progress + 5,
     //   });
     //   // console.log('--------------');
     //   // console.log(timeLeft);
@@ -59,6 +58,7 @@ class InformationPage extends React.Component {
     updateChatList(messageData);
     //firebase cloud firestore
     addMessage(userData.uid, chatList, messageData);
+    //local state
     this.setState({message: ''});
   };
 
@@ -67,8 +67,8 @@ class InformationPage extends React.Component {
   };
 
   render() {
-    const {timeLeft, progressPersent, message} = this.state;
-    const {chatList, userData} = this.props;
+    const {timeLeft, message} = this.state;
+    const {chatList, userData, progressRate} = this.props;
 
     return (
       <View style={Styles.page}>
@@ -88,16 +88,14 @@ class InformationPage extends React.Component {
                     <View style={Styles.progressBar}>
                       <Progress.Bar
                         key={1}
-                        progress={progressPersent / 100}
+                        progress={progressRate / 100}
                         width={null}
                         height={20}
                         borderRadius={40}
                         animationType={'timing'}
                       />
                     </View>
-                    <Text style={Styles.progressNumber}>
-                      {progressPersent}%
-                    </Text>
+                    <Text style={Styles.progressNumber}>{progressRate}%</Text>
                   </View>,
                 ]}
               />

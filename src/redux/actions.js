@@ -1,13 +1,20 @@
 export const UPDATE_CHECKPOINT = 'UPDATE_CHECKPOINT';
+export const INIT_CHECKPOINT = 'INIT_CHECKPOINT';
 export const UPDATE_TIMELEFT = 'UPDATE_TIMELEFT';
 export const ADD_STORYRECORD = 'ADD_STORYRECORD';
 export const INIT_STORYRECORD = 'INIT_STORYRECORD';
 export const SET_USERDATA = 'SET_USERDATA';
 export const UPDATE_CHATLIST = 'UPDATE_CHATLIST';
 export const INIT_CHATLIST = 'INIT_CHATLIST';
+export const UPDATE_PROGRESSRATE = 'UPDATE_PROGRESSRATE';
 
 export const updateCheckPoint = (checkPoint) => ({
   type: UPDATE_CHECKPOINT,
+  checkPoint,
+});
+
+export const initCheckPoint = (checkPoint) => ({
+  type: INIT_CHECKPOINT,
   checkPoint,
 });
 
@@ -44,4 +51,9 @@ export const updateChatList = (chatList) => ({
 export const initChatList = (chatList) => ({
   type: INIT_CHATLIST,
   chatList,
+});
+
+export const updateProgressRate = (progressRate) => ({
+  type: UPDATE_PROGRESSRATE,
+  progressRate,
 });

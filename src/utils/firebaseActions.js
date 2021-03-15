@@ -33,31 +33,40 @@ export async function checkIsUser(text) {
  * @param {Function} initChatList - function that init ChatList
  * @param {Function} initStoryRecord  - function that init StoryRecord
  * @param {Function} initCheckPoint  - function that init CheckPoint
+ * @param {Function} initProgressRate  - function that init ProgressRate
  */
 export function initPlayerData(
   uid,
   initChatList,
   initStoryRecord,
   initCheckPoint,
+  initProgressRate,
 ) {
   player
     .doc(uid)
     .get()
     .then((data) => {
-      const {chatList, storyRecord, checkPoint} = data._data;
+      const {chatList, storyRecord, checkPoint, progressRate} = data._data;
       initChatList(chatList);
       initStoryRecord(storyRecord);
       initCheckPoint(checkPoint);
+      initProgressRate(progressRate);
     });
 }
 
-export function snapshotChatList(uid) {
+/**
+ *
+ * @param {String} uid - Player UID
+ * @param {function} initChatList - to reload ChatList
+ */
+export function snapshotChatList(uid, initChatList) {
   player.doc(uid).onSnapshot((data) => {
     const source = data.metadata.hasPendingWrites ? 'Local' : 'Server';
     if (source === 'Local') {
       return;
     }
-    console.log(source, data);
+    const {chatList} = data._data;
+    initChatList(chatList);
   });
 }
 

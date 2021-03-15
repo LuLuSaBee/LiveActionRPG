@@ -37,7 +37,8 @@ class LandingPage extends React.Component {
     } else {
       replaceToTabs();
       this.initReduxState(user);
-      snapshotChatList(user.uid);
+      //add linster for chatList
+      snapshotChatList(user.uid, this.props.initChatList);
     }
   };
 
@@ -46,10 +47,21 @@ class LandingPage extends React.Component {
       setUserData,
       initChatList,
       initStoryRecord,
-      updateCheckPoint,
+      initCheckPoint,
+      updateProgressRate,
     } = this.props;
+
+    //at reducer
     setUserData(user);
-    initPlayerData(user.uid, initChatList, initStoryRecord, updateCheckPoint);
+
+    //at firbase
+    initPlayerData(
+      user.uid,
+      initChatList,
+      initStoryRecord,
+      initCheckPoint,
+      updateProgressRate,
+    );
   };
 
   render() {

@@ -1,17 +1,21 @@
 import {
   UPDATE_CHECKPOINT,
+  INIT_CHECKPOINT,
   UPDATE_TIMELEFT,
   ADD_STORYRECORD,
   INIT_STORYRECORD,
   SET_USERDATA,
   UPDATE_CHATLIST,
   INIT_CHATLIST,
+  UPDATE_PROGRESSRATE,
 } from './actions';
 import {combineReducers} from 'redux';
 
-const checkPoint = (state = 0, action) => {
+const checkPoint = (state = [], action) => {
   switch (action.type) {
     case UPDATE_CHECKPOINT:
+      return [{...action.checkPoint}, ...state];
+    case INIT_CHECKPOINT:
       return action.checkPoint;
     default:
       return state;
@@ -58,12 +62,22 @@ const chatList = (state = [], action) => {
   }
 };
 
+const progressRate = (state = 0, action) => {
+  switch (action.type) {
+    case UPDATE_PROGRESSRATE:
+      return action.progressRate;
+    default:
+      return state;
+  }
+};
+
 const rootReducer = combineReducers({
   checkPoint,
   timeLeft,
   storyRecord,
   userData,
   chatList,
+  progressRate,
 });
 
 export default rootReducer;
