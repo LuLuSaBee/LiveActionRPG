@@ -37,12 +37,7 @@ class LandingPage extends React.Component {
   };
 
   initReduxState = async (user) => {
-    // console.log('--------------');
-    // console.log(user);
-    // console.log(this.props);
-    // console.log('--------------');
-    const {uid} = user;
-    this.props.setUserID(uid);
+    this.props.setUserData(user);
   };
 
   render() {

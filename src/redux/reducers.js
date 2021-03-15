@@ -3,7 +3,7 @@ import {
   UPDATE_TIMELEFT,
   ADD_STORYRECORD,
   INIT_STORYRECORD,
-  SET_USERID,
+  SET_USERDATA,
   UPDATE_CHATLIST,
   INIT_CHATLIST,
 } from './actions';
@@ -38,10 +38,10 @@ const storyRecord = (state = [], action) => {
   }
 };
 
-const userID = (state = '', action) => {
+const userData = (state = {}, action) => {
   switch (action.type) {
-    case SET_USERID:
-      return action.userID;
+    case SET_USERDATA:
+      return action.userData;
     default:
       return state;
   }
@@ -62,7 +62,7 @@ const rootReducer = combineReducers({
   checkPoint,
   timeLeft,
   storyRecord,
-  userID,
+  userData,
   chatList,
 });
 
