@@ -4,13 +4,15 @@ import {
   ADD_STORYRECORD,
   INIT_STORYRECORD,
   SET_USERID,
+  UPDATE_CHATLIST,
+  INIT_CHATLIST,
 } from './actions';
 import {combineReducers} from 'redux';
 
 const checkPoint = (state = 0, action) => {
   switch (action.type) {
     case UPDATE_CHECKPOINT:
-      return action.checkPoint + 5;
+      return action.checkPoint;
     default:
       return state;
   }
@@ -45,11 +47,23 @@ const userID = (state = '', action) => {
   }
 };
 
+const chatList = (state = [], action) => {
+  switch (action.type) {
+    case UPDATE_CHATLIST:
+      return [{...action.chatList}, ...state];
+    case INIT_CHATLIST:
+      return action.chatList;
+    default:
+      return state;
+  }
+};
+
 const rootReducer = combineReducers({
   checkPoint,
   timeLeft,
   storyRecord,
   userID,
+  chatList,
 });
 
 export default rootReducer;

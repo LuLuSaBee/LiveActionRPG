@@ -3,6 +3,8 @@ export const UPDATE_TIMELEFT = 'UPDATE_TIMELEFT';
 export const ADD_STORYRECORD = 'ADD_STORYRECORD';
 export const INIT_STORYRECORD = 'INIT_STORYRECORD';
 export const SET_USERID = 'SET_USERID';
+export const UPDATE_CHATLIST = 'UPDATE_CHATLIST';
+export const INIT_CHATLIST = 'INIT_CHATLIST';
 
 export const updateCheckPoint = (checkPoint) => ({
   type: UPDATE_CHECKPOINT,
@@ -27,4 +29,14 @@ export const initStoryRecord = (storyRecord) => ({
 export const setUserID = (userID) => ({
   type: SET_USERID,
   userID,
+});
+
+export const updateChatList = (chatList) => ({
+  type: UPDATE_CHATLIST,
+  chatList,
+});
+
+export const initChatList = (chatList) => ({
+  type: INIT_CHATLIST,
+  chatList,
 });

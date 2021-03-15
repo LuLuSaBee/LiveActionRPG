@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 import Styles from '../Styles/landingPage.style';
 import {landingPageData as PageData} from '../data.source';
 import InputBox from '../Views/Elements/InputBox';
@@ -67,7 +67,6 @@ class LandingPage extends React.Component {
             onPress={this.onInToClick}
             style={{width: 80}}
           />
-          <Text>{this.props.userID}</Text>
         </View>
       </View>
     );
