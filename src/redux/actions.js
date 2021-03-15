@@ -33,7 +33,7 @@ export const setUserData = (userData) => ({
 
 /**
  * @param {List} chatList - chatroom data
- * @param {String} chatList[].text - message
+ * @param {String} chatList[].message - message
  * @param {String} chatList[].sendFrom - who send this message
  */
 export const updateChatList = (chatList) => ({

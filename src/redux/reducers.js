@@ -50,7 +50,7 @@ const userData = (state = {}, action) => {
 const chatList = (state = [], action) => {
   switch (action.type) {
     case UPDATE_CHATLIST:
-      return [{...action.chatList}, ...state];
+      return [...state, {...action.chatList}];
     case INIT_CHATLIST:
       return action.chatList;
     default:

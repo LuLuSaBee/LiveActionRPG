@@ -15,6 +15,7 @@ import moment from 'moment';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {connect} from 'react-redux';
 import * as actionCreators from '../redux/actions';
+import {addMessage} from '../utils/firebaseActions';
 /*
 進度
 時間
@@ -27,6 +28,7 @@ class InformationPage extends React.Component {
       price: 0,
       progressPersent: 10,
       timeLeft: moment(),
+      message: '',
     };
   }
   // + 183594
@@ -47,8 +49,26 @@ class InformationPage extends React.Component {
     // }, this.interval);
   }
 
+  onSummitMessage = (message) => {
+    if (message === '') {
+      return;
+    }
+    const {userData, updateChatList, chatList} = this.props;
+    const messageData = {sendFrom: userData.type, message: message};
+    //redux
+    updateChatList(messageData);
+    //firebase cloud firestore
+    addMessage(userData.uid, chatList, messageData);
+    this.setState({message: ''});
+  };
+
+  onChangeMessage = (message) => {
+    this.setState({message: message});
+  };
+
   render() {
-    const {timeLeft, progressPersent} = this.state;
+    const {timeLeft, progressPersent, message} = this.state;
+    const {chatList, userData} = this.props;
 
     return (
       <View style={Styles.page}>
@@ -101,23 +121,56 @@ class InformationPage extends React.Component {
                         {pageData.supportRoom.title}
                       </Text>
                     </View>
-                    <ScrollView style={Styles.roomBody}>
-                      <Text style={Styles.text}>12346</Text>
+                    <ScrollView
+                      ref={(ref) => {
+                        this.scrollView = ref;
+                      }}
+                      style={Styles.roomBody}
+                      contentContainerStyle={Styles.contentContainerStyle}
+                      onContentSizeChange={() =>
+                        this.scrollView.scrollToEnd({animated: true})
+                      }>
+                      {chatList.map((chat, index) => (
+                        <View
+                          key={index}
+                          style={[
+                            Styles.message,
+                            chat.sendFrom === userData.type
+                              ? Styles.ownMessage
+                              : Styles.otherMessage,
+                          ]}>
+                          <Text style={Styles.text}>{chat.message}</Text>
+                        </View>
+                      ))}
                     </ScrollView>
                     <ScrollView
                       horizontal={true}
                       style={Styles.supportSuggsetion}>
-                      <TouchableOpacity style={Styles.supportOption}>
-                        <Text style={Styles.text}>12345</Text>
-                      </TouchableOpacity>
+                      {pageData.supportRoom.supportItems.map((item, index) => (
+                        <TouchableOpacity
+                          key={index}
+                          style={Styles.supportItem}
+                          onPress={() => this.onSummitMessage(item)}>
+                          <Text style={Styles.supportText}>{item}</Text>
+                        </TouchableOpacity>
+                      ))}
                     </ScrollView>
                     <View style={Styles.roomFooter}>
                       <View style={Styles.footerContainer}>
                         <View style={Styles.roomInput}>
-                          <TextInput style={Styles.inputBox} />
+                          <TextInput
+                            style={Styles.inputBox}
+                            onChangeText={(text) => this.onChangeMessage(text)}
+                            value={message}
+                            placeholder={pageData.supportRoom.placeholder}
+                          />
                         </View>
-                        <TouchableOpacity style={Styles.roomSubmit}>
-                          <Text style={Styles.text}>發送</Text>
+                        <TouchableOpacity
+                          style={Styles.roomSubmit}
+                          onPress={() => this.onSummitMessage(message)}>
+                          <Text style={Styles.text}>
+                            {pageData.supportRoom.submit}
+                          </Text>
                         </TouchableOpacity>
                       </View>
                     </View>

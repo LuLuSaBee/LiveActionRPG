@@ -45,7 +45,7 @@ export const informationPageData = {
     title: '支援',
     submit: '發送',
     placeholder: '請輸入...',
-    supportItems: ['1', '3', '3'],
+    supportItems: ['需要幫忙', '請求支援', '找不到物品', '找不到展覽品'],
   },
 };
 

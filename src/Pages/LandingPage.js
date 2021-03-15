@@ -7,7 +7,11 @@ import Button from '../Views/Elements/Button';
 import {replaceToTabs} from '../utils/routerAction';
 import {connect} from 'react-redux';
 import * as actionCreators from '../redux/actions';
-import {checkIsUser} from '../utils/firebaseActions';
+import {
+  checkIsUser,
+  initPlayerData,
+  snapshotChatList,
+} from '../utils/firebaseActions';
 
 class LandingPage extends React.Component {
   constructor(props) {
@@ -31,13 +35,21 @@ class LandingPage extends React.Component {
       console.log('用戶不存在');
       console.log('--------------');
     } else {
-      this.initReduxState(user);
       replaceToTabs();
+      this.initReduxState(user);
+      snapshotChatList(user.uid);
     }
   };
 
   initReduxState = async (user) => {
-    this.props.setUserData(user);
+    const {
+      setUserData,
+      initChatList,
+      initStoryRecord,
+      updateCheckPoint,
+    } = this.props;
+    setUserData(user);
+    initPlayerData(user.uid, initChatList, initStoryRecord, updateCheckPoint);
   };
 
   render() {

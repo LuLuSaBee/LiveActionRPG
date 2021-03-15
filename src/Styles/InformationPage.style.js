@@ -83,6 +83,24 @@ export default StyleSheet.create({
   roomBody: {
     flex: 0.65,
   },
+  contentContainerStyle: {
+    alignItems: 'baseline',
+    paddingHorizontal: 5,
+    paddingTop: 10,
+  },
+  message: {
+    borderRadius: 40,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginBottom: 5,
+  },
+  ownMessage: {
+    backgroundColor: 'red',
+    alignSelf: 'flex-end',
+  },
+  otherMessage: {
+    backgroundColor: 'white',
+  },
   roomFooter: {
     flex: 0.2,
     borderBottomLeftRadius: borderRadius,
@@ -118,7 +136,7 @@ export default StyleSheet.create({
   supportSuggsetion: {
     maxHeight: 33,
   },
-  supportOption: {
+  supportItem: {
     borderRadius: 50,
     backgroundColor: 'white',
     paddingHorizontal: 5,
@@ -126,6 +144,9 @@ export default StyleSheet.create({
     alignItems: 'center',
     margin: 5,
     height: 25,
+  },
+  supportText: {
+    fontSize: 15,
   },
   text: {
     fontSize: 20,
