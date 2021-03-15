@@ -7,7 +7,7 @@ export default function NPCConversation(props) {
   const {line, options} = props.conversation;
 
   return (
-    <View style={Styles.container} key="option">
+    <View style={Styles.container}>
       <View style={Styles.lineView}>
         <Text style={Styles.lineText}>{line}</Text>
       </View>

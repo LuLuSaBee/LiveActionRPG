@@ -30,13 +30,9 @@ export default class CustomTabBar extends React.Component {
                 <TabViewIcon
                   source={TabData[element.key].icon}
                   iconStyle={Styles.iconStyle}
-                  focused={
-                    element.key === routerKey.ScanningView
-                      ? false
-                      : this.props.navigation._childrenNavigation[
-                          element.key
-                        ].isFocused()
-                  }
+                  focused={this.props.navigation._childrenNavigation[
+                    element.key
+                  ].isFocused()}
                 />
               </View>
             </TouchableOpacity>
