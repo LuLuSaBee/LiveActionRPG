@@ -61,53 +61,131 @@ export const defaultTheme = {
   ...ifIphoneX({marginTop: 0}, {marginTop: 10}),
 };
 
-export const ckeckPointList = [1001, 1002, 1003, 1004, 1005, 2001, 2002];
-export const storyData = {
-  1001: {
+/**
+ *
+ * start at 1 is normal
+ *
+ * start at 2 is mission
+ *
+ * start at 3 is room
+ */
+export const NPCIDlist = [
+  10001, // 耶穌
+  10002, // 章魚哥
+  10003, // 聖龍
+  20001, // 摩艾石像
+  20002, // 兵馬俑
+  30001, // 館長室
+  30002, // 修復室
+];
+
+export const npcData = {
+  nothing: {
+    name: '這邊空蕩蕩',
+    img: require('./assets/Walters_Gallery.jpg'),
+    lines: '目前沒有展覽品在附近\n｡ﾟヽ(ﾟ´Д`)ﾉﾟ｡',
+  },
+  10001: {
     name: '耶穌',
-    img: '',
-    story: [
+    img: require('./assets/Walters_Gallery.jpg'),
+    lines:
       '什麼！蒙娜麗莎不見了，我現在才知道耶，搞不好你可以去問問看裡面那些畫，他們也許知道些什麼',
-    ],
   },
-  1002: {
+  10002: {
     name: '章魚哥',
-    img: '',
-    story: [
-      '蒙娜麗莎！?我什麼都不知道，你不要來問我，你去問Ｃ，你不要來問我（害怕的樣子）',
-    ],
+    img: require('./assets/Walters_Gallery.jpg'),
+    lines:
+      '蒙娜麗莎！?我什麼都不知道，你不要來問我，你去問聖龍，你不要來問我（害怕的樣子）',
   },
-  1003: {
+  10003: {
     name: '聖龍',
-    img: '',
-    story: [
+    img: require('./assets/Walters_Gallery.jpg'),
+    lines:
       '我有聽說過這幅畫曾經在館長室出現過，但我不知道館長室的位置在哪裡，雕像他們可能會知道',
-    ],
   },
-  1004: {
+  20001: {
     name: '摩艾石像',
-    img: '',
-    story: [
-      '（哼歌）',
-      '才不告訴你咧，才不告訴你咧，除非你願意幫我解開這片拼圖，我再告訴你唄',
-      '那我就不能告訴你囉，加油吧～～',
-      '你怎麼又來拉，那我只好再給你一次機會囉，解不開我還是不會告訴你的呦^^',
-      '欸我這邊還有一組數字，但我不知道是甚麼用途，不如一起給你們好了（得到館長室的密碼）',
-    ],
+    img: require('./assets/Walters_Gallery.jpg'),
+    notInProcess: {
+      lines: ['（哼歌）'],
+      options: [],
+    },
+    inProcess: {
+      lines: [
+        '才不告訴你咧，才不告訴你咧，除非你願意幫我解開這片拼圖，我再告訴你唄',
+      ],
+      options: ['（進入遊戲）'],
+    },
+    gameFail: {
+      lines: '那我就不能告訴你囉，加油吧～～',
+      options: ['這什麼爛拼圖，不解了不解了'],
+      then: {
+        lines: [
+          '你怎麼又來拉，那我只好再給你一次機會囉，解不開我還是不會告訴你的呦^^',
+        ],
+        options: ['（進入遊戲）'],
+      },
+    },
+    gameSuccess: {
+      lines: [
+        '欸我這邊還有一組數字，但我不知道是甚麼用途，不如一起給你們好了（得到館長室的密碼）',
+      ],
+    },
   },
-  1005: {
+  20002: {
     name: '兵馬俑',
-    img: '',
-    story: [],
+    img: require('./assets/Walters_Gallery.jpg'),
+    notInProcess: {
+      lines: ['（哼歌）'],
+      options: [],
+    },
+    inProcess: [
+      {
+        lines: ['你找我嗎？有事嗎？'],
+        options: [
+          '我是來找遺失的蒙娜麗莎的',
+          '沒事，我就只是路過看看你好不好',
+          'ㄌㄩㄝ~~鬼臉，打我啊打我啊',
+        ],
+      },
+      {
+        lines: [
+          '（慌張害怕）如果..如果你願意幫我保密，我就告訴你發生了什麼事',
+          '喔好吧，謝謝你的關心^^ ',
+          '（生氣）走開',
+        ],
+        options: ['我答應你，我不會告訴任何人的'],
+      },
+      {
+        lines: ['我欠了秦始皇一筆錢，逼不得已只好先將畫藏起來，之後再轉手賣掉'],
+        options: [
+          '你為甚麼會欠人家錢',
+          '欠錢就賣畫也不是一件正確的事啊',
+          '賣畫可是一件犯罪的事情，你這樣不可取',
+        ],
+      },
+      {
+        lines: [
+          '因為我的小孩生了一場大病，急需用錢，但是我現在有一個可以得到金錢的方法，但是我不會，你可以幫幫我嗎？如果你願意的話，我就告訴你畫在哪裡',
+        ],
+        options: ['（進入遊戲）'],
+      },
+    ],
+    gameFail: {
+      lines: ['連你都不能成功嗎.....'],
+    },
+    gameSuccess: {
+      lines: [
+        '謝謝你，你幫了我一個大忙，這樣我就不用冒著風險去賣畫了，我把畫放在修復室裡，真的是太謝謝你了。',
+      ],
+    },
   },
-  2001: {
+  30001: {
     name: '館長室',
-    img: '',
-    story: [],
+    data: [],
   },
-  2002: {
+  30002: {
     name: '修復室',
-    img: '',
-    story: [],
+    data: [],
   },
 };

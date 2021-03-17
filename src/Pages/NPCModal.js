@@ -4,7 +4,7 @@ import {Modalize} from 'react-native-modalize';
 import NPCTitle from '../Views/NPCTitle';
 import NPCImage from '../Views/NPCImage';
 import NPCConversation from '../Views/NPCConversation';
-import {defaultTheme} from '../data.source';
+import {defaultTheme, npcData} from '../data.source';
 import {connect} from 'react-redux';
 import BeaconScanner from '../utils/BeaconScanner';
 
@@ -14,39 +14,27 @@ class NPCModal extends React.Component {
     super(props);
     this.props = props;
     this.beaconScanner = new BeaconScanner();
-    this.state = {didUpdate: false, modalState: 'close'};
+    this.nothingView = [
+      <NPCTitle key="title" name={npcData.nothing.name} />,
+      <NPCImage key="image" img={npcData.nothing.img} />,
+      <NPCConversation
+        key="option"
+        conversation={{lines: npcData.nothing.lines, options: []}}
+      />,
+    ];
+    this.state = {
+      didUpdate: false,
+      modalState: 'close',
+      visiableView: this.nothingView,
+      beaconState: 'nothing', //避免掉短時間內一直更新state
+    };
 
     const {openModal, closeModal} = props;
     this.openModal = openModal;
     this.closeModal = closeModal;
   }
 
-  componentDidMount() {
-    //set basic info
-    this.isGame = false;
-    const npcName = '蒙娜麗莎';
-    const imgSource = {
-      uri:
-        'https://upload.wikimedia.org/wikipedia/commons/7/7e/Walters_Gallery.jpg',
-    };
-    const conversation = {
-      line:
-        '謝謝你，你幫了我一個大忙，這樣我就不用冒著風險去賣畫了，我把畫放在修復室裡，真的是太謝謝你了。',
-      options: [
-        '我是來找遺失的蒙娜麗莎的',
-        '沒事，我就只是路過看看你好不好',
-        'ㄌㄩㄝ~~鬼臉，打我啊打我啊',
-      ],
-    };
-
-    //views
-    this.dialogueView = [
-      <NPCTitle key="title" name={npcName} />,
-      <NPCImage key="image" img={imgSource} />,
-      <NPCConversation key="option" conversation={conversation} />,
-    ];
-    this.gameView = <View />;
-  }
+  componentDidMount() {}
 
   componentDidUpdate() {
     if (this.state.didUpdate) {
@@ -65,14 +53,21 @@ class NPCModal extends React.Component {
 
   beaconUpdate = (beacon) => {
     if (beacon === undefined) {
-      return;
+      this.state.beaconState !== 'nothing'
+        ? this.setState({
+            visiableView: this.nothingView,
+            beaconState: 'nothing', //避免掉短時間內一直更新state
+          })
+        : console.log('beacon is nothing');
     } else {
       const {modalState} = this.state;
-      const {distance} = beacon;
+      const {distance, major, minor} = beacon;
+      const npcID = major + minor * 10000;
       if (distance === -1) {
         return;
       } else if (distance <= 0.45) {
         if (modalState !== 'open') {
+          //為了不要重複開啟（會跳回去預設高度）
           this.openModal();
           this.setState({modalState: 'open'});
         }
@@ -85,6 +80,7 @@ class NPCModal extends React.Component {
 
   //render
   render() {
+    const {visiableView} = this.state;
     return (
       <Modalize
         ref={this.props.modalizeRef}
@@ -96,9 +92,7 @@ class NPCModal extends React.Component {
         modalStyle={{
           backgroundColor: defaultTheme.backgroundColor,
         }}>
-        <View style={{height: screenHeight, flex: 1}}>
-          {this.isGame ? this.gameView : this.dialogueView}
-        </View>
+        <View style={{height: screenHeight, flex: 1}}>{visiableView}</View>
       </Modalize>
     );
   }

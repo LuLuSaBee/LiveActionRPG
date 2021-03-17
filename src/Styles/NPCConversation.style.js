@@ -8,15 +8,16 @@ export default StyleSheet.create({
     paddingTop: 20,
   },
   lineView: {
-    flex: 0.25,
+    flex: 0.3,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   lineText: {
     fontSize: isIphoneX() ? 20 : 18,
     fontWeight: '600',
   },
   optionView: {
-    flex: 0.75,
+    flex: 0.7,
     alignItems: 'center',
     marginTop: 10,
   },
