@@ -49,6 +49,7 @@ class LandingPage extends React.Component {
       initStoryRecord,
       initCheckPoint,
       updateProgressRate,
+      updateTimeLeft,
     } = this.props;
 
     //at reducer
@@ -61,6 +62,7 @@ class LandingPage extends React.Component {
       initStoryRecord,
       initCheckPoint,
       updateProgressRate,
+      updateTimeLeft,
     );
   };
 

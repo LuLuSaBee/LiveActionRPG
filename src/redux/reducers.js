@@ -22,10 +22,10 @@ const checkPoint = (state = [], action) => {
   }
 };
 
-const timeLeft = (state = 0, action) => {
+const timeLeft = (state = -1, action) => {
   switch (action.type) {
     case UPDATE_TIMELEFT:
-      return action.timeLeft;
+      return action.timeLeft < 0 ? 0 : action.timeLeft;
     default:
       return state;
   }

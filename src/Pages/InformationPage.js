@@ -25,27 +25,21 @@ class InformationPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      price: 0,
-      timeLeft: moment(),
       message: '',
     };
   }
   // + 183594
-  interval = 1000;
 
   componentDidMount() {
-    // this.timer = setInterval(() => {
-    //   const {timeLeft, progress} = this.state;
-    //   this.setState({
-    //     timeLeft: timeLeft + this.interval,
-    //     // progress: progress + 5,
-    //   });
-    //   // console.log('--------------');
-    //   // console.log(timeLeft);
-    //   // console.log('--------------');
-    //   if (timeLeft !== 0) return;
-    //   clearInterval(this.timer);
-    // }, this.interval);
+    const interval = 1000;
+    this.timer = setInterval(() => {
+      const {timeLeft} = this.props;
+      this.props.updateTimeLeft(timeLeft - interval);
+      if (timeLeft !== 0) {
+        return;
+      }
+      clearInterval(this.timer);
+    }, interval);
   }
 
   onSummitMessage = (message) => {
@@ -67,8 +61,8 @@ class InformationPage extends React.Component {
   };
 
   render() {
-    const {timeLeft, message} = this.state;
-    const {chatList, userData, progressRate} = this.props;
+    const {message} = this.state;
+    const {chatList, userData, progressRate, timeLeft} = this.props;
 
     return (
       <View style={Styles.page}>
@@ -105,8 +99,16 @@ class InformationPage extends React.Component {
                   <Text key={'title'} style={Styles.text}>
                     {pageData.timeLeft.title}
                   </Text>,
-                  <Text key={'timerNumber'} style={[Styles.timerNumber]}>
-                    {moment(timeLeft).format('HH:mm:ss')}
+                  <Text
+                    key={'timerNumber'}
+                    style={[
+                      Styles.timerNumber,
+                      moment(timeLeft).minute() < 3 &&
+                      moment(timeLeft).seconds() % 2 !== 0
+                        ? {color: 'red'}
+                        : {},
+                    ]}>
+                    {moment(timeLeft).format('00:mm:ss')}
                   </Text>,
                 ]}
               />

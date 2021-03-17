@@ -1,4 +1,5 @@
 import firestore from '@react-native-firebase/firestore';
+import moment from 'moment';
 
 const host = firestore().collection('host');
 const player = firestore().collection('player');
@@ -34,6 +35,7 @@ export async function checkIsUser(text) {
  * @param {Function} initStoryRecord  - function that init StoryRecord
  * @param {Function} initCheckPoint  - function that init CheckPoint
  * @param {Function} initProgressRate  - function that init ProgressRate
+ * @param {Function} updateTimeLeft  - function that init TimeLeft
  */
 export function initPlayerData(
   uid,
@@ -41,16 +43,26 @@ export function initPlayerData(
   initStoryRecord,
   initCheckPoint,
   initProgressRate,
+  updateTimeLeft,
 ) {
   player
     .doc(uid)
     .get()
     .then((data) => {
-      const {chatList, storyRecord, checkPoint, progressRate} = data._data;
+      const {
+        chatList,
+        storyRecord,
+        checkPoint,
+        progressRate,
+        endTime,
+      } = data._data;
       initChatList(chatList);
       initStoryRecord(storyRecord);
       initCheckPoint(checkPoint);
       initProgressRate(progressRate);
+
+      const time = endTime.seconds * 1000 + endTime.nanoseconds / 1000000;
+      updateTimeLeft(time - moment());
     });
 }
 
