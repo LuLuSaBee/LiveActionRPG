@@ -9,6 +9,8 @@ export default class BeaconScanner {
 
   constructor() {
     Beacons.requestAlwaysAuthorization();
+    // update location to ba able to monitor:
+    Beacons.startUpdatingLocation();
   }
 
   initBeacon() {
@@ -18,9 +20,6 @@ export default class BeaconScanner {
       .catch((error) =>
         console.log(`Beacons ranging not started, error: ${error}`),
       );
-
-    // update location to ba able to monitor:
-    Beacons.startUpdatingLocation();
   }
 
   startScan(reFunc) {
@@ -29,7 +28,7 @@ export default class BeaconScanner {
       'beaconsDidRange',
       (data) => {
         // console.log('beaconsDidRange data: ', data);
-        reFunc(data);
+        reFunc(data.beacons[0]);
       },
     );
   }

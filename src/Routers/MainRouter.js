@@ -9,9 +9,12 @@ import CustomTabBar from '../utils/CustomTabBar';
 import NPCModal from '../Pages/NPCModal';
 
 export default function MainRouter() {
-  const [modalizeRef, setModalizeRef] = useState(useRef(null));
-  const openModalize = () => {
+  const modalizeRef = useRef(null);
+  const openModal = () => {
     modalizeRef.current.open();
+  };
+  const closeModal = () => {
+    modalizeRef.current.close();
   };
 
   return (
@@ -23,7 +26,7 @@ export default function MainRouter() {
             key={routerKey.Tabs}
             showLabel={true}
             tabBarComponent={(props) => (
-              <CustomTabBar {...props} openModalize={openModalize} />
+              <CustomTabBar {...props} openModal={openModal} />
             )}
             hideNavBar>
             <Scene
@@ -41,7 +44,11 @@ export default function MainRouter() {
           <Scene key={routerKey.StoryRecordPage} component={StoryRecordPage} />
         </Scene>
       </Router>
-      <NPCModal setModalizeRef={setModalizeRef} />
+      <NPCModal
+        modalizeRef={modalizeRef}
+        openModal={openModal}
+        closeModal={closeModal}
+      />
     </>
   );
 }

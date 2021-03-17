@@ -58,7 +58,7 @@ export default class BeaconsDemo extends Component {
     this.beaconsDidRangeEvent = Beacons.BeaconsEventEmitter.addListener(
       'beaconsDidRange',
       (data) => {
-        console.log('beaconsDidRange data: ', data);
+        // console.log('beaconsDidRange data: ', data);
         const {beacons} = data;
         const {rangingDataSource} = this.state;
         this.setState({
