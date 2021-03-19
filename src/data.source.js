@@ -87,15 +87,15 @@ export const npcData = {
   },
   10001: {
     name: '耶穌',
-    img: require('./assets/Walters_Gallery.jpg'),
+    img: require('./assets/npc/10001.jpg'),
     lines:
       '什麼！蒙娜麗莎不見了，我現在才知道耶，搞不好你可以去問問看裡面那些畫，他們也許知道些什麼',
   },
   10002: {
     name: '章魚哥',
-    img: require('./assets/Walters_Gallery.jpg'),
+    img: require('./assets/npc/10002.jpg'),
     lines:
-      '蒙娜麗莎！?我什麼都不知道，你不要來問我，你去問聖龍，你不要來問我（害怕的樣子）',
+      '蒙娜麗莎！？我什麼都不知道，你不要來問我，你去問聖龍，你不要來問我（害怕的樣子）',
   },
   10003: {
     name: '聖龍',
@@ -105,7 +105,7 @@ export const npcData = {
   },
   20001: {
     name: '摩艾石像',
-    img: require('./assets/Walters_Gallery.jpg'),
+    img: require('./assets/npc/20001.jpg'),
     notInProcess: {
       lines: ['（哼歌）'],
       options: [],
@@ -136,7 +136,7 @@ export const npcData = {
     name: '兵馬俑',
     img: require('./assets/Walters_Gallery.jpg'),
     notInProcess: {
-      lines: ['（哼歌）'],
+      lines: ['還沒給我'],
       options: [],
     },
     inProcess: [
@@ -189,3 +189,17 @@ export const npcData = {
     data: [],
   },
 };
+
+export const checkPointDataList = [
+  {point: 1, name: '線索一', rate: 10}, //10
+  {point: 2, name: '嘗試拼圖', rate: 10}, //20
+  {point: 3, name: '拼圖太難', rate: 10}, //30
+  {point: 4, name: '拼圖算什麼', rate: 10}, //40
+  {point: 5, name: '監視錄影最好看', rate: 20}, //60
+  {point: 6, name: '守口如瓶', rate: 10}, //70
+  {point: 7, name: '嘗試翻牌遊戲', rate: 5}, //75
+  {point: 8, name: '感激不盡', rate: 5}, //80
+  {point: 9, name: '摩斯本人', rate: 10}, //90
+  {point: 10, name: '解碼能手', rate: 5}, //95
+  {point: 11, name: '慧眼識畫作', rate: 15}, //>100
+];

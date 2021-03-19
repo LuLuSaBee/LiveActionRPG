@@ -84,22 +84,57 @@ export function snapshotChatList(uid, initChatList) {
 
 /**
  *
- * @param {String} uid -  Player UID
+ * @param {String} uid - Player UID
  * @param {Array} chatList
  * @param {String} chatList[].sendFrom - who send this message
  * @param {String} chatList[].message - message
  * @param {String} message - new message
  */
 export async function addMessage(uid, chatList, message) {
-  chatList.push(message);
   const result = await player
     .doc(uid)
-    .update({chatList: chatList})
+    .update({chatList: [...chatList, message]})
     .then(() => 'success')
     .catch((e) => {
       console.log('---addMessage Error-----');
       console.log(e);
       console.log('------------------------');
+      return 'error';
+    });
+
+  return result;
+}
+
+/**
+ *
+ * @param {String} uid - Player UID
+ * @param {Array} storyRecord - old recordlist
+ * @param {Array} newRecord - new record
+ */
+export async function updateStoryRecord(uid, storyRecord) {
+  const result = await player
+    .doc(uid)
+    .update({storyRecord: storyRecord})
+    .then(() => 'success')
+    .catch((e) => {
+      console.log('---updateStoryRecord Error-----');
+      console.log(e);
+      console.log('-------------------------------');
+      return 'error';
+    });
+
+  return result;
+}
+
+export async function updateCPPR(uid, checkPoint, progressRate) {
+  const result = await player
+    .doc(uid)
+    .update({checkPoint: checkPoint, progressRate: progressRate})
+    .then(() => 'success')
+    .catch((e) => {
+      console.log('---updateStoryRecord Error-----');
+      console.log(e);
+      console.log('-------------------------------');
       return 'error';
     });
 
