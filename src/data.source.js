@@ -82,7 +82,7 @@ export const NPCIDlist = [
 export const npcData = {
   nothing: {
     name: '這邊空蕩蕩',
-    img: require('./assets/Walters_Gallery.jpg'),
+    img: require('./assets/empty.png'),
     lines: '目前沒有展覽品在附近\n｡ﾟヽ(ﾟ´Д`)ﾉﾟ｡',
   },
   10001: {
@@ -107,41 +107,44 @@ export const npcData = {
     name: '摩艾石像',
     img: require('./assets/npc/20001.jpg'),
     notInProcess: {
-      lines: ['（哼歌）'],
+      lines: '（哼歌）',
       options: [],
     },
     inProcess: {
-      lines: [
+      lines:
         '才不告訴你咧，才不告訴你咧，除非你願意幫我解開這片拼圖，我再告訴你唄',
-      ],
       options: ['（進入遊戲）'],
     },
     gameFail: {
       lines: '那我就不能告訴你囉，加油吧～～',
       options: ['這什麼爛拼圖，不解了不解了'],
-      then: {
-        lines: [
-          '你怎麼又來拉，那我只好再給你一次機會囉，解不開我還是不會告訴你的呦^^',
-        ],
-        options: ['（進入遊戲）'],
-      },
+    },
+    again: {
+      lines:
+        '你怎麼又來拉，那我只好再給你一次機會囉，解不開我還是不會告訴你的呦^^',
+      options: ['（進入遊戲）'],
     },
     gameSuccess: {
-      lines: [
+      lines:
         '欸我這邊還有一組數字，但我不知道是甚麼用途，不如一起給你們好了（得到館長室的密碼）',
-      ],
+      options: ['這拼圖好難解....', '你看我解開拼圖了！快點稱讚我快點稱讚我'],
+    },
+    after: {
+      lines:
+        '欸我這邊還有一組數字，但我不知道是甚麼用途，不如一起給你們好了（得到館長室的密碼）',
+      options: [],
     },
   },
   20002: {
     name: '兵馬俑',
     img: require('./assets/Walters_Gallery.jpg'),
     notInProcess: {
-      lines: ['還沒給我'],
+      lines: '還沒給我',
       options: [],
     },
     inProcess: [
       {
-        lines: ['你找我嗎？有事嗎？'],
+        lines: '你找我嗎？有事嗎？',
         options: [
           '我是來找遺失的蒙娜麗莎的',
           '沒事，我就只是路過看看你好不好',
@@ -157,7 +160,7 @@ export const npcData = {
         options: ['我答應你，我會保護你的'],
       },
       {
-        lines: ['我被別人威脅，不能把那天晚上看到的說出去'],
+        lines: '我被別人威脅，不能把那天晚上看到的說出去',
         options: [
           '是誰？',
           '你被威脅了什麼？',
@@ -165,27 +168,27 @@ export const npcData = {
         ],
       },
       {
-        lines: [
+        lines:
           '我的小孩被那個人抓走了，我有一個可以救出他的方法，你可以幫幫我嗎？如果你願意的話，我就告訴你我看見了什麼',
-        ],
         options: ['（進入遊戲）'],
       },
     ],
     gameFail: {
-      lines: '連你都不能成功嗎.....',
+      lines: '就快成功了！！再試一次吧！（我終於可以見到我的孩子了嗎ಥ_ಥ）',
     },
     gameSuccess: {
-      lines: [
-        '謝謝你，你幫了我一個大忙，這樣我就不用冒著風險去賣畫了，我把畫放在修復室裡，真的是太謝謝你了。',
-      ],
+      lines: '謝謝你，你幫了我一個大忙，（跑去找孩子）',
       options: ['慢著！該告訴我的話呢！'],
     },
     after: {
-      lines: [
+      lines:
         '噢，對齁，我那天晚上看到保全一個人鬼鬼祟祟的在藏東西，形狀看起來有點像是畫，你可以去調查他一下。',
-      ],
       options: ['保全嗎......我去問問看好了'],
     },
+  },
+  2003: {
+    lines:
+      '你們....是怎麼知道的....一定是兵馬俑告訴你們的，哼，那個兵馬俑，居然出賣我，他是放棄他的小孩了嗎，我就告訴你們吧，畫作在修復室，反正你們也找不到畫在哪裡，告訴你們也沒關係。',
   },
   30001: {
     name: '館長室',

@@ -50,7 +50,6 @@ class NPCModal extends React.Component {
       this.beaconScanner.initBeacon();
       this.beaconScanner.startScan(this.beaconUpdate);
     }
-    // this.beaconUpdate({distance: 0.45, major: 1, minor: 1});
   }
 
   beaconUpdate = (beacon) => {
@@ -68,11 +67,12 @@ class NPCModal extends React.Component {
         return;
       } else if (distance <= 0.45) {
         // distance <= 0.45 then open
-        if (modalState !== 'open') {
+        if (modalState !== 'open' && !(major === 3 && minor === 1)) {
+          // 如果是館長室 就不開modal
           //為了不要重複開啟跟setState（會跳回去預設高度）
+          this.handleNPCShowUp(major, minor);
           this.openModal();
           this.setState({modalState: 'open', beaconState: 'npc'});
-          this.handleNPCShowUp(major, minor);
         }
       } else if (modalState === 'open') {
         // distance > 0.45 then close
@@ -84,24 +84,51 @@ class NPCModal extends React.Component {
 
   handleNPCShowUp = (major, minor) => {
     const npcID = major * 10000 + minor;
-    var visiableView;
     switch (major) {
       case 1: //normal NPC
         this.handleStoryRecordDataFlow(npcID, npcData[npcID].lines);
         if (this.props.progressRate < 10) {
           this.handleCPPRDataFlow(checkPointDataList[0]);
         }
+        this.setNormalView(npcData[npcID]);
 
-        visiableView = [
-          <NPCTitle key="title" name={npcData[npcID].name} />,
-          <NPCImage key="image" img={npcData[npcID].img} />,
-          <NPCConversation
-            key="option"
-            conversation={{lines: npcData[npcID].lines, options: []}}
-          />,
-        ];
         break;
       case 2: // mission NPC
+        const {progressRate} = this.props;
+        if (progressRate < 10) {
+          this.handleStoryRecordDataFlow(
+            npcID,
+            npcData[npcID].notInProcess.lines,
+          );
+          this.setNormalView({
+            name: npcData[npcID].name,
+            img: npcData[npcID].img,
+            ...npcData[npcID].notInProcess,
+          });
+        } else if (minor === 1 && progressRate < 40) {
+          if (progressRate === 10) {
+            const npc = npcData[npcID].inProcess;
+            this.handleStoryRecordDataFlow(npcID, npc.lines);
+            this.setState({
+              visiableView: [
+                <NPCTitle key="title" name={npcData[npcID].name} />,
+                <NPCImage key="image" img={npcData[npcID].img} />,
+                <NPCConversation
+                  key="option"
+                  conversation={{lines: npc.lines, options: npc.options}}
+                />,
+              ],
+            });
+          }
+        } else if (minor === 2 && progressRate >= 60 && progressRate < 70) {
+        } else {
+          this.setNormalView({
+            name: npcData[npcID].name,
+            img: npcData[npcID].img,
+            ...npcData[npcID].after,
+          });
+        }
+
         break;
       case 3: // room
         break;
@@ -110,10 +137,25 @@ class NPCModal extends React.Component {
         console.log('--------------');
         console.log(`沒有這號人物\nmajor: ${major}\nminor: ${minor}`);
         console.log('--------------');
-        visiableView = this.nothingView;
+        this.setState({
+          visiableView: this.nothingView,
+        });
+
         break;
     }
-    this.setState({visiableView: visiableView});
+  };
+
+  setNormalView = (npc) => {
+    this.setState({
+      visiableView: [
+        <NPCTitle key="title" name={npc.name} />,
+        <NPCImage key="image" img={npc.img} />,
+        <NPCConversation
+          key="option"
+          conversation={{lines: npc.lines, options: []}}
+        />,
+      ],
+    });
   };
 
   handleStoryRecordDataFlow = (npcID, line) => {

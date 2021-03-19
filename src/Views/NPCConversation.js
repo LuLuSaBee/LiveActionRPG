@@ -4,7 +4,7 @@ import Styles from '../Styles/NPCConversation.style';
 import Button from './Elements/Button';
 
 export default function NPCConversation(props) {
-  const {lines, options} = props.conversation;
+  const {lines, options, onPress} = props.conversation;
 
   return (
     <View style={Styles.container}>
@@ -18,7 +18,9 @@ export default function NPCConversation(props) {
             text={option}
             style={Styles.optionButton}
             textStyle={Styles.optionText}
-            onPress={() => console.log('click')}
+            onPress={() =>
+              onPress === undefined ? console.log('click') : onPress()
+            }
           />
         ))}
       </View>
