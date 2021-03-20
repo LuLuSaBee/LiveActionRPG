@@ -11,6 +11,7 @@ import BeaconScanner from '../utils/BeaconScanner';
 import {updateStoryRecord, updateCPPR} from '../utils/firebaseActions';
 import firestore from '@react-native-firebase/firestore';
 import Game1 from '../Games/Game1';
+import Game2 from '../Games/Game2';
 
 const screenHeight = Dimensions.get('screen').height;
 class NPCModal extends React.Component {
@@ -193,9 +194,104 @@ class NPCModal extends React.Component {
           this.props.progressRate >= 60 &&
           this.props.progressRate < 75
         ) {
-          //兵馬俑
+          const {gameFail} = npcData[npcID];
+          const gameFailReact = () => {
+            this.handleStoryRecordDataFlow(npcID, gameFail.lines);
+            this.setNormalView(
+              {name: name, img: img},
+              {
+                lines: gameFail.lines,
+                options: gameFail.options,
+                onPress: goToGame,
+              },
+            );
+          };
+          const goToGame = () =>
+            this.setOtherView(
+              <Game1
+                back={gameFailReact}
+                start={() =>
+                  this.props.progressRate === 70
+                    ? {}
+                    : this.handleCPPRDataFlow(checkPointDataList[6])
+                }
+                finish={() => {
+                  this.handleCPPRDataFlow(checkPointDataList[7]);
+                  this.handleNPCShowUp(major, minor, true);
+                }}
+              />,
+            );
+          if (this.props.progressRate === 60) {
+            const {inProcess} = npcData[npcID];
+            const pickReply = (index) => {
+              const data = inProcess[1];
+              this.handleStoryRecordDataFlow(npcID, data.lines[index]);
+              this.handleCPPRDataFlow(checkPointDataList[5]);
+              this.setNormalView(
+                {name: name, img: img},
+                {
+                  lines: data.lines[index],
+                  options: data.options,
+                  onPress: () => this.handleNPCShowUp(major, minor),
+                },
+              );
+            };
+            this.handleStoryRecordDataFlow(npcID, inProcess[0].lines);
+            this.setNormalView(
+              {name: name, img: img},
+              {
+                lines: inProcess[0].lines,
+                options: inProcess[0].options,
+                onPress: (index) => pickReply(index),
+              },
+            );
+          } else if (this.props.progressRate === 65) {
+            const {onProtect} = npcData[npcID];
+            const pickReply = () => {
+              const data = onProtect[1];
+              this.handleStoryRecordDataFlow(npcID, data.lines);
+              this.setNormalView(
+                {name: name, img: img},
+                {
+                  lines: data.lines,
+                  options: data.options,
+                  onPress: goToGame,
+                },
+              );
+            };
+            this.handleStoryRecordDataFlow(npcID, onProtect[0].lines);
+            this.setNormalView(
+              {name: name, img: img},
+              {
+                lines: onProtect[0].lines,
+                options: onProtect[0].options,
+                onPress: pickReply,
+              },
+            );
+          } else if (this.props.progressRate === 70 && !isGameSuccess) {
+            this.handleStoryRecordDataFlow(npcID, gameFail.lines);
+            this.setNormalView(
+              {name: name, img: img},
+              {
+                lines: gameFail.lines,
+                options: gameFail.options,
+                onPress: goToGame,
+              },
+            );
+          } else if (isGameSuccess) {
+            const {gameSuccess} = npcData[npcID];
+            this.handleStoryRecordDataFlow(npcID, gameSuccess.lines);
+            this.setNormalView(
+              {name: name, img: img},
+              {
+                lines: gameSuccess.lines,
+                options: gameSuccess.options,
+                onPress: () => this.handleNPCShowUp(major, minor),
+              },
+            );
+          }
         } else {
-          //通過他們兩個之後
+          //通過兵馬俑或石像之後
           const npc = npcData[npcID];
           var data;
           if (
