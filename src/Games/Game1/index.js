@@ -1,102 +1,142 @@
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
-import Styles from './Style';
-import photo1 from './Photo/photo1.jpg';
-import photo2 from './Photo/photo2.jpg';
-import photo3 from './Photo/photo3.jpg';
-import photo4 from './Photo/photo4.jpg';
-import photo5 from './Photo/photo5.jpg';
-import photo6 from './Photo/photo6.jpg';
-import photo7 from './Photo/photo7.jpg';
-import photo8 from './Photo/photo8.jpg';
+import {PushNotificationIOS, SwitchComponent, Text, View} from 'react-native';
+import Styles from './Styles';
+import photo1 from './photo/photo1.jpg';
+import photo2 from './photo/photo2.jpg';
+import photo3 from './photo/photo3.jpg';
+import photo4 from './photo/photo4.jpg';
+import photo5 from './photo/photo5.jpg';
+import photo6 from './photo/photo6.jpg';
+import photo7 from './photo/photo7.jpg';
+import photo8 from './photo/photo8.jpg';
+import photo9 from './photo/photo9.jpg';
 import GameItem from './GameItem';
 
-export default class Game1 extends React.Component {
+export default class Game2 extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       photos: [
-        {id: 1, data: 1, url: photo1, lock: false},
-        {id: 2, data: 2, url: photo2, lock: false},
-        {id: 3, data: 3, url: photo3, lock: false},
-        {id: 4, data: 4, url: photo4, lock: false},
-        {id: 5, data: 5, url: photo5, lock: false},
-        {id: 6, data: 6, url: photo6, lock: false},
-        {id: 7, data: 7, url: photo7, lock: false},
-        {id: 8, data: 8, url: photo8, lock: false},
-        {id: 9, data: 1, url: photo1, lock: false},
-        {id: 10, data: 2, url: photo2, lock: false},
-        {id: 11, data: 3, url: photo3, lock: false},
-        {id: 12, data: 4, url: photo4, lock: false},
-        {id: 13, data: 5, url: photo5, lock: false},
-        {id: 14, data: 6, url: photo6, lock: false},
-        {id: 15, data: 7, url: photo7, lock: false},
-        {id: 16, data: 8, url: photo8, lock: false},
+        {id: 1, url: photo1, gap: false, move: false},
+        {id: 2, url: photo2, gap: false, move: false},
+        {id: 3, url: photo3, gap: false, move: false},
+        {id: 4, url: photo4, gap: false, move: false},
+        {id: 5, url: photo5, gap: false, move: false},
+        {id: 6, url: photo6, gap: false, move: false},
+        {id: 7, url: photo7, gap: true, move: true},
+        {id: 8, url: photo8, gap: false, move: false},
+        {id: 9, url: photo9, gap: false, move: false},
       ],
     };
-    const bag = this.state.photos;
-    bag.sort(function () {
+    const random = this.state.photos;
+    random.sort(function () {
       return Math.random() - 0.5;
     });
-
-    this.props.start();
   }
-
+  componentDidMount() {
+    for (var i = 0; i <= 8; i++) {
+      if (this.state.photos[i].gap) {
+        this.updateMove(i);
+      }
+    }
+  }
   componentDidUpdate() {
-    if (this.state.photos.filter((photo) => photo.lock).length === 2) {
-      setTimeout(() => {
-        this.Test();
-      }, 1000);
+    var end = true;
+    for (var i = 1; i <= 9; i++) {
+      if (i !== this.state.photos[i - 1].id) {
+        end = false;
+      }
     }
-    if (this.state.photos.filter((photo) => photo.finish).length === 16) {
-      this.props.finish();
+    if (end) {
+      alert('end');
     }
   }
 
-  Test = () => {
-    const newStep = this.state.photos.filter((photo) => photo.lock);
-    if (newStep[0].data === newStep[1].data) {
-      newStep[0] = {id: newStep[0].id, finish: true};
-      newStep[1] = {id: newStep[1].id, finish: true};
-    } else {
-      newStep[0].lock = false;
-      newStep[1].lock = false;
+  updateMove = (i) => {
+    const photos = this.state.photos;
+    for (var j = 0; j <= 8; j++) {
+      photos[j].move = false;
     }
-    this.setState((preState) => ({
-      photos: preState.photos.map((photo) => {
-        if (newStep[0].id === photo.id) {
-          return {...newStep[0]};
-        } else if (newStep[1].id === photo.id) {
-          return {...newStep[1]};
-        } else {
-          return {...photo};
-        }
-      }),
-    }));
+    if (i === 0) {
+      photos[0].move = true;
+      photos[1].move = true;
+      photos[3].move = true;
+    } else if (i === 1) {
+      photos[0].move = true;
+      photos[1].move = true;
+      photos[2].move = true;
+      photos[4].move = true;
+    } else if (i === 2) {
+      photos[1].move = true;
+      photos[2].move = true;
+      photos[5].move = true;
+    } else if (i === 3) {
+      photos[0].move = true;
+      photos[3].move = true;
+      photos[4].move = true;
+      photos[6].move = true;
+    } else if (i === 4) {
+      photos[1].move = true;
+      photos[3].move = true;
+      photos[4].move = true;
+      photos[5].move = true;
+      photos[7].move = true;
+    } else if (i === 5) {
+      photos[2].move = true;
+      photos[4].move = true;
+      photos[5].move = true;
+      photos[8].move = true;
+    } else if (i === 6) {
+      photos[3].move = true;
+      photos[6].move = true;
+      photos[7].move = true;
+    } else if (i === 7) {
+      photos[4].move = true;
+      photos[6].move = true;
+      photos[7].move = true;
+      photos[8].move = true;
+    } else if (i === 8) {
+      photos[5].move = true;
+      photos[7].move = true;
+      photos[8].move = true;
+    }
+    this.setState({photos: photos});
   };
-
   pressToLock = (id) => {
-    if (this.state.photos.filter((photo) => photo.lock).length !== 2) {
-      const newPhotos = this.state.photos.map((photo) => {
-        return photo.id === id ? {...photo, lock: !photo.lock} : photo;
-      });
-      this.setState({
-        photos: newPhotos,
-      });
+    var change = [];
+    for (var i in this.state.photos) {
+      if (this.state.photos[i].id === id && this.state.photos[i].move) {
+        change.push(i);
+      }
+      if (this.state.photos[i].gap) {
+        change.push(i);
+      }
+    }
+    this.Switch(change[0], change[1]);
+    for (var i = 0; i <= 8; i++) {
+      if (this.state.photos[i].gap) {
+        this.updateMove(i);
+      }
     }
   };
+  Switch(i, j) {
+    const newStep = this.state.photos;
+    const bag = newStep[i];
+    newStep[i] = newStep[j];
+    newStep[j] = bag;
+    this.setState({photos: newStep});
+  }
 
   render() {
-    const {photos} = this.state;
     return (
-      <View style={Styles.page}>
+      <View>
         <View style={Styles.titleView}>
-          <Text style={Styles.title}>翻牌遊戲</Text>
+          <Text style={Styles.title}>拼圖遊戲</Text>
         </View>
         <View style={Styles.GameView}>
           <View style={Styles.ImgSort}>
-            {photos.map((photo) => {
+            {this.state.photos.map((photo) => {
               return (
                 <GameItem
                   key={photo.id}
@@ -106,13 +146,6 @@ export default class Game1 extends React.Component {
               );
             })}
           </View>
-        </View>
-        <View style={Styles.btnView}>
-          <TouchableOpacity
-            style={Styles.backbtn}
-            onPress={() => this.props.back()}>
-            <Text>回到對話</Text>
-          </TouchableOpacity>
         </View>
       </View>
     );

@@ -1,28 +1,26 @@
 import React from 'react';
-import Styles from './Style';
-import {View, Image, TouchableOpacity} from 'react-native';
-import unknow from './Photo/unknow.jpg';
+import {Image, View, TouchableOpacity} from 'react-native';
+import Styles from './Styles';
 
 export default function GameItem(props) {
   const {photo, onPress} = props;
-
-  if (photo.lock === false) {
+  if (photo.gap === false && photo.move) {
     return (
       <TouchableOpacity onPress={() => onPress(photo.id)} activeOpacity={1}>
-        <View key={photo.id} style={Styles.ImgView}>
-          <Image style={Styles.image} key={photo.id} source={unknow} />
+        <View key={photo.id}>
+          <Image style={Styles.ImgView} key={photo.id} source={photo.url} />
         </View>
       </TouchableOpacity>
     );
-  } else if (photo.lock === true) {
+  } else if (photo.gap === false) {
     return (
-      <TouchableOpacity onPress={() => onPress(photo.id)} activeOpacity={1}>
-        <View key={photo.id} style={Styles.ImgView}>
-          <Image style={Styles.image} key={photo.id} source={photo.url} />
+      <TouchableOpacity activeOpacity={1}>
+        <View key={photo.id}>
+          <Image style={Styles.ImgView} key={photo.id} source={photo.url} />
         </View>
       </TouchableOpacity>
     );
   } else {
-    return <View style={Styles.ImgView} />;
+    return <View style={Styles.ImgView} key={photo.id} />;
   }
 }
