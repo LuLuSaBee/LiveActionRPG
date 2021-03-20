@@ -104,7 +104,7 @@ export const npcData = {
       '我有聽說過這幅畫曾經在館長室出現過，但我不知道館長室的位置在哪裡，雕像他們可能會知道',
   },
   20001: {
-    name: '雕像',
+    name: '石像',
     img: require('./assets/npc/20001.jpg'),
     notInProcess: {
       lines: '（哼歌）',

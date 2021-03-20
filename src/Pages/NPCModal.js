@@ -256,6 +256,7 @@ class NPCModal extends React.Component {
   };
 
   handleStoryRecordDataFlow = (npcID, line) => {
+    const {storyRecord} = this.props;
     const newRecord = {
       npcID: npcID,
       time: firestore.Timestamp.fromDate(new Date()),
@@ -264,10 +265,7 @@ class NPCModal extends React.Component {
     // to redux
     this.props.addStoryRecord(newRecord);
     // to firebase
-    updateStoryRecord(this.props.userData.uid, [
-      newRecord,
-      ...this.props.storyRecord,
-    ]);
+    updateStoryRecord(this.props.userData.uid, [newRecord, ...storyRecord]);
   };
 
   /**
