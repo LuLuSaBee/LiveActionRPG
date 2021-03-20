@@ -95,16 +95,16 @@ export const npcData = {
     name: '章魚哥',
     img: require('./assets/npc/10002.jpg'),
     lines:
-      '蒙娜麗莎！？我什麼都不知道，你不要來問我，你去問聖龍，你不要來問我（害怕的樣子）',
+      '蒙娜麗莎！？我什麼都不知道，你不要來問我，你去問主席，你不要來問我（害怕的樣子）',
   },
   10003: {
-    name: '聖龍',
+    name: '主席',
     img: require('./assets/Walters_Gallery.jpg'),
     lines:
       '我有聽說過這幅畫曾經在館長室出現過，但我不知道館長室的位置在哪裡，雕像他們可能會知道',
   },
   20001: {
-    name: '摩艾石像',
+    name: '雕像',
     img: require('./assets/npc/20001.jpg'),
     notInProcess: {
       lines: '（哼歌）',
@@ -116,8 +116,12 @@ export const npcData = {
       options: ['（進入遊戲）'],
     },
     gameFail: {
-      lines: '那我就不能告訴你囉，加油吧～～',
+      lines: '好笨喔！！這個都解不開，還想找畫阿。',
       options: ['這什麼爛拼圖，不解了不解了'],
+    },
+    afterGameFail: {
+      lines: '那我就不能告訴你囉，加油吧～～',
+      options: ['（繼續）'],
     },
     again: {
       lines:
@@ -125,13 +129,12 @@ export const npcData = {
       options: ['（進入遊戲）'],
     },
     gameSuccess: {
-      lines:
-        '欸我這邊還有一組數字，但我不知道是甚麼用途，不如一起給你們好了（得到館長室的密碼）',
-      options: ['這拼圖好難解....', '你看我解開拼圖了！快點稱讚我快點稱讚我'],
+      lines: '（居然解開了，這個人還是有兩把刷子的嘛）',
+      options: ['這拼圖好難解....', '你看我解開拼圖了！\n快點稱讚我快點稱讚我'],
     },
-    after: {
+    finish: {
       lines:
-        '欸我這邊還有一組數字，但我不知道是甚麼用途，不如一起給你們好了（得到館長室的密碼）',
+        '真是恭喜你啊，那我就告訴你館長室在MA316吧，但我就只知道這些了，我真的不知道畫在哪裡',
       options: [],
     },
   },
@@ -139,8 +142,8 @@ export const npcData = {
     name: '兵馬俑',
     img: require('./assets/Walters_Gallery.jpg'),
     notInProcess: {
-      lines: '還沒給我',
-      options: [],
+      lines: '你找我嗎？有事嗎？',
+      options: ['沒事，我就只是路過看看你好不好', 'ㄌㄩㄝ~~鬼臉，打我啊打我啊'],
     },
     inProcess: [
       {
@@ -177,18 +180,14 @@ export const npcData = {
       lines: '就快成功了！！再試一次吧！（我終於可以見到我的孩子了嗎ಥ_ಥ）',
     },
     gameSuccess: {
-      lines: '謝謝你，你幫了我一個大忙，（跑去找孩子）',
+      lines: '謝謝你，你幫了我一個大忙（跑去找孩子）',
       options: ['慢著！該告訴我的話呢！'],
     },
-    after: {
+    finish: {
       lines:
         '噢，對齁，我那天晚上看到保全一個人鬼鬼祟祟的在藏東西，形狀看起來有點像是畫，你可以去調查他一下。',
       options: ['保全嗎......我去問問看好了'],
     },
-  },
-  2003: {
-    lines:
-      '你們....是怎麼知道的....一定是兵馬俑告訴你們的，哼，那個兵馬俑，居然出賣我，他是放棄他的小孩了嗎，我就告訴你們吧，畫作在修復室，反正你們也找不到畫在哪裡，告訴你們也沒關係。',
   },
   30001: {
     name: '館長室',
@@ -201,16 +200,16 @@ export const npcData = {
 };
 
 export const checkPointDataList = [
-  {point: 1, name: '線索一', rate: 10}, //10
-  {point: 2, name: '嘗試拼圖', rate: 10}, //20
-  {point: 3, name: '拼圖太難', rate: 10}, //30
-  {point: 4, name: '拼圖算什麼', rate: 10}, //40
-  {point: 5, name: '監視錄影最好看', rate: 20}, //60
-  {point: 6, name: '助人為樂', rate: 5}, //65
-  {point: 7, name: '嘗試翻牌遊戲', rate: 5}, //70
-  {point: 8, name: '嘗試翻牌遊戲', rate: 5}, //75
-  {point: 9, name: '感激不盡', rate: 5}, //80
-  {point: 10, name: '摩斯本人', rate: 10}, //90
-  {point: 11, name: '解碼能手', rate: 5}, //95
-  {point: 12, name: '慧眼識畫作', rate: 15}, //>100
+  {point: 0, name: '線索一', rate: 10}, //10
+  {point: 1, name: '嘗試拼圖', rate: 10}, //20
+  {point: 2, name: '拼圖算什麼', rate: 10}, //30
+  {point: 3, name: '線索二', rate: 10}, //40
+  {point: 4, name: '名偵探科科', rate: 20}, //60
+  {point: 5, name: '007保護我', rate: 5}, //65
+  {point: 6, name: '嘗試翻牌', rate: 5}, //70
+  {point: 7, name: '翻牌如翻掌', rate: 5}, //75
+  {point: 8, name: '地圖太大了吧', rate: 5}, //80
+  {point: 9, name: '摩斯本人', rate: 10}, //90
+  {point: 10, name: '解碼能手', rate: 5}, //95
+  {point: 11, name: '慧眼識畫作', rate: 15}, //>100
 ];

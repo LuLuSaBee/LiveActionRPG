@@ -12,17 +12,21 @@ export default function NPCConversation(props) {
         <Text style={Styles.lineText}>{lines}</Text>
       </View>
       <View style={Styles.optionView}>
-        {options.map((option, index) => (
-          <Button
-            key={index}
-            text={option}
-            style={Styles.optionButton}
-            textStyle={Styles.optionText}
-            onPress={() =>
-              onPress === undefined ? console.log('click') : onPress()
-            }
-          />
-        ))}
+        {options === undefined ? (
+          <View />
+        ) : (
+          options.map((option, index) => (
+            <Button
+              key={index}
+              text={option}
+              style={Styles.optionButton}
+              textStyle={Styles.optionText}
+              onPress={() =>
+                onPress === undefined ? console.log('click') : onPress(index)
+              }
+            />
+          ))
+        )}
       </View>
     </View>
   );

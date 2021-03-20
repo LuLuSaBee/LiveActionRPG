@@ -10,6 +10,7 @@ import * as actionCreators from '../redux/actions';
 import BeaconScanner from '../utils/BeaconScanner';
 import {updateStoryRecord, updateCPPR} from '../utils/firebaseActions';
 import firestore from '@react-native-firebase/firestore';
+import Game1 from '../Games/Game1';
 
 const screenHeight = Dimensions.get('screen').height;
 class NPCModal extends React.Component {
@@ -76,13 +77,14 @@ class NPCModal extends React.Component {
         }
       } else if (modalState === 'open') {
         // distance > 0.45 then close
+        console.log('beacon is too far');
         this.closeModal();
         this.setState({modalState: 'close', visiableView: this.nothingView});
       }
     }
   };
 
-  handleNPCShowUp = (major, minor) => {
+  handleNPCShowUp = (major, minor, isGameSuccess = false) => {
     const npcID = major * 10000 + minor;
     switch (major) {
       case 1: //normal NPC
@@ -90,43 +92,121 @@ class NPCModal extends React.Component {
         if (this.props.progressRate < 10) {
           this.handleCPPRDataFlow(checkPointDataList[0]);
         }
-        this.setNormalView(npcData[npcID]);
+        this.setNormalView(npcData[npcID], {lines: npcData[npcID].lines});
 
         break;
       case 2: // mission NPC
-        const {progressRate} = this.props;
-        if (progressRate < 10) {
-          this.handleStoryRecordDataFlow(
-            npcID,
-            npcData[npcID].notInProcess.lines,
-          );
-          this.setNormalView({
-            name: npcData[npcID].name,
-            img: npcData[npcID].img,
-            ...npcData[npcID].notInProcess,
-          });
-        } else if (minor === 1 && progressRate < 40) {
-          if (progressRate === 10) {
-            const npc = npcData[npcID].inProcess;
-            this.handleStoryRecordDataFlow(npcID, npc.lines);
-            this.setState({
-              visiableView: [
-                <NPCTitle key="title" name={npcData[npcID].name} />,
-                <NPCImage key="image" img={npcData[npcID].img} />,
-                <NPCConversation
-                  key="option"
-                  conversation={{lines: npc.lines, options: npc.options}}
-                />,
-              ],
-            });
+        const name = npcData[npcID].name;
+        const img = npcData[npcID].img;
+
+        if (
+          minor === 1 &&
+          this.props.progressRate >= 10 &&
+          this.props.progressRate < 40
+        ) {
+          const {gameFail, afterGameFail} = npcData[npcID];
+          const afterGameFailReact = () => {
+            this.handleStoryRecordDataFlow(npcID, afterGameFail.lines);
+            this.setNormalView(
+              {name: name, img: img},
+              {
+                lines: afterGameFail.lines,
+                options: afterGameFail.options,
+                onPress: () => this.handleNPCShowUp(major, minor),
+              },
+            );
+          };
+          const gameFailReact = () => {
+            this.handleStoryRecordDataFlow(npcID, gameFail.lines);
+            this.setNormalView(
+              {name: name, img: img},
+              {
+                lines: gameFail.lines,
+                options: gameFail.options,
+                onPress: afterGameFailReact,
+              },
+            );
+          };
+          const goToGame = () =>
+            this.setOtherView(
+              <Game1
+                back={gameFailReact}
+                start={() =>
+                  this.props.progressRate === 20
+                    ? {}
+                    : this.handleCPPRDataFlow(checkPointDataList[1])
+                }
+                finish={() => {
+                  this.handleCPPRDataFlow(checkPointDataList[2]);
+                  this.handleNPCShowUp(major, minor, true);
+                }}
+              />,
+            );
+
+          if (this.props.progressRate === 10) {
+            const {inProcess} = npcData[npcID];
+            this.handleStoryRecordDataFlow(npcID, inProcess.lines);
+            this.setNormalView(
+              {name: name, img: img},
+              {
+                lines: inProcess.lines,
+                options: inProcess.options,
+                onPress: goToGame,
+              },
+            );
+          } else if (this.props.progressRate === 20 && !isGameSuccess) {
+            //bad condition
+            //但因為目前對生命週期無解，若要改的話要改結構
+            const {again} = npcData[npcID];
+            this.handleStoryRecordDataFlow(npcID, again.lines);
+            this.setNormalView(
+              {name: name, img: img},
+              {
+                lines: again.lines,
+                options: again.options,
+                onPress: goToGame,
+              },
+            );
+          } else if (this.props.progressRate === 30 || isGameSuccess) {
+            const {gameSuccess} = npcData[npcID];
+            this.handleStoryRecordDataFlow(npcID, gameSuccess.lines);
+            this.handleCPPRDataFlow(checkPointDataList[3]);
+            this.setNormalView(
+              {name: name, img: img},
+              {
+                lines: gameSuccess.lines,
+                options: gameSuccess.options,
+                onPress: () => {
+                  this.handleNPCShowUp(major, minor);
+                },
+              },
+            );
           }
-        } else if (minor === 2 && progressRate >= 60 && progressRate < 70) {
+        } else if (
+          minor === 2 &&
+          this.props.progressRate >= 60 &&
+          this.props.progressRate < 75
+        ) {
         } else {
-          this.setNormalView({
-            name: npcData[npcID].name,
-            img: npcData[npcID].img,
-            ...npcData[npcID].after,
-          });
+          const npc = npcData[npcID];
+          var data;
+          if (
+            this.props.progressRate < 10 ||
+            (minor === 2 && this.props.progressRate < 60)
+          ) {
+            data = npc.notInProcess;
+          } else {
+            data = npc.finish;
+          }
+          this.handleStoryRecordDataFlow(npcID, data.lines);
+          this.setNormalView(
+            {name: name, img: img},
+            {
+              lines: data.lines,
+              options: data.options,
+              onPress: this.closeModal,
+            },
+          );
         }
 
         break;
@@ -145,38 +225,62 @@ class NPCModal extends React.Component {
     }
   };
 
-  setNormalView = (npc) => {
+  /**
+   *
+   * @param {Map} npc
+   * @param {Map} conversation
+   * @param {Map} conversation.lines
+   * @param {Map} conversation.options
+   * @param {Map} conversation.onPress
+   */
+  setNormalView = (npc, conversation) => {
     this.setState({
       visiableView: [
         <NPCTitle key="title" name={npc.name} />,
         <NPCImage key="image" img={npc.img} />,
-        <NPCConversation
-          key="option"
-          conversation={{lines: npc.lines, options: []}}
-        />,
+        <NPCConversation key="option" conversation={{...conversation}} />,
       ],
     });
   };
 
+  setOtherView = (visiableView) => {
+    this.setState({visiableView: visiableView});
+  };
+
   handleStoryRecordDataFlow = (npcID, line) => {
-    // to redux
-    this.props.addStoryRecord({
+    const newRecord = {
       npcID: npcID,
       time: firestore.Timestamp.fromDate(new Date()),
       line: line,
-    });
+    };
+    // to redux
+    this.props.addStoryRecord(newRecord);
     // to firebase
-    updateStoryRecord(this.props.userData.uid, this.props.storyRecord);
+    updateStoryRecord(this.props.userData.uid, [
+      newRecord,
+      ...this.props.storyRecord,
+    ]);
   };
 
   /**
    * handle CheckPoint and ProgressRate DataFlow
    */
   handleCPPRDataFlow = (data) => {
-    const {updateProgressRate, updateCheckPoint, userData} = this.props;
+    const {
+      updateProgressRate,
+      updateCheckPoint,
+      userData,
+      checkPoint,
+    } = this.props;
 
     // redux
     var newRate = data.point === 11 ? 100 : this.props.progressRate + data.rate;
+    var newPoint = {
+      extraTime: '',
+      point: data.point,
+      name: data.name,
+      time: firestore.Timestamp.fromDate(new Date()),
+    };
     updateProgressRate(newRate);
     updateCheckPoint({
       extraTime: '',
@@ -186,8 +290,7 @@ class NPCModal extends React.Component {
     });
 
     // firebase
-    // 不解構是因為要讓reudx的結果直接進firebase
-    updateCPPR(userData.uid, this.props.checkPoint, this.props.progressRate);
+    updateCPPR(userData.uid, [newPoint, ...checkPoint], newRate);
   };
 
   //render
