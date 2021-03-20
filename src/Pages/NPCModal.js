@@ -68,8 +68,14 @@ class NPCModal extends React.Component {
         return;
       } else if (distance <= 0.45) {
         // distance <= 0.45 then open
-        if (modalState !== 'open' && !(major === 3 && minor === 1)) {
+        if (major === 3 && minor === 1 && modalState !== 'open') {
           // 如果是館長室 就不開modal
+          this.handleCPPRDataFlow(checkPointDataList[4]);
+          console.log('--------------');
+          console.log('給影片');
+          console.log('--------------');
+          this.setState({modalState: 'open', beaconState: 'room'});
+        } else if (modalState !== 'open') {
           //為了不要重複開啟跟setState（會跳回去預設高度）
           this.handleNPCShowUp(major, minor);
           this.openModal();
@@ -98,12 +104,12 @@ class NPCModal extends React.Component {
       case 2: // mission NPC
         const name = npcData[npcID].name;
         const img = npcData[npcID].img;
-
         if (
           minor === 1 &&
           this.props.progressRate >= 10 &&
           this.props.progressRate < 40
         ) {
+          //雕像
           const {gameFail, afterGameFail} = npcData[npcID];
           const afterGameFailReact = () => {
             this.handleStoryRecordDataFlow(npcID, afterGameFail.lines);
@@ -187,7 +193,9 @@ class NPCModal extends React.Component {
           this.props.progressRate >= 60 &&
           this.props.progressRate < 75
         ) {
+          //兵馬俑
         } else {
+          //通過他們兩個之後
           const npc = npcData[npcID];
           var data;
           if (
