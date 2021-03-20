@@ -1,5 +1,5 @@
 import React from 'react';
-import {PushNotificationIOS, SwitchComponent, Text, View} from 'react-native';
+import {TouchableOpacity, Text, View} from 'react-native';
 import Styles from './Styles';
 import photo1 from './photo/photo1.jpg';
 import photo2 from './photo/photo2.jpg';
@@ -12,7 +12,7 @@ import photo8 from './photo/photo8.jpg';
 import photo9 from './photo/photo9.jpg';
 import GameItem from './GameItem';
 
-export default class Game2 extends React.Component {
+export default class Game1 extends React.Component {
   constructor(props) {
     super(props);
 
@@ -33,6 +33,7 @@ export default class Game2 extends React.Component {
     random.sort(function () {
       return Math.random() - 0.5;
     });
+    this.props.start();
   }
   componentDidMount() {
     for (var i = 0; i <= 8; i++) {
@@ -49,7 +50,7 @@ export default class Game2 extends React.Component {
       }
     }
     if (end) {
-      alert('end');
+      this.props.finish();
     }
   }
 
@@ -130,7 +131,7 @@ export default class Game2 extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={Styles.page}>
         <View style={Styles.titleView}>
           <Text style={Styles.title}>拼圖遊戲</Text>
         </View>
@@ -146,6 +147,13 @@ export default class Game2 extends React.Component {
               );
             })}
           </View>
+        </View>
+        <View style={Styles.btnView}>
+          <TouchableOpacity
+            style={Styles.backbtn}
+            onPress={() => this.props.back()}>
+            <Text>回到對話</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
