@@ -14,6 +14,9 @@ class StoryRecordPage extends React.Component {
   }
 
   render() {
+    console.log('--------------');
+    console.log(this.props.storyRecord[0].time);
+    console.log('--------------');
     return (
       <View style={Styles.page}>
         <ScrollView style={Styles.container}>
@@ -38,7 +41,12 @@ class StoryRecordPage extends React.Component {
                     <Text>{record.line}</Text>
                   </View>
                   <View style={Styles.timeContainer}>
-                    <Text>{moment(record.time).format('HH:mm:ss')}</Text>
+                    <Text>
+                      {moment(
+                        record.time.seconds * 1000 +
+                          record.time.nanoseconds / 1000000,
+                      ).format('HH:mm:ss')}
+                    </Text>
                   </View>
                 </View>,
               ]}
