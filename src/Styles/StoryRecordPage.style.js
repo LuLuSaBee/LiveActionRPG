@@ -14,8 +14,8 @@ export default StyleSheet.create({
     marginTop: defaultTheme.marginTop,
   },
   box: {
-    width: 'auto',
-    minHeight: '20%',
+    minHeight: 150,
+    height: '40%',
     marginBottom: 10,
     marginHorizontal: 10,
     padding: 10,
@@ -34,6 +34,7 @@ export default StyleSheet.create({
   },
   image: {
     height: '100%',
+    width: '100%',
     resizeMode: 'cover',
     borderRadius: 10,
   },
@@ -43,16 +44,20 @@ export default StyleSheet.create({
     marginLeft: 10,
   },
   nameContainer: {
-    flex: 0.2,
-    backgroundColor: 'red',
+    flex: 0.4,
+    justifyContent: 'center',
+  },
+  name: {
+    fontSize: 20,
+    fontWeight: '600',
   },
   linesContainer: {
-    flex: 0.7,
-    backgroundColor: 'gray',
+    flex: 0.5,
   },
   timeContainer: {
     flex: 0.1,
-    backgroundColor: 'red',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
   },
   backButton: {
     borderColor: 'black',

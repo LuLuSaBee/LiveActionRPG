@@ -18,7 +18,9 @@ class BackpackPage extends React.Component {
         <SafeAreaView style={Styles.container}>
           <TouchableOpacity
             style={[Styles.box, Styles.record]}
-            onPress={pushToStoryRecordPage}>
+            onPress={() =>
+              pushToStoryRecordPage({storyRecord: this.props.storyRecord})
+            }>
             <View style={Styles.bookView}>
               <Image style={Styles.bookIcon} source={storyRecordData.left} />
             </View>

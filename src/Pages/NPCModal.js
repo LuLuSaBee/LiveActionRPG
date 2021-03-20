@@ -208,7 +208,7 @@ class NPCModal extends React.Component {
           };
           const goToGame = () =>
             this.setOtherView(
-              <Game1
+              <Game2
                 back={gameFailReact}
                 start={() =>
                   this.props.progressRate === 70
@@ -315,6 +315,9 @@ class NPCModal extends React.Component {
 
         break;
       case 3: // room
+        if (this.props.progressRate === 75) {
+          this.handleCPPRDataFlow(checkPointDataList[8]);
+        }
         break;
       default:
         // something roung
