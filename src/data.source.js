@@ -99,7 +99,7 @@ export const npcData = {
   },
   10003: {
     name: '主席',
-    img: require('./assets/Walters_Gallery.jpg'),
+    img: require('./assets/npc/10003.jpg'),
     lines:
       '我有聽說過這幅畫曾經在館長室出現過，但我不知道館長室的位置在哪裡，雕像他們可能會知道',
   },
@@ -140,7 +140,7 @@ export const npcData = {
   },
   20002: {
     name: '兵馬俑',
-    img: require('./assets/Walters_Gallery.jpg'),
+    img: require('./assets/npc/20002.jpg'),
     notInProcess: {
       lines: '你找我嗎？有事嗎？',
       options: ['沒事，我就只是路過看看你好不好', 'ㄌㄩㄝ~~鬼臉，打我啊打我啊'],
