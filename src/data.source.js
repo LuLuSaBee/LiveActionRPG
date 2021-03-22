@@ -60,14 +60,6 @@ export const defaultTheme = {
   ...ifIphoneX({marginTop: 0}, {marginTop: 10}),
 };
 
-/**
- *
- * start at 1 is normal
- *
- * start at 2 is mission
- *
- * start at 3 is room
- */
 export const NPCIDlist = [
   10000, // 神秘人
   10001, // 耶穌
@@ -228,4 +220,54 @@ export const musicData = {
   click: require('./assets/music/click.mp3'),
   fail: require('./assets/music/fail.mp3'),
   success: require('./assets/music/success.mp3'),
+};
+
+export const itemsData = {
+  bible: {
+    name: '聖經',
+    img: require('./assets/item/bible.png'),
+  },
+  cardGames: {
+    name: '撲克牌',
+    img: require('./assets/item/card-games.png'),
+  },
+  checkList: {
+    name: '成就清單',
+    img: require('./assets/item/checklist.png'),
+  },
+  history: {
+    name: '史書',
+    img: require('./assets/item/history.png'),
+  },
+  image: {
+    name: '照片',
+    img: require('./assets/item/image.png'),
+  },
+  lightning: {
+    name: '閃電',
+    img: require('./assets/item/lightning.png'),
+  },
+  paper: {
+    name: '道歉信',
+    img: require('./assets/item/paper.png'),
+  },
+  terms: {
+    name: '注意事項',
+    img: require('./assets/item/terms.png'),
+  },
+};
+
+export const videoData = {
+  firstHalfInterference: {
+    name: '模糊的前半段',
+    source: require('./assets/video/first-half-interference.mp4'),
+  },
+  firstHalf: {
+    name: '清晰的前半段',
+    source: require('./assets/video/first-half.mp4'),
+  },
+  secondHalf: {
+    name: '清晰的後半段',
+    source: require('./assets/video/second-half.mp4'),
+  },
 };
