@@ -3,7 +3,7 @@ import {View, TouchableOpacity} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {routerKey, TabData} from '../data.source';
 import Styles from '../Styles/CustomTabBar.style';
-import TabViewIcon from '../utils/TabViewIcon';
+import TabViewIcon from './TabViewIcon';
 
 export default class CustomTabBar extends React.Component {
   render() {

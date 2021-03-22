@@ -1,11 +1,11 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import {Router, Scene, Tabs} from 'react-native-router-flux';
 import {routerKey} from '../data.source';
 import LandingPage from '../Pages/LandingPage';
 import BackpackPage from '../Pages/BackpackPage';
 import InformationPage from '../Pages/InformationPage';
 import StoryRecordPage from '../Pages/StoryRecordPage';
-import CustomTabBar from '../utils/CustomTabBar';
+import CustomTabBar from '../Views/CustomTabBar';
 import NPCModal from '../Pages/NPCModal';
 
 export default function MainRouter() {
