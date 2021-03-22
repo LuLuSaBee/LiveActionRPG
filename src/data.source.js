@@ -14,22 +14,21 @@ export const landingPageData = {
 export const TabData = {
   ScanningView: {
     icon: {
-      normal: require('./assets/scan.png'),
-      seleted: require('./assets/scan-seleted.png'),
+      normal: require('./assets/tabs/scan.png'),
     },
   },
   BackpackPage: {
     title: '背包',
     icon: {
-      normal: require('./assets/backpack.png'),
-      seleted: require('./assets/backpack-seleted.png'),
+      normal: require('./assets/tabs/backpack.png'),
+      seleted: require('./assets/tabs/backpack-seleted.png'),
     },
   },
   InformationPage: {
     title: '資訊',
     icon: {
-      normal: require('./assets/info.png'),
-      seleted: require('./assets/info-seleted.png'),
+      normal: require('./assets/tabs/info.png'),
+      seleted: require('./assets/tabs/info-seleted.png'),
     },
   },
 };
