@@ -216,3 +216,10 @@ export const checkPointDataList = [
   {point: 10, name: '解碼能手', rate: 5}, //95
   {point: 11, name: '慧眼識畫作', rate: 15}, //>100
 ];
+
+export const musicData = {
+  background: require('./assets/music/background.mp3'),
+  click: require('./assets/music/click.mp3'),
+  fail: require('./assets/music/fail.mp3'),
+  success: require('./assets/music/success.mp3'),
+};
