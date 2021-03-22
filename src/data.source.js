@@ -70,11 +70,12 @@ export const defaultTheme = {
  * start at 3 is room
  */
 export const NPCIDlist = [
+  10000, // 神秘人
   10001, // 耶穌
   10002, // 章魚哥
-  10003, // 聖龍
-  20001, // 摩艾石像
-  20002, // 兵馬俑
+  10003, // 主席
+  10004, // 石像
+  10005, // 兵馬俑
   30001, // 館長室
   30002, // 修復室
 ];
@@ -84,6 +85,12 @@ export const npcData = {
     name: '這邊空蕩蕩',
     img: require('./assets/empty.png'),
     lines: '目前沒有展覽品在附近\n｡ﾟヽ(ﾟ´Д`)ﾉﾟ｡',
+  },
+  10000: {
+    name: '神秘人',
+    img: require('./assets/npc/10000.jpg'),
+    lines:
+      '本次任務為找到美術館遺失的蒙娜麗莎，包包裡有你們接下來將會需 要的物品(手電筒、借到教室的卡片)，祝你們好運!',
   },
   10001: {
     name: '耶穌',
@@ -103,9 +110,9 @@ export const npcData = {
     lines:
       '我有聽說過這幅畫曾經在館長室出現過，但我不知道館長室的位置在哪裡，雕像他們可能會知道',
   },
-  20001: {
+  10004: {
     name: '石像',
-    img: require('./assets/npc/20001.jpg'),
+    img: require('./assets/npc/10004.jpg'),
     notInProcess: {
       lines: '（哼歌）',
       options: [],
@@ -138,9 +145,9 @@ export const npcData = {
       options: [],
     },
   },
-  20002: {
+  10005: {
     name: '兵馬俑',
-    img: require('./assets/npc/20002.jpg'),
+    img: require('./assets/npc/10005.jpg'),
     notInProcess: {
       lines: '你找我嗎？有事嗎？',
       options: ['沒事，我就只是路過看看你好不好', 'ㄌㄩㄝ~~鬼臉，打我啊打我啊'],
