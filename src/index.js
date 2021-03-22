@@ -22,20 +22,10 @@ export default function App() {
     // loaded successfully
     console.log('Background music loaded successfully.');
 
-    // backgroundMusic.play();
-    // // Play the sound with an onEnd callback
-    // backgroundMusic.play((success) => {
-    //   if (success) {
-    //     console.log('successfully finished playing');
-    //     backgroundMusic.play();
-    //   } else {
-    //     console.log('playback failed due to audio decoding errors');
-    //   }
-    // });
+    backgroundMusic.play();
+    // Loop indefinitely until stop() is called
+    backgroundMusic.setNumberOfLoops(-1);
   });
-  backgroundMusic.play();
-  // Loop indefinitely until stop() is called
-  backgroundMusic.setNumberOfLoops(-1);
 
   return (
     <Provider store={store}>
