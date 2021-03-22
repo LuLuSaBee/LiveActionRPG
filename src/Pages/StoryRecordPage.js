@@ -14,9 +14,6 @@ class StoryRecordPage extends React.Component {
   }
 
   render() {
-    console.log('--------------');
-    console.log(this.props.storyRecord[0].time);
-    console.log('--------------');
     return (
       <View style={Styles.page}>
         <ScrollView style={Styles.container}>

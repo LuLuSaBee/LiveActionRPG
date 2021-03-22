@@ -27,7 +27,6 @@ export default StyleSheet.create({
     flexDirection: 'row',
   },
   imageContainer: {
-    backgroundColor: 'red',
     flex: 0.3,
     height: '100%',
     borderRadius: 10,

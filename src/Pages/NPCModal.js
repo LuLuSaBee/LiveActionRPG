@@ -40,6 +40,9 @@ class NPCModal extends React.Component {
   }
 
   componentDidUpdate() {
+    // if (this.props.timeLeft === 0) {
+    //   this.beaconScanner.stopScan();
+    // }
     if (this.state.didUpdate) {
       return;
     } else {
