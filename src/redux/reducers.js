@@ -98,7 +98,7 @@ const backpackItem = (state = [], action) => {
     case ADD_ACHIEVENENT:
       return [...state, action.backpackItem];
     case REDUCE_ACHIEVENENT:
-      return state.filter((element) => element.key !== action.backpackItem.key);
+      return state.filter((element) => element.key !== action.backpackItem);
     default:
       return state;
   }

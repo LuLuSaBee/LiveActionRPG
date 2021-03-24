@@ -146,10 +146,34 @@ export function updateCPPR(uid, checkPoint, progressRate) {
     });
 }
 
+/**
+ *
+ * @param {*} uid
+ * @param {Array<Map<Number,Boolean>>} achievement
+ * @param {Number} achievement[].id
+ * @param {Boolean} achievement[].lock
+ */
 export function updateAchievement(uid, achievement) {
   player
     .doc(uid)
     .update({achievement: achievement})
+    .then(() => 'success')
+    .catch((e) => {
+      console.log('---updateAchievement Error-----');
+      console.log(e);
+      console.log('-------------------------------');
+    });
+}
+
+/**
+ *
+ * @param {*} uid
+ * @param {Array<String>} backpackItem
+ */
+export function updateBackpackItem(uid, backpackItem) {
+  player
+    .doc(uid)
+    .update({backpackItem: backpackItem})
     .then(() => 'success')
     .catch((e) => {
       console.log('---updateAchievement Error-----');

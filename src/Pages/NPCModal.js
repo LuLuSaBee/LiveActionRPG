@@ -14,6 +14,7 @@ import {
   updateStoryRecord,
   updateCPPR,
   updateAchievement,
+  updateBackpackItem,
 } from '../utils/firebaseActions';
 import {
   defaultTheme,
@@ -198,6 +199,25 @@ class NPCModal extends React.Component {
       achievement.map((element) =>
         element.id === id ? {id: id, lock: false} : element,
       ),
+    );
+  };
+
+  addBackpackItem = (key) => {
+    const {backpackItem, userData} = this.props;
+    //redux
+    this.props.addBackpackItem(key);
+    //firebase
+    updateBackpackItem(userData.uid, [...backpackItem, key]);
+  };
+
+  reduceBackpackItem = (key) => {
+    const {backpackItem, userData} = this.props;
+    //redux
+    this.props.reduceBackpackItem(key);
+    //firebase
+    updateBackpackItem(
+      userData.uid,
+      backpackItem.filter((element) => element !== key),
     );
   };
 
