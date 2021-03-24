@@ -7,10 +7,14 @@ import NPCConversation from '../Views/NPCConversation';
 import {connect} from 'react-redux';
 import * as actionCreators from '../redux/actions';
 import BeaconScanner from '../utils/BeaconScanner';
-import {updateStoryRecord, updateCPPR} from '../utils/firebaseActions';
 import firestore from '@react-native-firebase/firestore';
 import Game1 from '../Games/Game1';
 import Game2 from '../Games/Game2';
+import {
+  updateStoryRecord,
+  updateCPPR,
+  updateAchievement,
+} from '../utils/firebaseActions';
 import {
   defaultTheme,
   npcData,
@@ -182,6 +186,19 @@ class NPCModal extends React.Component {
 
     // firebase
     updateCPPR(userData.uid, [newPoint, ...checkPoint], newRate);
+  };
+
+  unLockAchievement = (id) => {
+    const {achievement, userData} = this.props;
+    //redux
+    this.props.updateAchievement(id);
+    //firebase
+    updateAchievement(
+      userData.uid,
+      achievement.map((element) =>
+        element.id === id ? {id: id, lock: false} : element,
+      ),
+    );
   };
 
   //render

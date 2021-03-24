@@ -98,8 +98,8 @@ export function snapshotChatList(uid, initChatList) {
  * @param {String} chatList[].message - message
  * @param {String} message - new message
  */
-export async function addMessage(uid, chatList, message) {
-  const result = await player
+export function addMessage(uid, chatList, message) {
+  player
     .doc(uid)
     .update({chatList: [...chatList, message]})
     .then(() => 'success')
@@ -107,10 +107,7 @@ export async function addMessage(uid, chatList, message) {
       console.log('---addMessage Error-----');
       console.log(e);
       console.log('------------------------');
-      return 'error';
     });
-
-  return result;
 }
 
 /**
@@ -119,8 +116,8 @@ export async function addMessage(uid, chatList, message) {
  * @param {Array} storyRecord - old recordlist
  * @param {Array} newRecord - new record
  */
-export async function updateStoryRecord(uid, storyRecord) {
-  const result = await player
+export function updateStoryRecord(uid, storyRecord) {
+  player
     .doc(uid)
     .update({storyRecord: storyRecord})
     .then(() => 'success')
@@ -128,23 +125,35 @@ export async function updateStoryRecord(uid, storyRecord) {
       console.log('---updateStoryRecord Error-----');
       console.log(e);
       console.log('-------------------------------');
-      return 'error';
     });
-
-  return result;
 }
 
-export async function updateCPPR(uid, checkPoint, progressRate) {
-  const result = await player
+/**
+ * update checkPoint and progressRate into firebase
+ * @param {*} uid
+ * @param {*} checkPoint
+ * @param {*} progressRate
+ */
+export function updateCPPR(uid, checkPoint, progressRate) {
+  player
     .doc(uid)
     .update({checkPoint: checkPoint, progressRate: progressRate})
     .then(() => 'success')
     .catch((e) => {
-      console.log('---updateStoryRecord Error-----');
+      console.log('---updateCPPR Error-----');
+      console.log(e);
+      console.log('------------------------');
+    });
+}
+
+export function updateAchievement(uid, achievement) {
+  player
+    .doc(uid)
+    .update({achievement: achievement})
+    .then(() => 'success')
+    .catch((e) => {
+      console.log('---updateAchievement Error-----');
       console.log(e);
       console.log('-------------------------------');
-      return 'error';
     });
-
-  return result;
 }
