@@ -50,6 +50,8 @@ class LandingPage extends React.Component {
       initCheckPoint,
       updateProgressRate,
       updateTimeLeft,
+      initAchievement,
+      initBackpackItem,
     } = this.props;
 
     //at reducer
@@ -63,6 +65,8 @@ class LandingPage extends React.Component {
       initCheckPoint,
       updateProgressRate,
       updateTimeLeft,
+      initAchievement,
+      initBackpackItem,
     );
   };
 
