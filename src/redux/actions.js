@@ -7,6 +7,11 @@ export const SET_USERDATA = 'SET_USERDATA';
 export const UPDATE_CHATLIST = 'UPDATE_CHATLIST';
 export const INIT_CHATLIST = 'INIT_CHATLIST';
 export const UPDATE_PROGRESSRATE = 'UPDATE_PROGRESSRATE';
+export const INIT_ACHIEVENENT = 'INIT_ACHIEVENENT';
+export const UPDATE_ACHIEVENENT = 'UPDATE_ACHIEVENENT';
+export const INIT_BACKPACKITEM = 'INIT_BACKPACKITEM';
+export const ADD_ACHIEVENENT = 'ADD_ACHIEVENENT';
+export const REDUCE_ACHIEVENENT = 'REDUCE_ACHIEVENENT';
 
 export const updateCheckPoint = (checkPoint) => ({
   type: UPDATE_CHECKPOINT,
@@ -56,4 +61,29 @@ export const initChatList = (chatList) => ({
 export const updateProgressRate = (progressRate) => ({
   type: UPDATE_PROGRESSRATE,
   progressRate,
+});
+
+export const initAchievement = (achievement) => ({
+  type: INIT_ACHIEVENENT,
+  achievement,
+});
+
+export const updateAchievement = (id) => ({
+  type: UPDATE_ACHIEVENENT,
+  id: id,
+});
+
+export const initBackpackItem = (backpackItem) => ({
+  type: INIT_BACKPACKITEM,
+  backpackItem,
+});
+
+export const addBackpackItem = (backpackItem) => ({
+  type: ADD_ACHIEVENENT,
+  backpackItem,
+});
+
+export const reduceBackpackItem = (backpackItem) => ({
+  type: ADD_ACHIEVENENT,
+  backpackItem,
 });

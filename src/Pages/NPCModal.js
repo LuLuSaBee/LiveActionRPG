@@ -158,31 +158,27 @@ class NPCModal extends React.Component {
   };
 
   /**
-   * handle CheckPoint and ProgressRate DataFlow
+   * handle CheckPoint, ProgressRate dataflow
    */
-  handleCPPRDataFlow = (data) => {
+  handlePoint = (data) => {
     const {
       updateProgressRate,
       updateCheckPoint,
       userData,
       checkPoint,
+      progressRate,
     } = this.props;
 
     // redux
-    var newRate = data.point === 11 ? 100 : this.props.progressRate + data.rate;
+    var newRate = progressRate + data.rate;
     var newPoint = {
       extraTime: '',
-      point: data.point,
+      id: data.id,
       name: data.name,
       time: firestore.Timestamp.fromDate(new Date()),
     };
     updateProgressRate(newRate);
-    updateCheckPoint({
-      extraTime: '',
-      point: data.point,
-      name: data.name,
-      time: firestore.Timestamp.fromDate(new Date()),
-    });
+    updateCheckPoint(newPoint);
 
     // firebase
     updateCPPR(userData.uid, [newPoint, ...checkPoint], newRate);
