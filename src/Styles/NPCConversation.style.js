@@ -13,13 +13,14 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   lineText: {
-    fontSize: isIphoneX() ? 20 : 18,
+    fontSize: isIphoneX() ? 20 : 16,
     fontWeight: '600',
   },
   optionView: {
     flex: 0.7,
     alignItems: 'center',
-    marginTop: 10,
+    justifyContent: 'center',
+    marginTop: 5,
   },
   optionButton: {
     borderRadius: 50,
@@ -32,5 +33,6 @@ export default StyleSheet.create({
     fontSize: isIphoneX() ? 18 : 15,
     textAlign: 'center',
     margin: 10,
+    marginHorizontal: 20,
   },
 });

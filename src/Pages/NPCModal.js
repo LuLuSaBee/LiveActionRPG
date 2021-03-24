@@ -4,7 +4,6 @@ import {Modalize} from 'react-native-modalize';
 import NPCTitle from '../Views/NPCTitle';
 import NPCImage from '../Views/NPCImage';
 import NPCConversation from '../Views/NPCConversation';
-import {defaultTheme, npcData, checkPointDataList} from '../data.source';
 import {connect} from 'react-redux';
 import * as actionCreators from '../redux/actions';
 import BeaconScanner from '../utils/BeaconScanner';
@@ -12,6 +11,12 @@ import {updateStoryRecord, updateCPPR} from '../utils/firebaseActions';
 import firestore from '@react-native-firebase/firestore';
 import Game1 from '../Games/Game1';
 import Game2 from '../Games/Game2';
+import {
+  defaultTheme,
+  npcData,
+  checkPointDataList,
+  NPCIDlist,
+} from '../data.source';
 
 const screenHeight = Dimensions.get('screen').height;
 class NPCModal extends React.Component {
@@ -28,11 +33,11 @@ class NPCModal extends React.Component {
       />,
     ];
     this.state = {
-      didUpdate: false,
-      modalState: 'close',
       visiableView: this.nothingView,
-      beaconState: 'nothing', //避免掉短時間內一直更新state
     };
+    this.didUpdate = false;
+    this.modalState = 'close';
+    this.beaconState = 'nothing'; //避免掉短時間內一直更新state
 
     const {openModal, closeModal} = props;
     this.openModal = openModal;
@@ -40,9 +45,6 @@ class NPCModal extends React.Component {
   }
 
   componentDidUpdate() {
-    // if (this.props.timeLeft === 0) {
-    //   this.beaconScanner.stopScan();
-    // }
     if (this.state.didUpdate) {
       return;
     } else {
@@ -59,43 +61,54 @@ class NPCModal extends React.Component {
 
   beaconUpdate = (beacon) => {
     if (beacon === undefined) {
-      this.state.beaconState !== 'nothing'
+      this.beaconState !== 'nothing'
         ? this.setState({
             visiableView: this.nothingView,
-            beaconState: 'nothing', //避免掉短時間內一直更新state
           })
         : console.log('beacon is nothing');
+      this.beaconState = 'nothing';
     } else {
-      const {modalState} = this.state;
       const {distance, major, minor} = beacon;
       if (distance === -1) {
         return;
-      } else if (distance <= 1) {
-        // distance <= 1m then open
-        if (major === 3 && minor === 1 && modalState !== 'open') {
-          // 如果是館長室 就不開modal
-          this.setState({modalState: 'open', beaconState: 'room'});
-        } else if (modalState !== 'open') {
+      } else if (distance <= 0.6) {
+        // distance <= 0.6m then open
+        if (major === 3) {
+          // 如果是館長室、修復室就不開modal
+          this.beaconState = 'room';
+        } else if (this.modalState !== 'open') {
           //為了不要重複開啟跟setState（會跳回去預設高度）
           this.handleNPCShowUp(major, minor);
           this.openModal();
-          this.setState({modalState: 'open', beaconState: 'npc'});
+          this.modalState = 'open';
+          this.beaconState = 'npc';
         }
-      } else if (modalState === 'open') {
-        // distance > 1m then close
+      } else if (this.modalState === 'open') {
+        // distance > 0.6m then close
         console.log('beacon is too far');
         this.closeModal();
-        this.setState({modalState: 'close', visiableView: this.nothingView});
+        this.modalState = 'close';
+        this.setState({visiableView: this.nothingView});
       }
     }
   };
 
   handleNPCShowUp = (major, minor, isGameSuccess = false) => {
     const npcID = major * 10000 + minor;
-    switch (major) {
-      case 1: //normal NPC
+    switch (npcID) {
+      case NPCIDlist[0]: // 神秘人
+        this.handleStoryRecordDataFlow(npcID, npcData[npcID].line);
+        this.setNormalView(npcData[npcID], {line: npcData[npcID].line});
         break;
-      case 3: // room
+      case NPCIDlist[1]: // 耶穌
+        break;
+      case NPCIDlist[2]: // 章魚哥
+        break;
+      case NPCIDlist[3]: // 主席
+        break;
+      case NPCIDlist[4]: // 摩艾石像
+        break;
+      case NPCIDlist[5]: // 兵馬俑
         break;
       default:
         // something roung
