@@ -58,8 +58,5 @@ buck-out/
 # CocoaPods
 /ios/Pods/
 
-
-*.psd
-
 package-lock.json
-src/fakeindex.js
+src/tmpModal.js

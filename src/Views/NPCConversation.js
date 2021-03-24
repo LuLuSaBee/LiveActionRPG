@@ -4,12 +4,12 @@ import Styles from '../Styles/NPCConversation.style';
 import Button from './Elements/Button';
 
 export default function NPCConversation(props) {
-  const {lines, options, onPress} = props.conversation;
+  const {line, options, onPress} = props.conversation;
 
   return (
     <View style={Styles.container}>
       <View style={Styles.lineView}>
-        <Text style={Styles.lineText}>{lines}</Text>
+        <Text style={Styles.lineText}>{line}</Text>
       </View>
       <View style={Styles.optionView}>
         {options === undefined ? (
