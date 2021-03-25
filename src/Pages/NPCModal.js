@@ -21,6 +21,7 @@ import {
   npcData,
   checkPointDataList,
   NPCIDlist,
+  achievementData,
 } from '../data.source';
 
 const screenHeight = Dimensions.get('screen').height;
@@ -102,10 +103,33 @@ class NPCModal extends React.Component {
     const npcID = major * 10000 + minor;
     switch (npcID) {
       case NPCIDlist[0]: // 神秘人
-        this.handleStoryRecordDataFlow(npcID, npcData[npcID].line);
         this.setNormalView(npcData[npcID], {line: npcData[npcID].line});
         break;
       case NPCIDlist[1]: // 耶穌
+        const npc = npcData[npcID];
+        if (this.props.progressRate === 0) {
+          const data = npc.first;
+          const handleThisFinish = () => {
+            this.closeModal();
+            this.handlePoint(checkPointDataList[0]);
+            this.unLockAchievement(achievementData[0].id);
+          };
+          const lineLoop = (index) => {
+            this.handleStoryRecordDataFlow(npcID, data[index].line);
+            this.setNormalView(
+              {name: npc.name, img: npc.img},
+              {
+                line: data[index].line,
+                options: data[index].options,
+                onPress: () =>
+                  index === data.length - 1
+                    ? handleThisFinish()
+                    : lineLoop(index + 1),
+              },
+            );
+          };
+          lineLoop(0);
+        }
         break;
       case NPCIDlist[2]: // 章魚哥
         break;

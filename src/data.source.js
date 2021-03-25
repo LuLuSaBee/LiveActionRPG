@@ -580,14 +580,14 @@ export const itemsData = [
     name: '閃電',
     img: require('./assets/item/lightning.png'),
     description: '',
-    buttonText: '',
+    buttonText: null,
   },
   {
     key: 'cardGames',
     name: '撲克牌',
     img: require('./assets/item/card-games.png'),
     description: '',
-    buttonText: '',
+    buttonText: null,
   },
   {
     key: 'paper',
