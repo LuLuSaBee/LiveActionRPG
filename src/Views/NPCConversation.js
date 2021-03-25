@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import Styles from '../Styles/NPCConversation.style';
 import Button from './Elements/Button';
+import {playBtnClickMedia} from '../utils/musicPlayer';
 
 export default function NPCConversation(props) {
   const {line, options, onPress} = props.conversation;
@@ -21,9 +22,10 @@ export default function NPCConversation(props) {
               text={option}
               style={Styles.optionButton}
               textStyle={Styles.optionText}
-              onPress={() =>
-                onPress === undefined ? console.log('click') : onPress(index)
-              }
+              onPress={() => {
+                onPress === undefined ? console.log('click') : onPress(index);
+                playBtnClickMedia();
+              }}
             />
           ))
         )}

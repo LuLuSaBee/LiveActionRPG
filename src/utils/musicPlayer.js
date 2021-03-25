@@ -22,3 +22,17 @@ export function playerBackgroundMusic() {
 export function pauseBackgroundMusic() {
   backgroundMusic.pause();
 }
+
+var btnClickMedia = new Sound(musicData.click, (error) => {
+  if (error) {
+    console.log('failed to load the btnClickMedia\n', error);
+    return;
+  }
+  // loaded successfully
+  console.log('BtnClickMedia music loaded successfully.');
+});
+
+export function playBtnClickMedia() {
+  btnClickMedia.stop();
+  btnClickMedia.play();
+}
