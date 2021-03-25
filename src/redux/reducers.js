@@ -82,9 +82,7 @@ const achievement = (state = [], action) => {
       return action.achievement;
     case UPDATE_ACHIEVENENT:
       return state.map((element) =>
-        action.achievement.id === element.id
-          ? {id: action.achievement.id, lock: false}
-          : element,
+        action.id === element.id ? {id: action.id, lock: false} : element,
       );
     default:
       return state;
