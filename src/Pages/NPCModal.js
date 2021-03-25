@@ -177,6 +177,51 @@ class NPCModal extends React.Component {
         }
         break;
       case NPCIDlist[3]: // 主席
+        if (this.props.progressRate === 5) {
+          // 還沒找章魚哥就來找他的話
+          this.handleStoryRecordDataFlow(npcID, npc.first[0].line);
+          this.setNormalView(
+            {name: npc.name, img: npc.img},
+            {line: npc.first[0].line, options: []},
+          );
+        } else if (this.props.progressRate === 10) {
+          var data = npc.first;
+          const handleThisFinish = (index) => {
+            if (data === npc.first) {
+              data = npc.mission[index];
+              lineLoop(0);
+            } else {
+              this.closeModal();
+              this.handlePoint(checkPointDataList[2]);
+              this.unLockAchievement(achievementData[2].id);
+            }
+          };
+          const lineLoop = (index) => {
+            this.handleStoryRecordDataFlow(npcID, data[index].line);
+            this.setNormalView(
+              {name: npc.name, img: npc.img},
+              {
+                line: data[index].line,
+                options: data[index].options,
+                onPress: (option) =>
+                  index === data.length - 1
+                    ? handleThisFinish(option)
+                    : lineLoop(index + 1),
+              },
+            );
+          };
+          lineLoop(0);
+        } else {
+          this.handleStoryRecordDataFlow(npcID, npc.finish.line);
+          this.setNormalView(
+            {name: npc.name, img: npc.img},
+            {
+              line: npc.finish.line,
+              options: npc.finish.options,
+              onPress: this.closeModal,
+            },
+          );
+        }
         break;
       case NPCIDlist[4]: // 摩艾石像
         break;
