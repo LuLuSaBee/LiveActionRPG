@@ -8,11 +8,11 @@ import {
   UPDATE_CHATLIST,
   INIT_CHATLIST,
   UPDATE_PROGRESSRATE,
-  INIT_ACHIEVENENT,
+  INIT_ACHIEVEMENT,
   UPDATE_ACHIEVENENT,
   INIT_BACKPACKITEM,
-  ADD_ACHIEVENENT,
-  REDUCE_ACHIEVENENT,
+  ADD_BACKPACKITEM,
+  REDUCE_BACKPACKITEM,
 } from './actions';
 import {combineReducers} from 'redux';
 
@@ -77,8 +77,8 @@ const progressRate = (state = 0, action) => {
 };
 
 const achievement = (state = [], action) => {
-  switch (action) {
-    case INIT_ACHIEVENENT:
+  switch (action.type) {
+    case INIT_ACHIEVEMENT:
       return action.achievement;
     case UPDATE_ACHIEVENENT:
       return state.map((element) =>
@@ -92,12 +92,12 @@ const achievement = (state = [], action) => {
 };
 
 const backpackItem = (state = [], action) => {
-  switch (action) {
+  switch (action.type) {
     case INIT_BACKPACKITEM:
       return action.backpackItem;
-    case ADD_ACHIEVENENT:
+    case ADD_BACKPACKITEM:
       return [...state, action.backpackItem];
-    case REDUCE_ACHIEVENENT:
+    case REDUCE_BACKPACKITEM:
       return state.filter((element) => element.key !== action.backpackItem);
     default:
       return state;
