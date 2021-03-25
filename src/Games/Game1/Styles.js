@@ -6,7 +6,6 @@ const Styles = StyleSheet.create({
   },
   // 標題視窗
   titleView: {
-    borderWidth: 1,
     justifyContent: 'center',
     flex: 0.08,
   },
