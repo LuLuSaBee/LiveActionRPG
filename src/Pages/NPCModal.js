@@ -101,12 +101,12 @@ class NPCModal extends React.Component {
 
   handleNPCShowUp = (major, minor, isGameSuccess = false) => {
     const npcID = major * 10000 + minor;
+    const npc = npcData[npcID];
     switch (npcID) {
       case NPCIDlist[0]: // 神秘人
         this.setNormalView(npcData[npcID], {line: npcData[npcID].line});
         break;
       case NPCIDlist[1]: // 耶穌
-        const npc = npcData[npcID];
         if (this.props.progressRate === 0) {
           const data = npc.first;
           const handleThisFinish = () => {
@@ -129,9 +129,52 @@ class NPCModal extends React.Component {
             );
           };
           lineLoop(0);
+        } else {
+          this.handleStoryRecordDataFlow(npcID, npc.finish.line);
+          this.setNormalView(
+            {name: npc.name, img: npc.img},
+            {
+              line: npc.finish.line,
+              options: npc.finish.options,
+              onPress: this.closeModal,
+            },
+          );
         }
         break;
       case NPCIDlist[2]: // 章魚哥
+        if (this.props.progressRate === 5) {
+          const data = npc.first;
+          const handleThisFinish = () => {
+            this.closeModal();
+            this.handlePoint(checkPointDataList[1]);
+            this.unLockAchievement(achievementData[1].id);
+          };
+          const lineLoop = (index) => {
+            this.handleStoryRecordDataFlow(npcID, data[index].line);
+            this.setNormalView(
+              {name: npc.name, img: npc.img},
+              {
+                line: data[index].line,
+                options: data[index].options,
+                onPress: () =>
+                  index === data.length - 1
+                    ? handleThisFinish()
+                    : lineLoop(index + 1),
+              },
+            );
+          };
+          lineLoop(0);
+        } else {
+          this.handleStoryRecordDataFlow(npcID, npc.wait.line);
+          this.setNormalView(
+            {name: npc.name, img: npc.img},
+            {
+              line: npc.wait.line,
+              options: npc.wait.options,
+              onPress: this.closeModal,
+            },
+          );
+        }
         break;
       case NPCIDlist[3]: // 主席
         break;
