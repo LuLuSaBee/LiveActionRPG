@@ -358,6 +358,10 @@ export const npcData = {
       options: ['沒甚麼事，有事再來找你', '你可以自己上廁所嗎？'],
       answer: '（生氣）給我滾開',
     },
+    finish: {
+      line: '（兵馬俑目前不在線，去跟秦始皇打牌了）',
+      options: ['這小泥偶下線了.....'],
+    },
   },
   10005: {
     name: '兵馬俑',
@@ -510,7 +514,7 @@ export const achievementData = [
   {id: 10, name: checkPointDataList[10], img: '', description: ''},
   {id: 11, name: checkPointDataList[11], img: '', description: ''},
   {id: 12, name: '小白目', img: '', description: ''},
-  {id: 13, name: '拼圖好手', img: '', description: ''},
+  {id: 13, name: '嘗試拼圖', img: '', description: ''},
   {id: 14, name: '乖小孩是不可以騙人的喔', img: '', description: ''},
   {id: 15, name: '記憶力待加強', img: '', description: ''},
   {id: 16, name: '和事佬', img: '', description: ''},
@@ -525,78 +529,78 @@ export const musicData = {
   gameFail: require('./assets/music/gameFail.mp3'),
 };
 
-export const itemsData = [
-  {
+export const itemsData = {
+  terms: {
     key: 'terms',
     name: '注意事項',
     img: require('./assets/item/terms.png'),
     description: '',
     buttonText: '',
   },
-  {
+  checkList: {
     key: 'checkList',
     name: '進度紀錄',
     img: require('./assets/item/checklist.png'),
     description: '',
     buttonText: '',
   },
-  {
+  achievement: {
     key: 'achievement',
     name: '成就',
     img: require('./assets/item/achievement.png'),
     description: '',
     buttonText: '',
   },
-  {
+  book: {
     key: 'book',
     name: '事件記錄簿',
     img: require('./assets/item/book.png'),
     description: '',
     buttonText: '',
   },
-  {
+  image: {
     key: 'image',
     name: '照片',
     img: require('./assets/item/image.png'),
     description: '',
     buttonText: '',
   },
-  {
+  history: {
     key: 'history',
     name: '史書',
     img: require('./assets/item/history.png'),
     description: '',
     buttonText: '',
   },
-  {
+  bible: {
     key: 'bible',
     name: '聖經',
     img: require('./assets/item/bible.png'),
     description: '',
     buttonText: '',
   },
-  {
+  lightning: {
     key: 'lightning',
     name: '閃電',
     img: require('./assets/item/lightning.png'),
     description: '',
     buttonText: null,
   },
-  {
+  cardGames: {
     key: 'cardGames',
     name: '撲克牌',
     img: require('./assets/item/card-games.png'),
     description: '',
     buttonText: null,
   },
-  {
+  paper: {
     key: 'paper',
     name: '道歉信',
     img: require('./assets/item/paper.png'),
     description: '',
     buttonText: '',
   },
-];
+};
 
 export const videoData = {
   firstHalfInterference: {
