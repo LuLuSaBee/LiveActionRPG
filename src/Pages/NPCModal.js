@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, View} from 'react-native';
+import {Dimensions, Text, View} from 'react-native';
 import {Modalize} from 'react-native-modalize';
 import NPCTitle from '../Views/NPCTitle';
 import NPCImage from '../Views/NPCImage';
@@ -508,6 +508,12 @@ class NPCModal extends React.Component {
             },
           );
         }
+        break;
+      case NPCIDlist[7]:
+        this.setNormalView(
+          {name: npc.name, img: npcData.nothing.img},
+          {line: npc.tip},
+        );
         break;
       default:
         // something wroung
