@@ -1,16 +1,17 @@
 import {StyleSheet} from 'react-native';
 import {isIphoneX} from 'react-native-iphone-x-helper';
 
+const centerVH = {justifyContent: 'center', alignItems: 'center'};
 export default StyleSheet.create({
   container: {
     flex: 0.42,
     padding: 10,
     paddingTop: 20,
+    height: '100%',
   },
   lineView: {
     flex: 0.3,
-    alignItems: 'center',
-    justifyContent: 'center',
+    ...centerVH,
   },
   lineText: {
     fontSize: isIphoneX() ? 20 : 16,
@@ -18,8 +19,7 @@ export default StyleSheet.create({
   },
   optionView: {
     flex: 0.7,
-    alignItems: 'center',
-    justifyContent: 'center',
+    ...centerVH,
     marginTop: 5,
   },
   optionButton: {

@@ -16,10 +16,15 @@ export default class BeaconScanner {
 
   initBeacon() {
     // Range for beacons inside the region
-    Beacons.startRangingBeaconsInRegion(REGION) // or like  < v1.0.7: .startRangingBeaconsInRegion(identifier, uuid)
+    Beacons.startRangingBeaconsInRegion(REGION)
       .then(() => console.log('Beacons ranging started succesfully'))
       .catch((error) =>
         console.log(`Beacons ranging not started, error: ${error}`),
+      );
+    Beacons.startMonitoringForRegion(REGION)
+      .then(() => console.log('Beacons monitoring started succesfully'))
+      .catch((error) =>
+        console.log(`Beacons monitoring not started, error: ${error}`),
       );
   }
 
@@ -34,8 +39,18 @@ export default class BeaconScanner {
     );
     this.regionDidExitEvent = Beacons.BeaconsEventEmitter.addListener(
       'regionDidExit',
-      (data) => {
-        console.log('monitoring - regionDidExit data: ', data);
+      ({identifier, uuid, minor, major}) => {
+        console.log('monitoring - regionDidExit data: ', {
+          identifier,
+          uuid,
+          minor,
+          major,
+        });
+        if (major === 3 && minor === 1) {
+          console.log('--------------');
+          console.log('離開館長室');
+          console.log('--------------');
+        }
       },
     );
   }

@@ -184,7 +184,7 @@ export const npcData = {
     },
     final: {
       line: 'Rrrrrrr(打哈欠)，早安，你找到我的好朋友蒙娜麗莎了嗎？',
-      answer: 1506,
+      code: 1506,
     },
     fail: {
       line: '這不是我的好朋友，你把我的好朋友帶去哪了，給我滾出去',

@@ -73,19 +73,11 @@ var gameFail = new Sound(musicData.fail, (error) => {
   }
 });
 export function playSuccess() {
+  backgroundMusic.pause();
   gameSuccess.play();
-  releaseMemory();
 }
 
 export function playFail() {
-  gameSuccess.play();
-  releaseMemory();
-}
-
-function releaseMemory() {
-  btnClickMedia.release();
-  littleGameSuccess.release();
-  littleGameFail.release();
-  gameSuccess.release();
-  gameFail.release();
+  backgroundMusic.pause();
+  gameFail.play();
 }

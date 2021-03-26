@@ -8,8 +8,13 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../redux/actions';
 import BeaconScanner from '../utils/BeaconScanner';
 import firestore from '@react-native-firebase/firestore';
+import Styles from '../Styles/NPCModal.style';
+import Button from '../Views/Elements/Button';
+import InfoBox from '../Views/Elements/InfoBox';
+import {ConfirmDialog} from 'react-native-simple-dialogs';
 import Game1 from '../Games/Game1'; // 拼圖
 import Game2 from '../Games/Game2'; // 翻牌
+import {playSuccess, playFail} from '../utils/musicPlayer';
 import {
   updateStoryRecord,
   updateCPPR,
@@ -41,6 +46,10 @@ class NPCModal extends React.Component {
     ];
     this.state = {
       visiableView: this.nothingView,
+      code: [' ', ' ', ' ', ' '],
+      dialogVisible_1: false,
+      dialogVisible_2: false,
+      dialogVisible_3: false,
     };
     this.didUpdate = false;
     this.modalState = 'close';
@@ -51,19 +60,18 @@ class NPCModal extends React.Component {
     this.closeModal = closeModal;
 
     // var tmp = [];
-    // for (let index = 0; index < 17; index++) {
+    // for (let index = 0; index < 16; index++) {
     //   tmp.push({id: index, lock: true});
     // }
+    // tmp.push({id: 16, lock: true,progress: 0})
     // firestore()
     //   .collection('player')
     //   .doc('tjkrdJLNtcgflAZEMnrT')
-    //   .update({achievement: tmp, storyRecord: [], checkPoint: []});
+    //   .update({achievement: tmp, storyRecord: [], checkPoint: [],progressRate: 0});
   }
 
   componentDidUpdate() {
-    if (this.state.didUpdate) {
-      return;
-    } else {
+    if (!this.state.didUpdate) {
       // 因為redux在幫我initPlayerData的時候總共會跑五遍，再加上原本UserData的會有六遍
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({didUpdate: true});
@@ -191,6 +199,10 @@ class NPCModal extends React.Component {
           data = npc.first;
           dataNumber = 1;
           lineLoop();
+        } else if (this.props.progressRate === 80) {
+          data = npc.final;
+          this.handleStoryRecordDataFlow(npcID, data.line);
+          this.setOtherView('final');
         } else {
           this.handleStoryRecordDataFlow(npcID, npc.wait.line);
           this.setNormalView(
@@ -621,9 +633,53 @@ class NPCModal extends React.Component {
     );
   };
 
+  handleInputCode = (number) => {
+    const nowIndex = this.state.code.indexOf(' ');
+    if (nowIndex > -1) {
+      const newCode = this.state.code;
+      newCode.splice(nowIndex, 1, number);
+      this.setState({code: newCode});
+    }
+  };
+
+  handleDeleteCode = () => {
+    var nowIndex = this.state.code.indexOf(' ');
+    nowIndex = nowIndex === -1 ? 4 : nowIndex;
+    const newCode = this.state.code;
+    newCode.splice(nowIndex - 1, 1, ' ');
+    this.setState({code: newCode});
+  };
+
+  handleSubmmitCode = () => {
+    const npc = npcData[10002];
+    const playerAnswer = parseInt(this.state.code.join(''));
+    if (playerAnswer === npc.final.code) {
+      this.handleStoryRecordDataFlow(10002, npc.success.line);
+      this.unLockAchievement(achievementData[11]);
+      this.handlePoint(checkPointDataList[11]);
+      this.setNormalView(
+        {name: npc.name, img: npc.img},
+        {line: npc.success.line},
+      );
+      playSuccess();
+    } else {
+      this.handleStoryRecordDataFlow(10002, npc.fail.line);
+      this.unLockAchievement(achievementData[10]);
+      this.handlePoint(checkPointDataList[10]);
+      this.setNormalView({name: npc.name, img: npc.img}, {line: npc.fail.line});
+      playFail();
+    }
+  };
+
   //render
   render() {
-    const {visiableView} = this.state;
+    const {
+      visiableView,
+      code,
+      dialogVisible_1,
+      dialogVisible_2,
+      dialogVisible_3,
+    } = this.state;
     return (
       <Modalize
         ref={this.props.modalizeRef}
@@ -635,7 +691,136 @@ class NPCModal extends React.Component {
         modalStyle={{
           backgroundColor: defaultTheme.backgroundColor,
         }}>
-        <View style={{height: screenHeight, flex: 1}}>{visiableView}</View>
+        <View style={{height: screenHeight, flex: 1}}>
+          {visiableView !== 'final'
+            ? visiableView
+            : [
+                <NPCTitle key="title" name={npcData[NPCIDlist[2]].name} />,
+                <NPCImage key="image" img={npcData[NPCIDlist[2]].img} />,
+                <View key="options" style={Styles.container}>
+                  <View style={Styles.lineView}>
+                    <Text style={Styles.lineText}>
+                      {npcData[NPCIDlist[2]].final.line}
+                    </Text>
+                  </View>
+                  <View style={Styles.optionView}>
+                    <View key="code" style={Styles.codeContainer}>
+                      {code.map((element, index) => (
+                        <InfoBox
+                          key={index}
+                          boxStyle={Styles.codeView}
+                          content={
+                            <Text style={Styles.codeText}>{element}</Text>
+                          }
+                        />
+                      ))}
+                    </View>
+                    <View key="codeBtn1" style={Styles.codeBtnView}>
+                      {[0, 1, 2, 3, 4].map((number) => (
+                        <Button
+                          key={number}
+                          text={number}
+                          style={Styles.codeButton}
+                          textStyle={Styles.codeButtonText}
+                          onPress={() => this.handleInputCode(number)}
+                        />
+                      ))}
+                    </View>
+                    <View key="codeBtn2" style={Styles.codeBtnView}>
+                      {[5, 6, 7, 8, 9].map((number) => (
+                        <Button
+                          key={number}
+                          text={number}
+                          style={Styles.codeButton}
+                          textStyle={Styles.codeButtonText}
+                          onPress={() => this.handleInputCode(number)}
+                        />
+                      ))}
+                    </View>
+                    <View key="btn" style={Styles.btnView}>
+                      <Button
+                        text="刪除"
+                        style={[
+                          Styles.backSpace,
+                          Styles.button,
+                          code.indexOf(' ') === 0 ? Styles.opacity : {},
+                        ]}
+                        textStyle={Styles.backSpaceText}
+                        onPress={() => this.handleDeleteCode()}
+                        disabled={code.indexOf(' ') === 0 ? true : false}
+                      />
+                      <Button
+                        text="確認"
+                        style={[
+                          Styles.enter,
+                          Styles.button,
+                          code.indexOf(' ') > -1 ? Styles.opacity : {},
+                        ]}
+                        textStyle={Styles.backSpaceText}
+                        onPress={() => this.setState({dialogVisible_1: true})}
+                        disabled={code.indexOf(' ') > -1 ? true : false}
+                      />
+                    </View>
+                  </View>
+                </View>,
+              ]}
+          <ConfirmDialog
+            title="確認輸入"
+            message={'機會只有一次，確認輸入 ' + code.join('') + ' ?'}
+            visible={dialogVisible_1}
+            animationType={'fade'}
+            onTouchOutside={() => this.setState({dialogVisible_1: false})}
+            positiveButton={{
+              title: '確定',
+              onPress: () =>
+                this.setState({dialogVisible_1: false, dialogVisible_2: true}),
+              titleStyle: Styles.positiveButtonText,
+            }}
+            negativeButton={{
+              title: '再想想',
+              onPress: () => this.setState({dialogVisible_1: false}),
+              titleStyle: Styles.negativeButtonText,
+            }}
+          />
+          <ConfirmDialog
+            title="確認輸入"
+            message={'真的只想輸入' + code.join('') + ' ?'}
+            visible={dialogVisible_2}
+            animationType={'fade'}
+            onTouchOutside={() => this.setState({dialogVisible_2: false})}
+            positiveButton={{
+              title: '沒錯',
+              onPress: () =>
+                this.setState({dialogVisible_2: false, dialogVisible_3: true}),
+              titleStyle: Styles.positiveButtonText,
+            }}
+            negativeButton={{
+              title: '再想想',
+              onPress: () => this.setState({dialogVisible_2: false}),
+              titleStyle: Styles.negativeButtonText,
+            }}
+          />
+          <ConfirmDialog
+            title="確認輸入"
+            message={'最後一次機會可以反悔，確定一樣是 ' + code.join('') + ' ?'}
+            visible={dialogVisible_3}
+            animationType={'fade'}
+            onTouchOutside={() => this.setState({dialogVisible_3: false})}
+            positiveButton={{
+              title: '對！我要過關！',
+              onPress: () => {
+                this.setState({dialogVisible_3: false});
+                this.handleSubmmitCode();
+              },
+              titleStyle: Styles.positiveButtonText,
+            }}
+            negativeButton={{
+              title: '再想想',
+              onPress: () => this.setState({dialogVisible_3: false}),
+              titleStyle: Styles.negativeButtonText,
+            }}
+          />
+        </View>
       </Modalize>
     );
   }
