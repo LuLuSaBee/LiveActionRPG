@@ -100,7 +100,7 @@ class NPCModal extends React.Component {
     }
   };
 
-  handleNPCShowUp = (major, minor, isGameSuccess = false) => {
+  handleNPCShowUp = (major, minor) => {
     const npcID = major * 10000 + minor;
     const npc = npcData[npcID];
     switch (npcID) {
@@ -114,6 +114,27 @@ class NPCModal extends React.Component {
             this.closeModal();
             this.handlePoint(checkPointDataList[0]);
             this.unLockAchievement(achievementData[0]);
+          };
+          const lineLoop = (index) => {
+            this.handleStoryRecordDataFlow(npcID, data[index].line);
+            this.setNormalView(
+              {name: npc.name, img: npc.img},
+              {
+                line: data[index].line,
+                options: data[index].options,
+                onPress: () =>
+                  index === data.length - 1
+                    ? handleThisFinish()
+                    : lineLoop(index + 1),
+              },
+            );
+          };
+          lineLoop(0);
+        } else if (this.props.progressRate === 35) {
+          const data = npc.wrongBook;
+          const handleThisFinish = () => {
+            this.closeModal();
+            this.unLockAchievement(achievementData[14]);
           };
           const lineLoop = (index) => {
             this.handleStoryRecordDataFlow(npcID, data[index].line);
@@ -213,12 +234,12 @@ class NPCModal extends React.Component {
           };
           lineLoop(0);
         } else if (this.props.progressRate === 25) {
+          this.reduceBackpackItem(itemsData.image.key); // delete image
           var data = npc.afterMission;
           const handleThisFinish = () => {
             this.closeModal();
             this.handlePoint(checkPointDataList[4]);
             this.unLockAchievement(achievementData[4]);
-            this.reduceBackpackItem(itemsData.image.key); // delete image
             this.addBackpackItem(itemsData.history.key); // add history
           };
           const lineLoop = (index) => {
@@ -330,7 +351,30 @@ class NPCModal extends React.Component {
             );
           };
           handleInProcess(() => lineLoop(0));
-          return;
+        } else if (this.props.progressRate === 35) {
+          this.reduceBackpackItem(itemsData.history.key); // delete history
+          var data = npc.changeBible;
+          const handleThisFinish = () => {
+            this.closeModal();
+            this.handlePoint(checkPointDataList[5]);
+            this.unLockAchievement(achievementData[5]);
+            this.addBackpackItem(itemsData.bible.key); // add bible
+          };
+          const lineLoop = (index) => {
+            this.handleStoryRecordDataFlow(npcID, data[index].line);
+            this.setNormalView(
+              {name: npc.name, img: npc.img},
+              {
+                line: data[index].line,
+                options: data[index].options,
+                onPress: () =>
+                  index === data.length - 1
+                    ? handleThisFinish()
+                    : lineLoop(index + 1),
+              },
+            );
+          };
+          handleInProcess(() => lineLoop(0));
         } else if (this.props.progressRate >= 80) {
           this.handleStoryRecordDataFlow(npcID, npc.finish.line);
           this.setNormalView(
