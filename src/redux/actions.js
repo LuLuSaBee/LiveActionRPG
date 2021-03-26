@@ -84,6 +84,6 @@ export const addBackpackItem = (backpackItem) => ({
 });
 
 export const reduceBackpackItem = (backpackItem) => ({
-  type: ADD_BACKPACKITEM,
+  type: REDUCE_BACKPACKITEM,
   backpackItem,
 });

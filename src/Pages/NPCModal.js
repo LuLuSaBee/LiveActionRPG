@@ -212,6 +212,30 @@ class NPCModal extends React.Component {
             );
           };
           lineLoop(0);
+        } else if (this.props.progressRate === 25) {
+          var data = npc.afterMission;
+          const handleThisFinish = () => {
+            this.closeModal();
+            this.handlePoint(checkPointDataList[4]);
+            this.unLockAchievement(achievementData[4]);
+            this.reduceBackpackItem(itemsData.image.key); // delete image
+            this.addBackpackItem(itemsData.history.key); // add history
+          };
+          const lineLoop = (index) => {
+            this.handleStoryRecordDataFlow(npcID, data[index].line);
+            this.setNormalView(
+              {name: npc.name, img: npc.img},
+              {
+                line: data[index].line,
+                options: data[index].options,
+                onPress: () =>
+                  index === data.length - 1
+                    ? handleThisFinish()
+                    : lineLoop(index + 1),
+              },
+            );
+          };
+          lineLoop(0);
         } else {
           this.handleStoryRecordDataFlow(npcID, npc.finish.line);
           this.setNormalView(
