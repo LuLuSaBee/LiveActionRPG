@@ -6,6 +6,7 @@ const REGION = {identifier, uuid};
 
 export default class BeaconScanner {
   beaconsDidRangeEvent = null;
+  regionDidExitEvent = null;
 
   constructor() {
     Beacons.requestAlwaysAuthorization();
@@ -31,6 +32,12 @@ export default class BeaconScanner {
         reFunc(data.beacons[0]);
       },
     );
+    this.regionDidExitEvent = Beacons.BeaconsEventEmitter.addListener(
+      'regionDidExit',
+      (data) => {
+        console.log('monitoring - regionDidExit data: ', data);
+      },
+    );
   }
 
   stopScan() {
@@ -43,5 +50,6 @@ export default class BeaconScanner {
 
     // remove ranging event we registered at componentDidMount
     this.beaconsDidRangeEvent.remove();
+    this.regionDidExitEvent.remove();
   }
 }

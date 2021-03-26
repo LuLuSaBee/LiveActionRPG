@@ -11,8 +11,6 @@ export function playerBackgroundMusic() {
       console.log('failed to load the background music\n', error);
       return;
     }
-    // loaded successfully
-    console.log('Background music loaded successfully.');
 
     backgroundMusic.play();
     // Loop indefinitely until stop() is called
@@ -30,8 +28,6 @@ var btnClickMedia = new Sound(musicData.click, (error) => {
     console.log('failed to load the btnClickMedia\n', error);
     return;
   }
-  // loaded successfully
-  console.log('BtnClickMedia music loaded successfully.');
 });
 
 export function playBtnClickMedia() {
@@ -45,16 +41,12 @@ var littleGameSuccess = new Sound(musicData.gameSuccess, (error) => {
     console.log('failed to load the littleGameSuccess Success\n', error);
     return;
   }
-  // loaded successfully
-  console.log('littleGameSuccess music loaded successfully.');
 });
 var littleGameFail = new Sound(musicData.gameFail, (error) => {
   if (error) {
     console.log('failed to load the littleGameFail Fail\n', error);
     return;
   }
-  // loaded Failfully
-  console.log('littleGameFail music loaded successfully.');
 });
 
 export function playGameSuccess() {
@@ -73,16 +65,12 @@ var gameSuccess = new Sound(musicData.success, (error) => {
     console.log('failed to load the gameSuccess Success\n', error);
     return;
   }
-  // loaded successfully
-  console.log('gameSuccess music loaded successfully.');
 });
 var gameFail = new Sound(musicData.fail, (error) => {
   if (error) {
     console.log('failed to load the gameFail Fail\n', error);
     return;
   }
-  // loaded Failfully
-  console.log('gameFail music loaded successfully.');
 });
 export function playSuccess() {
   gameSuccess.play();
