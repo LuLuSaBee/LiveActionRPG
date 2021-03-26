@@ -74,6 +74,7 @@ class NPCModal extends React.Component {
           })
         : console.log('beacon is nothing');
       this.beaconState = 'nothing';
+      this.modalState = 'close';
     } else {
       const {distance, major, minor} = beacon;
       if (distance === -1) {
@@ -106,10 +107,13 @@ class NPCModal extends React.Component {
     var data = [];
     var dataNumber = 0;
     var extra = () => {};
-    const handleThisFinish = () => {
+    const handleFinish = () => {
       this.closeModal();
-      this.handlePoint(checkPointDataList[dataNumber]);
       this.unLockAchievement(achievementData[dataNumber]);
+      if (dataNumber <= checkPointDataList.length - 1) {
+        // 有些只有成就，並無檢查點
+        this.handlePoint(checkPointDataList[dataNumber]);
+      }
       extra();
     };
     const lineLoop = (index = 0) => {
@@ -120,60 +124,24 @@ class NPCModal extends React.Component {
           line: data[index].line,
           options: data[index].options,
           onPress: () =>
-            index === data.length - 1
-              ? handleThisFinish()
-              : lineLoop(index + 1),
+            index === data.length - 1 ? handleFinish() : lineLoop(index + 1),
         },
       );
     };
     switch (npcID) {
       case NPCIDlist[0]: // 神秘人
+        this.handleStoryRecordDataFlow(npcID, npcData[npcID].line);
         this.setNormalView(npcData[npcID], {line: npcData[npcID].line});
         break;
       case NPCIDlist[1]: // 耶穌
         if (this.props.progressRate === 0) {
-          const data = npc.first;
-          const handleThisFinish = () => {
-            this.closeModal();
-            this.handlePoint(checkPointDataList[0]);
-            this.unLockAchievement(achievementData[0]);
-          };
-          const lineLoop = (index) => {
-            this.handleStoryRecordDataFlow(npcID, data[index].line);
-            this.setNormalView(
-              {name: npc.name, img: npc.img},
-              {
-                line: data[index].line,
-                options: data[index].options,
-                onPress: () =>
-                  index === data.length - 1
-                    ? handleThisFinish()
-                    : lineLoop(index + 1),
-              },
-            );
-          };
-          lineLoop(0);
+          data = npc.first;
+          dataNumber = 0;
+          lineLoop();
         } else if (this.props.progressRate === 35) {
-          const data = npc.wrongBook;
-          const handleThisFinish = () => {
-            this.closeModal();
-            this.unLockAchievement(achievementData[14]);
-          };
-          const lineLoop = (index) => {
-            this.handleStoryRecordDataFlow(npcID, data[index].line);
-            this.setNormalView(
-              {name: npc.name, img: npc.img},
-              {
-                line: data[index].line,
-                options: data[index].options,
-                onPress: () =>
-                  index === data.length - 1
-                    ? handleThisFinish()
-                    : lineLoop(index + 1),
-              },
-            );
-          };
-          lineLoop(0);
+          data = npc.wrongBook;
+          dataNumber = 14;
+          lineLoop();
         } else if (this.props.progressRate === 40) {
           data = npc.rightBook;
           dataNumber = 6;
@@ -196,27 +164,9 @@ class NPCModal extends React.Component {
         break;
       case NPCIDlist[2]: // 章魚哥
         if (this.props.progressRate === 5) {
-          const data = npc.first;
-          const handleThisFinish = () => {
-            this.closeModal();
-            this.handlePoint(checkPointDataList[1]);
-            this.unLockAchievement(achievementData[1]);
-          };
-          const lineLoop = (index) => {
-            this.handleStoryRecordDataFlow(npcID, data[index].line);
-            this.setNormalView(
-              {name: npc.name, img: npc.img},
-              {
-                line: data[index].line,
-                options: data[index].options,
-                onPress: () =>
-                  index === data.length - 1
-                    ? handleThisFinish()
-                    : lineLoop(index + 1),
-              },
-            );
-          };
-          lineLoop(0);
+          data = npc.first;
+          dataNumber = 1;
+          lineLoop();
         } else {
           this.handleStoryRecordDataFlow(npcID, npc.wait.line);
           this.setNormalView(
@@ -238,56 +188,33 @@ class NPCModal extends React.Component {
             {line: npc.first[0].line},
           );
         } else if (this.props.progressRate === 10) {
-          var data = npc.first;
-          const handleThisFinish = (index) => {
-            if (data === npc.first) {
-              data = npc.mission[index];
-              lineLoop(0);
-            } else {
-              this.closeModal();
-              this.handlePoint(checkPointDataList[2]);
-              this.unLockAchievement(achievementData[2]);
-            }
-          };
-          const lineLoop = (index) => {
+          data = npc.first;
+          dataNumber = 2;
+          const thisLineLoop = (index = 0) => {
             this.handleStoryRecordDataFlow(npcID, data[index].line);
             this.setNormalView(
               {name: npc.name, img: npc.img},
               {
                 line: data[index].line,
                 options: data[index].options,
-                onPress: (option) =>
-                  index === data.length - 1
-                    ? handleThisFinish(option)
-                    : lineLoop(index + 1),
+                onPress: (option) => {
+                  if (index === data.length - 1) {
+                    data = npc.mission[option];
+                    lineLoop();
+                  } else {
+                    thisLineLoop(index + 1);
+                  }
+                },
               },
             );
           };
-          lineLoop(0);
+          thisLineLoop();
         } else if (this.props.progressRate === 25) {
           this.reduceBackpackItem(itemsData.image.key); // delete image
-          var data = npc.afterMission;
-          const handleThisFinish = () => {
-            this.closeModal();
-            this.handlePoint(checkPointDataList[4]);
-            this.unLockAchievement(achievementData[4]);
-            this.addBackpackItem(itemsData.history.key); // add history
-          };
-          const lineLoop = (index) => {
-            this.handleStoryRecordDataFlow(npcID, data[index].line);
-            this.setNormalView(
-              {name: npc.name, img: npc.img},
-              {
-                line: data[index].line,
-                options: data[index].options,
-                onPress: () =>
-                  index === data.length - 1
-                    ? handleThisFinish()
-                    : lineLoop(index + 1),
-              },
-            );
-          };
-          lineLoop(0);
+          data = npc.afterMission;
+          dataNumber = 4;
+          extra = () => this.addBackpackItem(itemsData.history.key); // add history
+          lineLoop();
         } else {
           this.handleStoryRecordDataFlow(npcID, npc.finish.line);
           this.setNormalView(
@@ -365,7 +292,7 @@ class NPCModal extends React.Component {
             this.unLockAchievement(achievementData[3]);
             this.addBackpackItem(itemsData.image.key); // add image
           };
-          const lineLoop = (index, isGameFinish = false) => {
+          const thisLineLoop = (index = 0, isGameFinish = false) => {
             this.handleStoryRecordDataFlow(npcID, data[index].line);
             this.setNormalView(
               {name: npc.name, img: npc.img},
@@ -377,35 +304,17 @@ class NPCModal extends React.Component {
                     ? isGameFinish
                       ? handleThisFinish()
                       : goToGame()
-                    : lineLoop(index + 1, isGameFinish),
+                    : thisLineLoop(index + 1, isGameFinish),
               },
             );
           };
-          handleInProcess(() => lineLoop(0));
+          handleInProcess(() => thisLineLoop());
         } else if (this.props.progressRate === 35) {
           this.reduceBackpackItem(itemsData.history.key); // delete history
-          var data = npc.changeBible;
-          const handleThisFinish = () => {
-            this.closeModal();
-            this.handlePoint(checkPointDataList[5]);
-            this.unLockAchievement(achievementData[5]);
-            this.addBackpackItem(itemsData.bible.key); // add bible
-          };
-          const lineLoop = (index) => {
-            this.handleStoryRecordDataFlow(npcID, data[index].line);
-            this.setNormalView(
-              {name: npc.name, img: npc.img},
-              {
-                line: data[index].line,
-                options: data[index].options,
-                onPress: () =>
-                  index === data.length - 1
-                    ? handleThisFinish()
-                    : lineLoop(index + 1),
-              },
-            );
-          };
-          handleInProcess(() => lineLoop(0));
+          data = npc.changeBible;
+          dataNumber = 5;
+          extra = () => this.addBackpackItem(itemsData.bible.key); // add bible
+          handleInProcess(() => lineLoop());
         } else if (this.props.progressRate >= 80) {
           this.handleStoryRecordDataFlow(npcID, npc.finish.line);
           this.setNormalView(
