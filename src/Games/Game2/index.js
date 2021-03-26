@@ -10,6 +10,7 @@ import photo6 from './Photo/photo6.jpg';
 import photo7 from './Photo/photo7.jpg';
 import photo8 from './Photo/photo8.jpg';
 import GameItem from './GameItem';
+import {playGameSuccess, playGameFail} from '../../utils/musicPlayer';
 
 export default class Game1 extends React.Component {
   constructor(props) {
@@ -51,6 +52,7 @@ export default class Game1 extends React.Component {
     }
     if (this.state.photos.filter((photo) => photo.finish).length === 16) {
       this.props.finish();
+      playGameSuccess();
     }
   }
 
@@ -110,7 +112,10 @@ export default class Game1 extends React.Component {
         <View style={Styles.btnView}>
           <TouchableOpacity
             style={Styles.backbtn}
-            onPress={() => this.props.back()}>
+            onPress={() => {
+              this.props.back();
+              playGameFail();
+            }}>
             <Text>回到對話</Text>
           </TouchableOpacity>
         </View>

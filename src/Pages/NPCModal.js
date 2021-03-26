@@ -236,7 +236,7 @@ class NPCModal extends React.Component {
             {line: npc.angry.line},
           );
         };
-        const handleInProcess = (next) => {
+        var handleInProcess = (next) => {
           this.handleStoryRecordDataFlow(npcID, npc.inProcess.line);
           this.setNormalView(
             {name: npc.name, img: npc.img},
@@ -284,7 +284,7 @@ class NPCModal extends React.Component {
             );
           const onGameSuccess = () => {
             data = gameSuccess;
-            lineLoop(0, true);
+            thisLineLoop(0, true);
           };
           const handleThisFinish = () => {
             this.closeModal();
@@ -339,6 +339,88 @@ class NPCModal extends React.Component {
         }
         break;
       case NPCIDlist[5]: // 兵馬俑
+        if (this.props.progressRate === 45) {
+          const {gameFail, inProcess, gameSuccess, answer} = npc;
+          data = inProcess;
+          var handleInProcess = (index = 0) => {
+            this.handleStoryRecordDataFlow(npcID, inProcess[index].line);
+            this.setNormalView(
+              {name: npc.name, img: npc.img},
+              {
+                line: inProcess[index].line,
+                options: inProcess[index].options,
+                onPress: (choose) => {
+                  if (index === data.length - 1) {
+                    data = answer[choose];
+                    thisLineLoop();
+                  } else {
+                    handleInProcess(index + 1);
+                  }
+                },
+              },
+            );
+          };
+          const onGameFail = () => {
+            this.unLockAchievement(achievementData[15]);
+            this.handleStoryRecordDataFlow(npcID, gameFail.line);
+            this.setNormalView(
+              {name: npc.name, img: npc.img},
+              {
+                line: gameFail.line,
+                options: gameFail.options,
+                onPress: goToGame,
+              },
+            );
+          };
+          const goToGame = () =>
+            this.setOtherView(
+              <Game2
+                back={onGameFail}
+                start={() => {
+                  this.unLockAchievement(achievementData[15]);
+                }}
+                finish={() => onGameSuccess()}
+              />,
+            );
+          const onGameSuccess = () => {
+            data = gameSuccess;
+            thisLineLoop(0, true);
+          };
+          const handleThisFinish = () => {
+            this.closeModal();
+            this.handlePoint(checkPointDataList[7]);
+            this.unLockAchievement(achievementData[7]);
+            this.addBackpackItem(itemsData.cardGames.key); // add image
+          };
+          const thisLineLoop = (index = 0, isGameFinish = false) => {
+            this.handleStoryRecordDataFlow(npcID, data[index].line);
+            this.setNormalView(
+              {name: npc.name, img: npc.img},
+              {
+                line: data[index].line,
+                options: data[index].options,
+                onPress: () =>
+                  index === data.length - 1
+                    ? isGameFinish
+                      ? handleThisFinish()
+                      : goToGame()
+                    : thisLineLoop(index + 1, isGameFinish),
+              },
+            );
+          };
+          handleInProcess();
+        } else {
+          data = npc.notInProcess;
+          this.handleStoryRecordDataFlow(npcID, data.line);
+          this.setNormalView(
+            {name: npc.name, img: npc.img},
+            {
+              line: data.line,
+              options: data.options,
+              onPress: () => this.closeModal(),
+            },
+          );
+        }
         break;
       default:
         // something roung
