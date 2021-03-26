@@ -142,7 +142,7 @@ export const npcData = {
       {
         line:
           '欸這是什麼啊，這才不是聖經，這不是聖經，你給我回來～我要召喚閃電打你',
-        options: ['阿～ 一代一代一代'],
+        options: ['阿～一代一代一代'],
       },
     ],
     finish: {

@@ -103,6 +103,29 @@ class NPCModal extends React.Component {
   handleNPCShowUp = (major, minor) => {
     const npcID = major * 10000 + minor;
     const npc = npcData[npcID];
+    var data = [];
+    var dataNumber = 0;
+    var extra = () => {};
+    const handleThisFinish = () => {
+      this.closeModal();
+      this.handlePoint(checkPointDataList[dataNumber]);
+      this.unLockAchievement(achievementData[dataNumber]);
+      extra();
+    };
+    const lineLoop = (index = 0) => {
+      this.handleStoryRecordDataFlow(npcID, data[index].line);
+      this.setNormalView(
+        {name: npc.name, img: npc.img},
+        {
+          line: data[index].line,
+          options: data[index].options,
+          onPress: () =>
+            index === data.length - 1
+              ? handleThisFinish()
+              : lineLoop(index + 1),
+        },
+      );
+    };
     switch (npcID) {
       case NPCIDlist[0]: // 神秘人
         this.setNormalView(npcData[npcID], {line: npcData[npcID].line});
@@ -151,6 +174,14 @@ class NPCModal extends React.Component {
             );
           };
           lineLoop(0);
+        } else if (this.props.progressRate === 40) {
+          data = npc.rightBook;
+          dataNumber = 6;
+          extra = () => {
+            this.addBackpackItem(itemsData.lightning.key); // add lightning
+          };
+          this.reduceBackpackItem(itemsData.bible.key); // delete bible
+          lineLoop();
         } else {
           this.handleStoryRecordDataFlow(npcID, npc.finish.line);
           this.setNormalView(
