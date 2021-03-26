@@ -316,41 +316,43 @@ export const npcData = {
       },
     ],
     clearVideo: [
-      {
-        line: '有什麼事嗎？',
-        options: ['幫我把影片變得清晰'],
-      },
-      {
-        line: '可是我現在不想幫，我心情不好',
-        options: ['為甚麼不好？'],
-      },
-      {
-        line: '我剛剛跟我的好朋友兵馬俑吵架了',
-        options: ['為什麼吵架？'],
-      },
-      {
-        line: '不關你的事，我不想告訴你',
-        options: ['兇什麼阿，不說就不說，我去問問兵馬俑'],
-      },
-    ],
-    askWhy: [
-      {
-        line: '你怎麼又回來了',
-        options: ['為甚麼你要去告密'],
-      },
-      {
-        line:
-          '我這是為了他好，我要是不說的話，我怕兵馬俑下次會再做出一樣的事情，我可以幫你把影片變得清晰，作為答謝，我希望你可以代替我去跟兵馬俑道歉',
-        options: ['(繼續)'],
-      },
-      {
-        line: '霹靂卡霹靂拉拉，波波莉娜貝貝魯多，影片變清晰',
-        options: ['你到底是石像還是小魔女DoReMi啊'],
-      },
-      {
-        line: '完成了，希望你答應我的事你會做到',
-        options: ['我會完成它的'],
-      },
+      [
+        {
+          line: '有什麼事嗎？',
+          options: ['幫我把影片變得清晰'],
+        },
+        {
+          line: '可是我現在不想幫，我心情不好',
+          options: ['為甚麼不好？'],
+        },
+        {
+          line: '我剛剛跟我的好朋友兵馬俑吵架了',
+          options: ['為什麼吵架？'],
+        },
+        {
+          line: '不關你的事，我不想告訴你',
+          options: ['兇什麼阿，不說就不說，我去問問兵馬俑'],
+        },
+      ],
+      [
+        {
+          line: '你怎麼又回來了',
+          options: ['為甚麼你要去告密'],
+        },
+        {
+          line:
+            '我這是為了他好，我要是不說的話，我怕兵馬俑下次會再做出一樣的事情，我可以幫你把影片變得清晰，作為答謝，我希望你可以代替我去跟兵馬俑道歉',
+          options: ['(繼續)'],
+        },
+        {
+          line: '霹靂卡霹靂拉拉，波波莉娜貝貝魯多，影片變清晰',
+          options: ['你到底是石像還是小魔女DoReMi啊'],
+        },
+        {
+          line: '完成了，希望你答應我的事你會做到',
+          options: ['我會完成它的'],
+        },
+      ],
     ],
     notInProcess: {
       line: '沒有什麼事情是我做不到的，你有什麼事嗎?',
@@ -452,24 +454,28 @@ export const npcData = {
         options: ['（前往尋找）'],
       },
     ],
-    bad: [
-      {
-        line: '你怎麼又回來找我，有什麼事嗎',
-        options: ['聽說你跟石像吵架了，發生什麼事了'],
-      },
-      {
-        line: '因為石像偷偷去跟秦始皇告狀，害我被秦始皇臭罵一頓',
-        options: ['那有什麼我可以幫到你們的嗎？'],
-      },
-      {
-        line: '我希望石像可以來跟我道歉',
-        options: ['（這兩個怎麼這麼麻煩阿...）'],
-      },
+    fighting: [
+      [
+        {
+          line: '你怎麼又回來找我，有什麼事嗎',
+          options: ['聽說你跟石像吵架了，發生什麼事了'],
+        },
+        {
+          line: '因為石像偷偷去跟秦始皇告狀，害我被秦始皇臭罵一頓',
+          options: ['那有什麼我可以幫到你們的嗎？'],
+        },
+        {
+          line: '我希望石像可以來跟我道歉',
+          options: ['（這兩個怎麼這麼麻煩阿...）'],
+        },
+      ],
+      [
+        {
+          line: '原來是這樣，我誤會他了，真是謝謝你幫我把這封信帶來',
+          options: ['沒事就好'],
+        },
+      ],
     ],
-    fine: {
-      line: '原來是這樣，我誤會他了，真是謝謝你幫我把這封信帶來',
-      options: ['沒事就好'],
-    },
     finish: {
       line: '兵馬俑目前不在線，去跟秦始皇打牌了',
       options: ['這小泥偶下線了...'],
@@ -528,6 +534,24 @@ export const musicData = {
   success: require('./assets/music/success.mp3'),
   gameSuccess: require('./assets/music/gameSuccess.wav'),
   gameFail: require('./assets/music/gameFail.mp3'),
+};
+
+export const videoData = {
+  firstHalfInterference: {
+    key: 'firstHalfInterference',
+    name: '模糊的前半段',
+    source: require('./assets/video/first-half-interference.mp4'),
+  },
+  firstHalf: {
+    key: 'firstHalf',
+    name: '清晰的前半段',
+    source: require('./assets/video/first-half.mp4'),
+  },
+  secondHalf: {
+    key: 'secondHalf',
+    name: '清晰的後半段',
+    source: require('./assets/video/second-half.mp4'),
+  },
 };
 
 export const itemsData = {
@@ -601,19 +625,5 @@ export const itemsData = {
     description: '',
     buttonText: '',
   },
-};
-
-export const videoData = {
-  firstHalfInterference: {
-    name: '模糊的前半段',
-    source: require('./assets/video/first-half-interference.mp4'),
-  },
-  firstHalf: {
-    name: '清晰的前半段',
-    source: require('./assets/video/first-half.mp4'),
-  },
-  secondHalf: {
-    name: '清晰的後半段',
-    source: require('./assets/video/second-half.mp4'),
-  },
+  ...videoData,
 };

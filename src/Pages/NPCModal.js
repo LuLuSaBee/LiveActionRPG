@@ -49,6 +49,15 @@ class NPCModal extends React.Component {
     const {openModal, closeModal} = props;
     this.openModal = openModal;
     this.closeModal = closeModal;
+
+    // var tmp = [];
+    // for (let index = 0; index < 17; index++) {
+    //   tmp.push({id: index, lock: true});
+    // }
+    // firestore()
+    //   .collection('player')
+    //   .doc('tjkrdJLNtcgflAZEMnrT')
+    //   .update({achievement: tmp, storyRecord: [], checkPoint: []});
   }
 
   componentDidUpdate() {
@@ -81,9 +90,19 @@ class NPCModal extends React.Component {
         return;
       } else if (distance <= 0.6) {
         // distance <= 0.6m then open
-        if (major === 3) {
-          // 如果是館長室、修復室就不開modal
+        if (
+          major === 3 &&
+          minor === 1 &&
+          this.beaconState !== 'room' &&
+          this.props.progressRate === 55
+        ) {
+          // 如果是館長室就不開modal
+          console.log('檢測到館長室');
           this.beaconState = 'room';
+          this.addBackpackItem(itemsData.firstHalfInterference.key);
+          this.addBackpackItem(itemsData.secondHalf.key);
+          this.unLockAchievement(achievementData[8]);
+          this.handlePoint(checkPointDataList[8]);
         } else if (this.modalState !== 'open') {
           //為了不要重複開啟跟setState（會跳回去預設高度）
           this.handleNPCShowUp(major, minor);
@@ -109,12 +128,17 @@ class NPCModal extends React.Component {
     var extra = () => {};
     const handleFinish = () => {
       this.closeModal();
-      this.unLockAchievement(achievementData[dataNumber]);
-      if (dataNumber <= checkPointDataList.length - 1) {
-        // 有些只有成就，並無檢查點
-        this.handlePoint(checkPointDataList[dataNumber]);
+      //< 0 為不需檢查點與成就
+      if (dataNumber > 0) {
+        this.unLockAchievement(achievementData[dataNumber]);
+        if (dataNumber < checkPointDataList.length) {
+          // 有些只有成就，並無檢查點
+          this.handlePoint(checkPointDataList[dataNumber]);
+        }
       }
       extra();
+      //reset extra
+      extra = () => {};
     };
     const lineLoop = (index = 0) => {
       this.handleStoryRecordDataFlow(npcID, data[index].line);
@@ -315,6 +339,34 @@ class NPCModal extends React.Component {
           dataNumber = 5;
           extra = () => this.addBackpackItem(itemsData.bible.key); // add bible
           handleInProcess(() => lineLoop());
+        } else if (
+          this.props.progressRate === 75 &&
+          this.props.achievement[16].progress % 2 === 0
+        ) {
+          const {initAchievement, achievement, userData} = this.props;
+          const times = Math.floor(achievement[16].progress / 2);
+          const newAchievement = achievement.map((element) =>
+            element.id === 16
+              ? {...element, progress: element.progress + 1}
+              : element,
+          );
+          if (times !== 0) {
+            this.reduceBackpackItem(itemsData.firstHalfInterference.key);
+          }
+          data = npc.clearVideo[times];
+          //等於0是第一次來 不等於0為第二次來
+          dataNumber = times === 0 ? -1 : 9;
+          extra = () => {
+            //redux
+            initAchievement(newAchievement);
+            //firebase
+            updateAchievement(userData.uid, newAchievement);
+            if (times !== 0) {
+              this.addBackpackItem(itemsData.firstHalf.key);
+              this.addBackpackItem(itemsData.paper.key);
+            }
+          };
+          times === 0 ? handleInProcess(() => lineLoop()) : lineLoop();
         } else if (this.props.progressRate >= 80) {
           this.handleStoryRecordDataFlow(npcID, npc.finish.line);
           this.setNormalView(
@@ -409,6 +461,41 @@ class NPCModal extends React.Component {
             );
           };
           handleInProcess();
+        } else if (
+          this.props.progressRate >= 75 &&
+          this.props.achievement[16].progress % 2 === 1 &&
+          this.props.achievement[16].progress < 4
+        ) {
+          const {initAchievement, achievement, userData} = this.props;
+          const times = Math.floor(achievement[16].progress / 2);
+          const newAchievement = achievement.map((element) =>
+            element.id === 16
+              ? {...element, progress: element.progress + 1}
+              : element,
+          );
+          data = npc.fighting[times];
+          dataNumber = times === 0 ? -1 : 16;
+          extra = () => {
+            //redux
+            initAchievement(newAchievement);
+            //firebase
+            updateAchievement(userData.uid, newAchievement);
+            if (times !== 0) {
+              this.props.updateAchievement(achievementData[16].id);
+            }
+          };
+          lineLoop();
+        } else if (this.props.progressRate >= 80) {
+          data = npc.finish;
+          this.handleStoryRecordDataFlow(npcID, data.line);
+          this.setNormalView(
+            {name: npc.name, img: npc.img},
+            {
+              line: data.line,
+              options: data.options,
+              onPress: () => this.closeModal(),
+            },
+          );
         } else {
           data = npc.notInProcess;
           this.handleStoryRecordDataFlow(npcID, data.line);
@@ -423,7 +510,7 @@ class NPCModal extends React.Component {
         }
         break;
       default:
-        // something roung
+        // something wroung
         console.log('--------------');
         console.log(`沒有這號人物\nmajor: ${major}\nminor: ${minor}`);
         console.log('--------------');
@@ -504,7 +591,7 @@ class NPCModal extends React.Component {
     updateAchievement(
       userData.uid,
       achievement.map((element) =>
-        element.id === data.id ? {id: data.id, lock: false} : element,
+        element.id === data.id ? {...element, lock: false} : element,
       ),
     );
   };
