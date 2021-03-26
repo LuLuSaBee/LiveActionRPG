@@ -268,7 +268,6 @@ export const npcData = {
     inProcess: {
       line: '沒有什麼事情是我做不到的，你有什麼事嗎?',
       options: ['有求於你', '你可以自己上廁所嗎？'],
-      answer: '（生氣）給我滾開',
     },
     findPhoto: [
       {
@@ -356,11 +355,13 @@ export const npcData = {
     notInProcess: {
       line: '沒有什麼事情是我做不到的，你有什麼事嗎?',
       options: ['沒甚麼事，有事再來找你', '你可以自己上廁所嗎？'],
-      answer: '（生氣）給我滾開',
     },
     finish: {
       line: '（兵馬俑目前不在線，去跟秦始皇打牌了）',
       options: ['這小泥偶下線了.....'],
+    },
+    angry: {
+      line: '（生氣）給我滾開',
     },
   },
   10005: {

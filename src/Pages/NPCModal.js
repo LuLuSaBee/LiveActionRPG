@@ -8,8 +8,8 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../redux/actions';
 import BeaconScanner from '../utils/BeaconScanner';
 import firestore from '@react-native-firebase/firestore';
-import Game1 from '../Games/Game1';
-import Game2 from '../Games/Game2';
+import Game1 from '../Games/Game1'; // 拼圖
+import Game2 from '../Games/Game2'; // 翻牌
 import {
   updateStoryRecord,
   updateCPPR,
@@ -22,6 +22,7 @@ import {
   checkPointDataList,
   NPCIDlist,
   achievementData,
+  itemsData,
 } from '../data.source';
 
 const screenHeight = Dimensions.get('screen').height;
@@ -35,7 +36,7 @@ class NPCModal extends React.Component {
       <NPCImage key="image" img={npcData.nothing.img} />,
       <NPCConversation
         key="option"
-        conversation={{line: npcData.nothing.line, options: []}}
+        conversation={{line: npcData.nothing.line}}
       />,
     ];
     this.state = {
@@ -112,7 +113,7 @@ class NPCModal extends React.Component {
           const handleThisFinish = () => {
             this.closeModal();
             this.handlePoint(checkPointDataList[0]);
-            this.unLockAchievement(achievementData[0].id);
+            this.unLockAchievement(achievementData[0]);
           };
           const lineLoop = (index) => {
             this.handleStoryRecordDataFlow(npcID, data[index].line);
@@ -147,7 +148,7 @@ class NPCModal extends React.Component {
           const handleThisFinish = () => {
             this.closeModal();
             this.handlePoint(checkPointDataList[1]);
-            this.unLockAchievement(achievementData[1].id);
+            this.unLockAchievement(achievementData[1]);
           };
           const lineLoop = (index) => {
             this.handleStoryRecordDataFlow(npcID, data[index].line);
@@ -182,7 +183,7 @@ class NPCModal extends React.Component {
           this.handleStoryRecordDataFlow(npcID, npc.first[0].line);
           this.setNormalView(
             {name: npc.name, img: npc.img},
-            {line: npc.first[0].line, options: []},
+            {line: npc.first[0].line},
           );
         } else if (this.props.progressRate === 10) {
           var data = npc.first;
@@ -193,7 +194,7 @@ class NPCModal extends React.Component {
             } else {
               this.closeModal();
               this.handlePoint(checkPointDataList[2]);
-              this.unLockAchievement(achievementData[2].id);
+              this.unLockAchievement(achievementData[2]);
             }
           };
           const lineLoop = (index) => {
@@ -224,6 +225,110 @@ class NPCModal extends React.Component {
         }
         break;
       case NPCIDlist[4]: // 摩艾石像
+        const handleAngry = () => {
+          this.handleStoryRecordDataFlow(npcID, npc.angry.line);
+          this.unLockAchievement(achievementData[12]);
+          this.setNormalView(
+            {name: npc.name, img: npc.img},
+            {line: npc.angry.line},
+          );
+        };
+        const handleInProcess = (next) => {
+          this.handleStoryRecordDataFlow(npcID, npc.inProcess.line);
+          this.setNormalView(
+            {name: npc.name, img: npc.img},
+            {
+              line: npc.inProcess.line,
+              options: npc.inProcess.options,
+              onPress: (index) => (index === 1 ? handleAngry() : next()),
+            },
+          );
+        };
+        if (this.props.progressRate === 15) {
+          const {findPhoto, gameSuccess, gameFail, again} = npc;
+          var data = findPhoto;
+          const againReact = () => {
+            this.handleStoryRecordDataFlow(npcID, again.line);
+            this.setNormalView(
+              {name: npc.name, img: npc.img},
+              {
+                line: again.line,
+                options: again.options,
+                onPress: goToGame,
+              },
+            );
+          };
+          const onGameFail = () => {
+            this.handleStoryRecordDataFlow(npcID, gameFail.line);
+            this.setNormalView(
+              {name: npc.name, img: npc.img},
+              {
+                line: gameFail.line,
+                options: gameFail.options,
+                onPress: againReact,
+              },
+            );
+          };
+          const goToGame = () =>
+            this.setOtherView(
+              <Game1
+                back={onGameFail}
+                start={() => {
+                  this.unLockAchievement(achievementData[13]);
+                }}
+                finish={() => onGameSuccess()}
+              />,
+            );
+          const onGameSuccess = () => {
+            data = gameSuccess;
+            lineLoop(0, true);
+          };
+          const handleThisFinish = () => {
+            this.closeModal();
+            this.handlePoint(checkPointDataList[3]);
+            this.unLockAchievement(achievementData[3]);
+            this.addBackpackItem(itemsData.image.key); // add image
+          };
+          const lineLoop = (index, isGameFinish = false) => {
+            this.handleStoryRecordDataFlow(npcID, data[index].line);
+            this.setNormalView(
+              {name: npc.name, img: npc.img},
+              {
+                line: data[index].line,
+                options: data[index].options,
+                onPress: () =>
+                  index === data.length - 1
+                    ? isGameFinish
+                      ? handleThisFinish()
+                      : goToGame()
+                    : lineLoop(index + 1, isGameFinish),
+              },
+            );
+          };
+          handleInProcess(() => lineLoop(0));
+          return;
+        } else if (this.props.progressRate >= 80) {
+          this.handleStoryRecordDataFlow(npcID, npc.finish.line);
+          this.setNormalView(
+            {name: npc.name, img: npc.img},
+            {
+              line: npc.finish.line,
+              options: npc.finish.options,
+              onPress: this.closeModal,
+            },
+          );
+        } else {
+          this.handleStoryRecordDataFlow(npcID, npc.notInProcess.line);
+          this.setNormalView(
+            {name: npc.name, img: npc.img},
+            {
+              line: npc.notInProcess.line,
+              options: npc.notInProcess.options,
+              onPress: (index) =>
+                index === 1 ? handleAngry() : this.closeModal(),
+            },
+          );
+        }
         break;
       case NPCIDlist[5]: // 兵馬俑
         break;
@@ -301,15 +406,15 @@ class NPCModal extends React.Component {
     updateCPPR(userData.uid, [newPoint, ...checkPoint], newRate);
   };
 
-  unLockAchievement = (id) => {
+  unLockAchievement = (data) => {
     const {achievement, userData} = this.props;
     //redux
-    this.props.updateAchievement(id);
+    this.props.updateAchievement(data.id);
     //firebase
     updateAchievement(
       userData.uid,
       achievement.map((element) =>
-        element.id === id ? {id: id, lock: false} : element,
+        element.id === data.id ? {id: data.id, lock: false} : element,
       ),
     );
   };
