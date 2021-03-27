@@ -51,5 +51,22 @@ const Styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  dialogStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '50%',
+    paddingBottom: 10,
+    paddingTop: 10,
+  },
+  titleStyle: {},
+  image: {
+    height: '100%',
+    width: '100%',
+    resizeMode: 'contain',
+  },
+  showImageBtn: {
+    alignItems: 'flex-end',
+    marginRight: 10,
+  },
 });
 export default Styles;

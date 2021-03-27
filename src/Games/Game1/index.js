@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, Text, View} from 'react-native';
+import {TouchableOpacity, Text, View, Image} from 'react-native';
 import Styles from './Styles';
 import photo1 from './photo/photo1.jpg';
 import photo2 from './photo/photo2.jpg';
@@ -12,6 +12,7 @@ import photo8 from './photo/photo8.jpg';
 import photo9 from './photo/photo9.jpg';
 import GameItem from './GameItem';
 import {playGameSuccess, playGameFail} from '../../utils/musicPlayer';
+import {Dialog} from 'react-native-simple-dialogs';
 
 export default class Game1 extends React.Component {
   constructor(props) {
@@ -29,6 +30,7 @@ export default class Game1 extends React.Component {
         {id: 8, url: photo8, gap: false, move: false},
         {id: 9, url: photo9, gap: false, move: false},
       ],
+      dialogVisible: true,
     };
     const random = this.state.photos;
     random.sort(function () {
@@ -137,6 +139,11 @@ export default class Game1 extends React.Component {
         <View style={Styles.titleView}>
           <Text style={Styles.title}>拼圖遊戲</Text>
         </View>
+        <TouchableOpacity
+          onPress={() => this.setState({dialogVisible: true})}
+          style={Styles.showImageBtn}>
+          <Text>顯示原圖</Text>
+        </TouchableOpacity>
         <View style={Styles.GameView}>
           <View style={Styles.ImgSort}>
             {this.state.photos.map((photo) => {
@@ -160,6 +167,18 @@ export default class Game1 extends React.Component {
             <Text>回到對話</Text>
           </TouchableOpacity>
         </View>
+        <Dialog
+          visible={this.state.dialogVisible}
+          title={'原圖'}
+          animationType={'fade'}
+          onTouchOutside={() => this.setState({dialogVisible: false})}
+          dialogStyle={Styles.dialogStyle}
+          contentStyle={Styles.contentView}>
+          <Image
+            style={Styles.image}
+            source={require('../../assets/puzzle.jpg')}
+          />
+        </Dialog>
       </View>
     );
   }

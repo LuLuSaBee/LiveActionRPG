@@ -63,11 +63,18 @@ class NPCModal extends React.Component {
     // for (let index = 0; index < 16; index++) {
     //   tmp.push({id: index, lock: true});
     // }
-    // tmp.push({id: 16, lock: true,progress: 0})
+    // tmp.push({id: 16, lock: true, progress: 0});
     // firestore()
     //   .collection('player')
     //   .doc('tjkrdJLNtcgflAZEMnrT')
-    //   .update({achievement: tmp, storyRecord: [], checkPoint: [],progressRate: 0});
+    //   .update({
+    //     achievement: tmp,
+    //     storyRecord: [],
+    //     checkPoint: [],
+    //     progressRate: 0,
+    //     backpackItem: ['terms', 'checkList', 'achievement', 'book'],
+    //     chatList: [],
+    //   });
   }
 
   componentDidUpdate() {
@@ -137,7 +144,7 @@ class NPCModal extends React.Component {
     const handleFinish = () => {
       this.closeModal();
       //< 0 為不需檢查點與成就
-      if (dataNumber > 0) {
+      if (dataNumber >= 0) {
         this.unLockAchievement(achievementData[dataNumber]);
         if (dataNumber < checkPointDataList.length) {
           // 有些只有成就，並無檢查點
