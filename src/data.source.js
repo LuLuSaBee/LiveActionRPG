@@ -48,12 +48,6 @@ export const informationPageData = {
   },
 };
 
-export const storyRecordPageData = {
-  title: '美術館事件簿',
-  left: require('./assets/item/book.png'),
-  right: require('./assets/right-arrow.png'),
-};
-
 import {ifIphoneX} from 'react-native-iphone-x-helper';
 export const defaultTheme = {
   backgroundColor: '#efefef',
@@ -541,16 +535,25 @@ export const videoData = {
     key: 'firstHalfInterference',
     name: '模糊的前半段',
     source: require('./assets/video/first-half-interference.mp4'),
+    img: require('./assets/item/video.png'),
+    description: '模糊的前半段',
+    buttonType: 'video',
   },
   firstHalf: {
     key: 'firstHalf',
     name: '清晰的前半段',
     source: require('./assets/video/first-half.mp4'),
+    img: require('./assets/item/video.png'),
+    description: '清晰的前半段',
+    buttonType: 'video',
   },
   secondHalf: {
     key: 'secondHalf',
     name: '清晰的後半段',
     source: require('./assets/video/second-half.mp4'),
+    img: require('./assets/item/video.png'),
+    description: '清晰的後半段',
+    buttonType: 'video',
   },
 };
 
@@ -559,71 +562,83 @@ export const itemsData = {
     key: 'terms',
     name: '注意事項',
     img: require('./assets/item/terms.png'),
-    description: '',
-    buttonText: '',
+    description: '【消失的畫作】遊玩注意事項，請詳細閱讀，並牢記於腦海中',
+    buttonType: 'open',
+    content: {
+      title: '遊戲注意事項',
+      text: `
+１. 遊戲範圍為管一2～4樓，遊戲時間為50分鐘\n
+２. 嚴禁破壞道具及設備，若惡意破壞遊戲道具，將以原價要求賠償\n
+３. 請勿攻擊工作人員\n
+４. 遊戲過程中若有任何疑問可以詢問身旁的工作人員\n
+５. 遊戲過程中若感到身體不適，請告知身旁工作人員\n
+６. 遊戲結束後剛開始的物品放回袋子中，並交回工作人員\n
+７. 為留存遊戲資料，遊戲過程中將會進行錄影及攝影\n
+８. 若進入遊戲中保全的手電筒範圍則整組定格10秒鐘，請小心避開\n`,
+    },
   },
   checkList: {
     key: 'checkList',
     name: '進度紀錄',
     img: require('./assets/item/checklist.png'),
-    description: '',
-    buttonText: '',
+    description: 'description',
+    buttonType: 'checkList',
   },
   achievement: {
     key: 'achievement',
     name: '成就',
     img: require('./assets/item/achievement.png'),
-    description: '',
-    buttonText: '',
+    description: 'description',
+    buttonType: 'achievement',
   },
   book: {
     key: 'book',
     name: '事件記錄簿',
     img: require('./assets/item/book.png'),
-    description: '',
-    buttonText: '',
+    description: 'description',
+    buttonType: 'record',
   },
   image: {
     key: 'image',
     name: '照片',
     img: require('./assets/item/image.png'),
-    description: '',
-    buttonText: '',
+    description: 'description',
+    buttonType: null,
   },
   history: {
     key: 'history',
     name: '史書',
     img: require('./assets/item/history.png'),
-    description: '',
-    buttonText: '',
+    description: 'description',
+    buttonType: null,
   },
   bible: {
     key: 'bible',
     name: '聖經',
     img: require('./assets/item/bible.png'),
-    description: '',
-    buttonText: '',
+    description: 'description',
+    buttonType: null,
   },
   lightning: {
     key: 'lightning',
     name: '閃電',
     img: require('./assets/item/lightning.png'),
-    description: '',
-    buttonText: null,
+    description: '把玩家電到一代一代的東西',
+    buttonType: null,
   },
   cardGames: {
     key: 'cardGames',
     name: '撲克牌',
     img: require('./assets/item/card-games.png'),
-    description: '',
-    buttonText: null,
+    description: '秦始皇的撲克牌',
+    buttonType: null,
   },
   paper: {
     key: 'paper',
     name: '道歉信',
     img: require('./assets/item/paper.png'),
-    description: '',
-    buttonText: '',
+    description: '摩艾石像的道歉信',
+    buttonType: null,
   },
   ...videoData,
 };

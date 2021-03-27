@@ -14,7 +14,7 @@ const store = createStore(rootReducer);
 import Video from 'react-native-video';
 import {StyleSheet} from 'react-native';
 export default function App() {
-  playerBackgroundMusic();
+  //playerBackgroundMusic();
   return (
     <Provider store={store}>
       <View style={Styles.page}>

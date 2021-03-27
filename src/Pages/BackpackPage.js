@@ -1,37 +1,61 @@
 import React from 'react';
 import {View, SafeAreaView, Image, Text, TouchableOpacity} from 'react-native';
-import Styles from '../Styles/BackpackPage.style';
-import InfoBox from '../Views/Elements/InfoBox';
-import {storyRecordPageData as storyRecordData} from '../data.source';
 import {pushToStoryRecordPage} from '../utils/routerAction';
+import Styles from '../Styles/BackpackPage.style';
+import {itemsData} from '../data.source';
 import {connect} from 'react-redux';
 import * as actionCreators from '../redux/actions';
+import BagView from '../Views/BagView';
+import ItemPreview from '../Views/ItemPreview';
+import {Dialog} from 'react-native-simple-dialogs';
 
 class BackpackPage extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      previewItem: 'terms',
+      dialogVisible: false,
+    };
+    this.openItem = {
+      terms: () => this.setState({dialogVisible: true}),
+      book: () => pushToStoryRecordPage(),
+    };
   }
 
+  handleItemPress = (key) => {
+    this.setState({previewItem: key});
+  };
+
   render() {
+    const {backpackItem} = this.props;
+    const {previewItem, dialogVisible} = this.state;
     return (
       <View style={Styles.page}>
         <SafeAreaView style={Styles.container}>
-          <TouchableOpacity
-            style={[Styles.box, Styles.record]}
-            onPress={() =>
-              pushToStoryRecordPage({storyRecord: this.props.storyRecord})
-            }>
-            <View style={Styles.bookView}>
-              <Image style={Styles.bookIcon} source={storyRecordData.left} />
+          <View style={Styles.previewContainer}>
+            <ItemPreview previewItem={previewItem} openItem={this.openItem} />
+          </View>
+          <View style={Styles.bagContainer}>
+            <View style={Styles.bagView}>
+              {
+                <BagView
+                  backpackItem={backpackItem}
+                  previewItem={previewItem}
+                  onPress={this.handleItemPress}
+                />
+              }
             </View>
-            <View style={Styles.textView}>
-              <Text style={Styles.text}>{storyRecordData.title}</Text>
-            </View>
-            <View style={Styles.arrowView}>
-              <Image style={Styles.arrowIcon} source={storyRecordData.right} />
-            </View>
-          </TouchableOpacity>
+          </View>
         </SafeAreaView>
+        <Dialog
+          visible={dialogVisible}
+          title={itemsData['terms'].content.title}
+          animationType={'fade'}
+          onTouchOutside={() => this.setState({dialogVisible: false})}>
+          <View>
+            <Text>{itemsData['terms'].content.text}</Text>
+          </View>
+        </Dialog>
       </View>
     );
   }
