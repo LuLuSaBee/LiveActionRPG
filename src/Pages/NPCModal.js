@@ -331,9 +331,11 @@ class NPCModal extends React.Component {
           };
           const handleThisFinish = () => {
             this.closeModal();
-            this.handlePoint(checkPointDataList[3]);
-            this.unLockAchievement(achievementData[3]);
-            this.addBackpackItem(itemsData.image.key); // add image
+            if (this.props.progressRate !== checkPointDataList[3].point) {
+              this.handlePoint(checkPointDataList[3]);
+              this.unLockAchievement(achievementData[3]);
+              this.addBackpackItem(itemsData.image.key); // add image
+            }
           };
           const thisLineLoop = (index = 0, isGameFinish = false) => {
             this.handleStoryRecordDataFlow(npcID, data[index].line);
@@ -375,6 +377,9 @@ class NPCModal extends React.Component {
           data = npc.clearVideo[times];
           //等於0是第一次來 不等於0為第二次來
           dataNumber = times === 0 ? -1 : 9;
+          if (times !== 0) {
+            this.addBackpackItem(itemsData.paper.key);
+          }
           extra = () => {
             //redux
             initAchievement(newAchievement);
@@ -382,7 +387,6 @@ class NPCModal extends React.Component {
             updateAchievement(userData.uid, newAchievement);
             if (times !== 0) {
               this.addBackpackItem(itemsData.firstHalf.key);
-              this.addBackpackItem(itemsData.paper.key);
             }
           };
           times === 0 ? handleInProcess(() => lineLoop()) : lineLoop();
@@ -459,9 +463,11 @@ class NPCModal extends React.Component {
           };
           const handleThisFinish = () => {
             this.closeModal();
-            this.handlePoint(checkPointDataList[7]);
-            this.unLockAchievement(achievementData[7]);
-            this.addBackpackItem(itemsData.cardGames.key); // add image
+            if (this.props.progressRate !== checkPointDataList[7].point) {
+              this.handlePoint(checkPointDataList[7]);
+              this.unLockAchievement(achievementData[7]);
+              this.addBackpackItem(itemsData.cardGames.key); // add cardGames
+            }
           };
           const thisLineLoop = (index = 0, isGameFinish = false) => {
             this.handleStoryRecordDataFlow(npcID, data[index].line);
@@ -489,7 +495,11 @@ class NPCModal extends React.Component {
           const times = Math.floor(achievement[16].progress / 2);
           const newAchievement = achievement.map((element) =>
             element.id === 16
-              ? {...element, progress: element.progress + 1}
+              ? {
+                  ...element,
+                  progress: element.progress + 1,
+                  lock: times === 0 ? true : false,
+                }
               : element,
           );
           data = npc.fighting[times];
@@ -593,19 +603,21 @@ class NPCModal extends React.Component {
       progressRate,
     } = this.props;
 
-    // redux
-    var newRate = progressRate + data.rate;
+    var newRate = data.point;
     var newPoint = {
       extraTime: '',
       id: data.id,
       name: data.name,
       time: firestore.Timestamp.fromDate(new Date()),
     };
+    if (progressRate !== data.point) {
+      // redux
+      updateCheckPoint(newPoint);
+      // firebase
+      updateCPPR(userData.uid, [newPoint, ...checkPoint], newRate);
+    }
+    // redux
     updateProgressRate(newRate);
-    updateCheckPoint(newPoint);
-
-    // firebase
-    updateCPPR(userData.uid, [newPoint, ...checkPoint], newRate);
   };
 
   unLockAchievement = (data) => {

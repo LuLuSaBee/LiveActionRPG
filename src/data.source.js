@@ -487,18 +487,18 @@ export const npcData = {
 };
 
 export const checkPointDataList = [
-  {id: 0, name: '基督教', rate: 5}, //5
-  {id: 1, name: '我滴朋朋', rate: 5}, //10
-  {id: 2, name: '作家', rate: 5}, //15
-  {id: 3, name: '拼圖好手', rate: 10}, //25
-  {id: 4, name: '話術大師', rate: 10}, //35
-  {id: 5, name: '小魔女DoReMi', rate: 5}, //40
-  {id: 6, name: '100萬伏特', rate: 5}, //45
-  {id: 7, name: '翻牌如翻掌', rate: 10}, //55
-  {id: 8, name: '解密大師', rate: 20}, //75
-  {id: 9, name: '高清無碼影片', rate: 5}, //80
-  {id: 10, name: '差之分毫', rate: 10}, //90
-  {id: 11, name: '慧眼識畫作', rate: 20}, //100
+  {id: 0, name: '基督教', rate: 5, point: 5}, //5
+  {id: 1, name: '我滴朋朋', rate: 5, point: 10}, //10
+  {id: 2, name: '作家', rate: 5, point: 15}, //15
+  {id: 3, name: '拼圖好手', rate: 10, point: 25}, //25
+  {id: 4, name: '話術大師', rate: 10, point: 35}, //35
+  {id: 5, name: '小魔女DoReMi', rate: 5, point: 40}, //40
+  {id: 6, name: '100萬伏特', rate: 5, point: 45}, //45
+  {id: 7, name: '翻牌如翻掌', rate: 10, point: 55}, //55
+  {id: 8, name: '解密大師', rate: 20, point: 75}, //75
+  {id: 9, name: '高清無碼影片', rate: 5, point: 80}, //80
+  {id: 10, name: '差之分毫', rate: 10, point: 90}, //90
+  {id: 11, name: '慧眼識畫作', rate: 20, point: 100}, //100
 ];
 
 export const achievementData = [
