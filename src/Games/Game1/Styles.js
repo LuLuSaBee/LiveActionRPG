@@ -1,4 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
+import {isIphoneX} from 'react-native-iphone-x-helper';
 
 const Styles = StyleSheet.create({
   page: {
@@ -45,6 +46,7 @@ const Styles = StyleSheet.create({
     height: '80%',
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: isIphoneX() ? 40 : 0,
   },
   btnView: {
     flex: 0.07,
@@ -58,7 +60,6 @@ const Styles = StyleSheet.create({
     paddingBottom: 10,
     paddingTop: 10,
   },
-  titleStyle: {},
   image: {
     height: '100%',
     width: '100%',

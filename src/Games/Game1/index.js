@@ -172,8 +172,7 @@ export default class Game1 extends React.Component {
           title={'原圖'}
           animationType={'fade'}
           onTouchOutside={() => this.setState({dialogVisible: false})}
-          dialogStyle={Styles.dialogStyle}
-          contentStyle={Styles.contentView}>
+          dialogStyle={Styles.dialogStyle}>
           <Image
             style={Styles.image}
             source={require('../../assets/puzzle.jpg')}
