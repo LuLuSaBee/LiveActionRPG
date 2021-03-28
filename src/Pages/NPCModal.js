@@ -59,22 +59,22 @@ class NPCModal extends React.Component {
     this.openModal = openModal;
     this.closeModal = closeModal;
 
-    var tmp = [];
-    for (let index = 0; index < 16; index++) {
-      tmp.push({id: index, lock: true});
-    }
-    tmp.push({id: 16, lock: true, progress: 0});
-    firestore()
-      .collection('player')
-      .doc('tjkrdJLNtcgflAZEMnrT')
-      .update({
-        achievement: tmp,
-        storyRecord: [],
-        checkPoint: [],
-        progressRate: 0,
-        backpackItem: ['terms', 'checkList', 'achievement', 'book'],
-        chatList: [],
-      });
+    // var tmp = [];
+    // for (let index = 0; index < 16; index++) {
+    //   tmp.push({id: index, lock: true});
+    // }
+    // tmp.push({id: 16, lock: true, progress: 0});
+    // firestore()
+    //   .collection('player')
+    //   .doc('tjkrdJLNtcgflAZEMnrT')
+    //   .update({
+    //     achievement: tmp,
+    //     storyRecord: [],
+    //     checkPoint: [],
+    //     progressRate: 0,
+    //     backpackItem: ['terms', 'checkList', 'achievement', 'book'],
+    //     chatList: [],
+    //   });
   }
 
   componentDidUpdate() {
@@ -411,16 +411,6 @@ class NPCModal extends React.Component {
             }
           };
           times === 0 ? handleInProcess(() => lineLoop()) : lineLoop();
-        } else if (this.props.progressRate >= 80) {
-          this.handleStoryRecordDataFlow(npcID, npc.finish.line);
-          this.setNormalView(
-            {name: npc.name, img: npc.img},
-            {
-              line: npc.finish.line,
-              options: npc.finish.options,
-              onPress: this.closeModal,
-            },
-          );
         } else {
           this.handleStoryRecordDataFlow(npcID, npc.notInProcess.line);
           this.setNormalView(

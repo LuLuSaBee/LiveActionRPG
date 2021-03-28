@@ -352,10 +352,6 @@ export const npcData = {
       line: '沒有什麼事情是我做不到的，你有什麼事嗎?',
       options: ['沒甚麼事，有事再來找你', '你可以自己上廁所嗎？'],
     },
-    finish: {
-      line: '（兵馬俑目前不在線，去跟秦始皇打牌了）',
-      options: ['這小泥偶下線了.....'],
-    },
     angry: {
       line: '（生氣）給我滾開',
     },
@@ -609,7 +605,7 @@ export const itemsData = {
     key: 'history',
     name: '史書',
     img: require('./assets/item/history.png'),
-    description: '《資治通鑑》\n司馬光著',
+    description: '《資治通鑑》司馬光著',
     buttonType: null,
   },
   bible: {
