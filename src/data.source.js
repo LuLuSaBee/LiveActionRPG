@@ -532,7 +532,7 @@ export const videoData = {
     name: '模糊的前半段',
     source: require('./assets/video/first-half-interference.mp4'),
     img: require('./assets/item/video.png'),
-    description: '在館長室獲得的模糊的前半段',
+    description: '在館長室獲得的模糊的前半段\n（輕觸影片即可放大）',
     buttonType: 'video',
   },
   firstHalf: {
@@ -540,7 +540,7 @@ export const videoData = {
     name: '清晰的前半段',
     source: require('./assets/video/first-half.mp4'),
     img: require('./assets/item/video.png'),
-    description: '從摩艾石像那邊拿到的清晰的前半段',
+    description: '從摩艾石像那邊拿到的清晰的前半段\n（輕觸影片即可放大）',
     buttonType: 'video',
   },
   secondHalf: {
@@ -548,7 +548,7 @@ export const videoData = {
     name: '模糊的後半段',
     source: require('./assets/video/second-half.mp4'),
     img: require('./assets/item/video.png'),
-    description: '在館長室獲得的模糊的後半段',
+    description: '在館長室獲得的模糊的後半段\n（輕觸影片即可放大）',
     buttonType: 'video',
   },
 };
@@ -563,14 +563,16 @@ export const itemsData = {
     content: {
       title: '遊戲注意事項',
       text: `
-１. 遊戲範圍為管一2～4樓，遊戲時間為50分鐘\n
-２. 嚴禁破壞道具及設備，若惡意破壞遊戲道具，將以原價要求賠償\n
-３. 請勿攻擊工作人員\n
-４. 遊戲過程中若有任何疑問可以詢問身旁的工作人員\n
-５. 遊戲過程中若感到身體不適，請告知身旁工作人員\n
-６. 遊戲結束後剛開始的物品放回袋子中，並交回工作人員\n
-７. 為留存遊戲資料，遊戲過程中將會進行錄影及攝影\n
-８. 若進入遊戲中保全的手電筒範圍則整組定格10秒鐘，請小心避開\n`,
+遊戲注意事項：\n
+１. 遊戲範圍為管一2～3樓，遊戲時間為50分鐘
+２. 嚴禁破壞道具及設備，若惡意破壞遊戲道具，將以原價要求賠償
+３. 請勿攻擊工作人員
+４. 遊戲過程中若有任何疑問可以詢問身旁的工作人員
+５. 遊戲過程中若感到身體不適，請告知身旁工作人員
+６. 遊戲結束後將袋子裡原有道具歸位
+７. 為留存遊戲資料，遊戲過程中將會進行錄影及攝影
+８. 過程中有2次的提示機會，若需要提示請告知隨行的工作人員
+９. 若進入遊戲中保全的手電筒範圍則整組定格10秒鐘，若聽到鈴聲請小心避開`,
     },
   },
   checkList: {
