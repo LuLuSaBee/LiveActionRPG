@@ -8,7 +8,9 @@ export const routerKey = {
 };
 
 export const landingPageData = {
-  teamNamePH: '請輸入團隊名稱',
+  teamNamePH: '輸入團隊名稱',
+  img: require('./assets/startPng.png'),
+  background: require('./assets/landingBackground.png'),
 };
 
 export const TabData = {

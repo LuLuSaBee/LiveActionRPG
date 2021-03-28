@@ -1,11 +1,12 @@
 import React from 'react';
-import {View} from 'react-native';
+import {Image, View, ImageBackground} from 'react-native';
 import Styles from '../Styles/landingPage.style';
-import {landingPageData as PageData} from '../data.source';
+import {landingPageData as pageData} from '../data.source';
 import InputBox from '../Views/Elements/InputBox';
 import Button from '../Views/Elements/Button';
 import {replaceToTabs} from '../utils/routerAction';
 import {connect} from 'react-redux';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import * as actionCreators from '../redux/actions';
 import {
   checkIsUser,
@@ -71,29 +72,40 @@ class LandingPage extends React.Component {
   };
 
   render() {
-    const {teamNamePH} = PageData;
+    const {teamNamePH} = pageData;
     const {teamName} = this.state;
     return (
-      <View style={Styles.page}>
-        <View style={Styles.inputContainer}>
-          <InputBox
-            containerStyle={Styles.inputView}
-            inputData={{
-              style: Styles.inputBox,
-              value: teamName,
-              placeholder: teamNamePH,
-              placeholderTextColor: 'gray',
-              textAlign: 'center',
-              onChangeText: (text) => this.onChangeTeamName(text),
-            }}
-          />
-          <Button
-            text={'進入'}
-            onPress={this.onInToClick}
-            style={{width: 80}}
-          />
-        </View>
-      </View>
+      <KeyboardAwareScrollView
+        resetScrollToCoords={{x: 0, y: 0}}
+        contentContainerStyle={Styles.page}
+        scrollEnabled={false}>
+        <ImageBackground
+          source={pageData.background}
+          style={Styles.page}
+          imageStyle={Styles.backgroundImage}>
+          <View style={Styles.inputContainer}>
+            <Image style={Styles.image} source={pageData.img} />
+            <InputBox
+              containerStyle={Styles.inputView}
+              inputData={{
+                style: Styles.inputBox,
+                value: teamName,
+                placeholder: teamNamePH,
+                placeholderTextColor: 'gray',
+                textAlign: 'center',
+                onChangeText: (text) => this.onChangeTeamName(text),
+              }}
+            />
+            <Button
+              text={'開始遊戲'}
+              onPress={this.onInToClick}
+              style={Styles.button}
+              textStyle={Styles.buttonText}
+              disabled={teamName === ''}
+            />
+          </View>
+        </ImageBackground>
+      </KeyboardAwareScrollView>
     );
   }
 }
