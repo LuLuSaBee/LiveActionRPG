@@ -10,11 +10,12 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
+    marginTop: defaultTheme.marginTop,
   },
   previewContainer: {
     flex: 0.4,
     justifyContent: 'center',
-    marginTop: defaultTheme.marginTop,
+    marginTop: 20,
   },
   bagContainer: {
     flex: 0.6,

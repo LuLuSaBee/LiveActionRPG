@@ -173,8 +173,8 @@ export const npcData = {
       },
     ],
     wait: {
-      line: 'Zzz',
-      options: ['居然睡著了...'],
+      line: '我的好友蒙娜麗莎呢？快把他帶來見我！',
+      options: ['（繼續尋找蒙娜麗莎）'],
     },
     final: {
       line: 'Rrrrrrr(打哈欠)，早安，你找到我的好朋友蒙娜麗莎了嗎？',
@@ -536,7 +536,7 @@ export const videoData = {
     name: '模糊的前半段',
     source: require('./assets/video/first-half-interference.mp4'),
     img: require('./assets/item/video.png'),
-    description: '模糊的前半段',
+    description: '在館長室獲得的模糊的前半段',
     buttonType: 'video',
   },
   firstHalf: {
@@ -544,7 +544,7 @@ export const videoData = {
     name: '清晰的前半段',
     source: require('./assets/video/first-half.mp4'),
     img: require('./assets/item/video.png'),
-    description: '清晰的前半段',
+    description: '從摩艾石像那邊拿到的清晰的前半段',
     buttonType: 'video',
   },
   secondHalf: {
@@ -552,7 +552,7 @@ export const videoData = {
     name: '清晰的後半段',
     source: require('./assets/video/second-half.mp4'),
     img: require('./assets/item/video.png'),
-    description: '清晰的後半段',
+    description: '在館長室獲得的清晰的後半段',
     buttonType: 'video',
   },
 };
@@ -595,28 +595,29 @@ export const itemsData = {
     key: 'book',
     name: '事件記錄簿',
     img: require('./assets/item/book.png'),
-    description: 'description',
+    description: '此行在博物館的遭遇紀錄',
     buttonType: 'record',
   },
   image: {
     key: 'image',
     name: '照片',
     img: require('./assets/item/image.png'),
-    description: 'description',
+    description: '印有內容的照片',
     buttonType: null,
   },
   history: {
     key: 'history',
     name: '史書',
     img: require('./assets/item/history.png'),
-    description: 'description',
+    description: '《資治通鑑》\n司馬光著',
     buttonType: null,
   },
   bible: {
     key: 'bible',
-    name: '聖經',
+    name: '假聖經',
     img: require('./assets/item/bible.png'),
-    description: 'description',
+    description:
+      '    觀自在菩薩，行深般若波羅蜜多時，照見五蘊皆空，度一切苦厄。',
     buttonType: null,
   },
   lightning: {

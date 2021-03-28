@@ -59,22 +59,22 @@ class NPCModal extends React.Component {
     this.openModal = openModal;
     this.closeModal = closeModal;
 
-    // var tmp = [];
-    // for (let index = 0; index < 16; index++) {
-    //   tmp.push({id: index, lock: true});
-    // }
-    // tmp.push({id: 16, lock: true, progress: 0});
-    // firestore()
-    //   .collection('player')
-    //   .doc('tjkrdJLNtcgflAZEMnrT')
-    //   .update({
-    //     achievement: tmp,
-    //     storyRecord: [],
-    //     checkPoint: [],
-    //     progressRate: 0,
-    //     backpackItem: ['terms', 'checkList', 'achievement', 'book'],
-    //     chatList: [],
-    //   });
+    var tmp = [];
+    for (let index = 0; index < 16; index++) {
+      tmp.push({id: index, lock: true});
+    }
+    tmp.push({id: 16, lock: true, progress: 0});
+    firestore()
+      .collection('player')
+      .doc('tjkrdJLNtcgflAZEMnrT')
+      .update({
+        achievement: tmp,
+        storyRecord: [],
+        checkPoint: [],
+        progressRate: 0,
+        backpackItem: ['terms', 'checkList', 'achievement', 'book'],
+        chatList: [],
+      });
   }
 
   componentDidUpdate() {
@@ -103,8 +103,8 @@ class NPCModal extends React.Component {
       const {distance, major, minor} = beacon;
       if (distance === -1) {
         return;
-      } else if (distance <= 1) {
-        // distance <= 1m then open
+      } else if (distance <= 1.5) {
+        // distance <= 1.5m then open
         if (
           major === 3 &&
           minor === 1 &&
@@ -114,6 +114,7 @@ class NPCModal extends React.Component {
           // 如果是館長室就不開modal
           console.log('檢測到館長室');
           this.beaconState = 'room';
+          this.modalState = 'open';
           this.addBackpackItem(itemsData.firstHalfInterference.key);
           this.addBackpackItem(itemsData.secondHalf.key);
           this.unLockAchievement(achievementData[8]);
@@ -126,7 +127,7 @@ class NPCModal extends React.Component {
           this.beaconState = 'npc';
         }
       } else if (this.modalState === 'open') {
-        // distance > 1m then close
+        // distance > 1.5m then close
         console.log('beacon is too far');
         this.closeModal();
         this.modalState = 'close';
@@ -139,7 +140,7 @@ class NPCModal extends React.Component {
     const npcID = major * 10000 + minor;
     const npc = npcData[npcID];
     var data = [];
-    var dataNumber = 0;
+    var dataNumber = -1;
     var extra = () => {};
     const handleFinish = () => {
       this.closeModal();
@@ -181,6 +182,16 @@ class NPCModal extends React.Component {
           data = npc.wrongBook;
           dataNumber = 14;
           lineLoop();
+        } else if (this.props.progressRate < 40) {
+          this.handleStoryRecordDataFlow(npcID, npc.beforeBook.line);
+          this.setNormalView(
+            {name: npc.name, img: npc.img},
+            {
+              line: npc.beforeBook.line,
+              options: npc.beforeBook.options,
+              onPress: this.closeModal,
+            },
+          );
         } else if (this.props.progressRate === 40) {
           data = npc.rightBook;
           dataNumber = 6;
@@ -252,6 +263,16 @@ class NPCModal extends React.Component {
             );
           };
           thisLineLoop();
+        } else if (this.props.progressRate < 25) {
+          this.handleStoryRecordDataFlow(npcID, npc.wait.line);
+          this.setNormalView(
+            {name: npc.name, img: npc.img},
+            {
+              line: npc.wait.line,
+              options: npc.wait.options,
+              onPress: this.closeModal,
+            },
+          );
         } else if (this.props.progressRate === 25) {
           this.reduceBackpackItem(itemsData.image.key); // delete image
           data = npc.afterMission;
@@ -414,7 +435,18 @@ class NPCModal extends React.Component {
         }
         break;
       case NPCIDlist[5]: // 兵馬俑
-        if (this.props.progressRate === 45) {
+        if (this.props.progressRate < 45) {
+          data = npc.notInProcess;
+          this.handleStoryRecordDataFlow(npcID, data.line);
+          this.setNormalView(
+            {name: npc.name, img: npc.img},
+            {
+              line: data.line,
+              options: data.options,
+              onPress: () => this.closeModal(),
+            },
+          );
+        } else if (this.props.progressRate === 45) {
           const {gameFail, inProcess, gameSuccess, answer} = npc;
           data = inProcess;
           var handleInProcess = (index = 0) => {
@@ -526,7 +558,7 @@ class NPCModal extends React.Component {
             },
           );
         } else {
-          data = npc.notInProcess;
+          data = npc.finish;
           this.handleStoryRecordDataFlow(npcID, data.line);
           this.setNormalView(
             {name: npc.name, img: npc.img},
