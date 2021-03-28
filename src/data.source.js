@@ -545,10 +545,10 @@ export const videoData = {
   },
   secondHalf: {
     key: 'secondHalf',
-    name: '清晰的後半段',
+    name: '模糊的後半段',
     source: require('./assets/video/second-half.mp4'),
     img: require('./assets/item/video.png'),
-    description: '在館長室獲得的清晰的後半段',
+    description: '在館長室獲得的模糊的後半段',
     buttonType: 'video',
   },
 };
@@ -578,21 +578,21 @@ export const itemsData = {
     name: '進度紀錄',
     img: require('./assets/item/checklist.png'),
     description: 'description',
-    buttonType: 'checkList',
+    buttonType: 'open',
   },
   achievement: {
     key: 'achievement',
     name: '成就',
     img: require('./assets/item/achievement.png'),
     description: 'description',
-    buttonType: 'achievement',
+    buttonType: 'open',
   },
   book: {
     key: 'book',
     name: '事件記錄簿',
     img: require('./assets/item/book.png'),
     description: '此行在博物館的遭遇紀錄',
-    buttonType: 'record',
+    buttonType: 'open',
   },
   image: {
     key: 'image',

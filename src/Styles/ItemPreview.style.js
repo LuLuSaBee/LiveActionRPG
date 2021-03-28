@@ -24,6 +24,11 @@ export default StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 10,
   },
+  video: {
+    flex: 1,
+    borderRadius: 10,
+    marginHorizontal: 10,
+  },
   imageView: {
     width: '50%',
     height: '100%',
