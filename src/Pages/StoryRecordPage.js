@@ -62,7 +62,7 @@ class StoryRecordPage extends React.Component {
           }}
         />
         <TouchableOpacity style={Styles.backButton} onPress={() => pop()}>
-          <Text style={Styles.backText}>回到遊戲</Text>
+          <Text style={Styles.backText}>回到上一頁</Text>
         </TouchableOpacity>
       </View>
     );

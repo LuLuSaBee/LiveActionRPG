@@ -7,6 +7,7 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: defaultTheme.backgroundColor,
     height: '100%',
+    paddingTop: 10,
   },
   container: {
     flex: 0.9,
@@ -16,7 +17,7 @@ export default StyleSheet.create({
   box: {
     minHeight: 150,
     height: '40%',
-    marginBottom: 10,
+    marginTop: 10,
     marginHorizontal: 10,
     padding: 10,
     backgroundColor: 'white',
@@ -61,14 +62,14 @@ export default StyleSheet.create({
   backButton: {
     borderColor: 'black',
     borderWidth: 1,
-    flex: 0.08,
-    margin: 10,
+    flex: 0.06,
     borderRadius: 40,
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 10,
   },
   backText: {
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: '600',
   },
 });
