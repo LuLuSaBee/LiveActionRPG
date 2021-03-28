@@ -68,7 +68,7 @@ export const NPCIDlist = [
 export const npcData = {
   nothing: {
     name: '這邊空蕩蕩',
-    img: require('./assets/empty.png'),
+    img: require('./assets/empty.jpg'),
     line: '目前沒有展覽品在附近\n｡ﾟヽ(ﾟ´Д`)ﾉﾟ｡',
   },
   10000: {

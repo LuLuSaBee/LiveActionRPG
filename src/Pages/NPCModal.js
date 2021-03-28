@@ -103,8 +103,8 @@ class NPCModal extends React.Component {
       const {distance, major, minor} = beacon;
       if (distance === -1) {
         return;
-      } else if (distance <= 0.6) {
-        // distance <= 0.6m then open
+      } else if (distance <= 1) {
+        // distance <= 1m then open
         if (
           major === 3 &&
           minor === 1 &&
@@ -126,7 +126,7 @@ class NPCModal extends React.Component {
           this.beaconState = 'npc';
         }
       } else if (this.modalState === 'open') {
-        // distance > 0.6m then close
+        // distance > 1m then close
         console.log('beacon is too far');
         this.closeModal();
         this.modalState = 'close';

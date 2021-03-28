@@ -7,11 +7,16 @@ const REGION = {identifier, uuid};
 export default class BeaconScanner {
   beaconsDidRangeEvent = null;
   regionDidExitEvent = null;
+  authStateDidRangeEvent = null;
 
   constructor() {
     Beacons.requestAlwaysAuthorization();
     // update location to ba able to monitor:
     Beacons.startUpdatingLocation();
+    this.authStateDidRangeEvent = Beacons.BeaconsEventEmitter.addListener(
+      'authorizationStatusDidChange',
+      (info) => console.log('authorizationStatusDidChange: ', info),
+    );
   }
 
   initBeacon() {
