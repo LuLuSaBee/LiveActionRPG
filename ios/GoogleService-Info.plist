@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1075357782913-qesh8rgk78jait2nu08kdi5simfq6g94.apps.googleusercontent.com</string>
+	<string>1075357782913-el52gj08g5jmgn9khrf3g89cvkflh9p2.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1075357782913-qesh8rgk78jait2nu08kdi5simfq6g94</string>
+	<string>com.googleusercontent.apps.1075357782913-el52gj08g5jmgn9khrf3g89cvkflh9p2</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAI5Re0rcFhaZwceMofNcVFnKrprUe5fgQ</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.reactjs.native.example.LiveActionRPG</string>
+	<string>org.reactjs.native.example.LiveActionRPG.japan288300</string>
 	<key>PROJECT_ID</key>
 	<string>liveactionrpg-c2f75</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1075357782913:ios:12ca4f6eead6b1ded30e80</string>
+	<string>1:1075357782913:ios:4dce8c72b59d86bbd30e80</string>
 </dict>
 </plist>
