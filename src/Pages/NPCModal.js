@@ -12,7 +12,6 @@ import Styles from '../Styles/NPCModal.style';
 import Button from '../Views/Elements/Button';
 import InfoBox from '../Views/Elements/InfoBox';
 import Toast from 'react-native-toast-message';
-import {ConfirmDialog} from 'react-native-simple-dialogs';
 import Game1 from '../Games/Game1'; // 拼圖
 import Game2 from '../Games/Game2'; // 翻牌
 import {playSuccess, playFail} from '../utils/musicPlayer';
@@ -49,9 +48,6 @@ class NPCModal extends React.Component {
     this.state = {
       visiableView: this.nothingView,
       code: [' ', ' ', ' ', ' '],
-      dialogVisible_1: false,
-      dialogVisible_2: false,
-      dialogVisible_3: false,
     };
     this.didUpdate = false;
     this.modalState = 'close';
@@ -789,13 +785,7 @@ class NPCModal extends React.Component {
 
   //render
   render() {
-    const {
-      visiableView,
-      code,
-      dialogVisible_1,
-      dialogVisible_2,
-      dialogVisible_3,
-    } = this.state;
+    const {visiableView, code} = this.state;
     return (
       <Modalize
         ref={this.props.modalizeRef}
@@ -880,42 +870,6 @@ class NPCModal extends React.Component {
                   </View>
                 </View>,
               ]}
-          <ConfirmDialog
-            title="確認輸入"
-            message={'機會只有一次，確認輸入 ' + code.join('') + ' ?'}
-            visible={dialogVisible_1}
-            animationType={'fade'}
-            onTouchOutside={() => this.setState({dialogVisible_1: false})}
-            positiveButton={{
-              title: '確定',
-              onPress: () =>
-                this.setState({dialogVisible_1: false, dialogVisible_2: true}),
-              titleStyle: Styles.positiveButtonText,
-            }}
-            negativeButton={{
-              title: '再想想',
-              onPress: () => this.setState({dialogVisible_1: false}),
-              titleStyle: Styles.negativeButtonText,
-            }}
-          />
-          <ConfirmDialog
-            title="確認輸入"
-            message={'真的只想輸入' + code.join('') + ' ?'}
-            visible={dialogVisible_2}
-            animationType={'fade'}
-            onTouchOutside={() => this.setState({dialogVisible_2: false})}
-            positiveButton={{
-              title: '沒錯',
-              onPress: () =>
-                this.setState({dialogVisible_2: false, dialogVisible_3: true}),
-              titleStyle: Styles.positiveButtonText,
-            }}
-            negativeButton={{
-              title: '再想想',
-              onPress: () => this.setState({dialogVisible_2: false}),
-              titleStyle: Styles.negativeButtonText,
-            }}
-          />
         </View>
       </Modalize>
     );
