@@ -50,6 +50,26 @@ export const informationPageData = {
   },
 };
 
+export const npcModalPageData = {
+  finalOption: [
+    {
+      message: '機會只有一次，確認輸入',
+      confirm: '確定',
+      cancel: '再想想',
+    },
+    {
+      message: '真的只想輸入',
+      confirm: '沒錯',
+      cancel: '再想想',
+    },
+    {
+      message: '最後一次機會可以反悔，確定一樣是',
+      confirm: '對！我要過關！',
+      cancel: '再想想',
+    },
+  ],
+};
+
 import {ifIphoneX} from 'react-native-iphone-x-helper';
 export const defaultTheme = {
   backgroundColor: '#efefef',

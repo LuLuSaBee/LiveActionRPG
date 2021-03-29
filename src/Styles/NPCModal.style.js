@@ -106,6 +106,30 @@ export default StyleSheet.create({
   alertContent: {
     height: '100%',
   },
+  alertContent_final: {
+    height: '70%',
+  },
+  alertMessage_final: {
+    fontSize: 20,
+    color: 'black',
+  },
+  alertActionContainer_final: {
+    flex: 1,
+    flexDirection: 'row',
+    height: '30%',
+    alignContent: 'flex-start',
+    justifyContent: 'space-around',
+  },
+  alertButton_final: {
+    margin: 0,
+    flex: 0.5,
+    height: '100%',
+    width: '100%',
+    justifyContent: 'center',
+  },
+  alertButtonText_final: {
+    fontSize: 15,
+  },
   alertTitle: {
     flex: 0.2,
   },

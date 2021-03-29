@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, Image, Text, TouchableOpacity, View} from 'react-native';
+import {Dimensions, Image, Text, View} from 'react-native';
 import {Modalize} from 'react-native-modalize';
 import NPCTitle from '../Views/NPCTitle';
 import NPCImage from '../Views/NPCImage';
@@ -29,6 +29,7 @@ import {
   NPCIDlist,
   achievementData,
   itemsData,
+  npcModalPageData as pageData,
 } from '../data.source';
 
 const screenHeight = Dimensions.get('screen').height;
@@ -44,26 +45,6 @@ class NPCModal extends React.Component {
         key="option"
         conversation={{line: npcData.nothing.line}}
       />,
-      // <TouchableOpacity
-      //   onPress={() =>
-      //     this.openAlert({
-      //       show: true,
-      //       title: '獲得道具 ' + '道具',
-      //       contentContainerStyle: Styles.alertContentContainer,
-      //       contentStyle: Styles.alertContent,
-      //       titleStyle: Styles.alertTitle,
-      //       customView: (
-      //         <View style={Styles.alertCustomView}>
-      //           <Image
-      //             style={Styles.alertItemImage}
-      //             source={itemsData.bible.img}
-      //           />
-      //         </View>
-      //       ),
-      //     })
-      //   }>
-      //   <Text>click</Text>
-      // </TouchableOpacity>,
     ];
     this.state = {
       visiableView: this.nothingView,
@@ -753,7 +734,39 @@ class NPCModal extends React.Component {
     this.setState({code: newCode});
   };
 
+  showConfirmAlert = (times = 0) => {
+    const {code} = this.state;
+    const {finalOption} = pageData;
+    this.openAlert({
+      key: times,
+      show: true,
+      title: '確認輸入',
+      contentContainerStyle: Styles.alertContentContainer,
+      contentStyle: Styles.alertContent_final,
+      titleStyle: Styles.alertTitle,
+      showCancelButton: true,
+      message: finalOption[times].message + ' ' + code.join('') + ' ?',
+      messageStyle: Styles.alertMessage_final,
+      actionContainerStyle: Styles.alertActionContainer_final,
+      cancelText: finalOption[times].cancel,
+      cancelButtonColor: '#CB1B45',
+      cancelButtonStyle: Styles.alertButton_final,
+      cancelButtonTextStyle: Styles.alertButtonText_final,
+      showConfirmButton: true,
+      confirmText: finalOption[times].confirm,
+      confirmButtonColor: '#1B813E',
+      confirmButtonStyle: Styles.alertButton_final,
+      confirmButtonTextStyle: Styles.alertButtonText_final,
+      onConfirmPressed: () => {
+        times === 2
+          ? this.handleSubmmitCode()
+          : this.showConfirmAlert(times + 1);
+      },
+    });
+  };
+
   handleSubmmitCode = () => {
+    this.closeAlert();
     const npc = npcData[10002];
     const playerAnswer = parseInt(this.state.code.join(''));
     if (playerAnswer === npc.final.code) {
@@ -860,7 +873,7 @@ class NPCModal extends React.Component {
                           code.indexOf(' ') > -1 ? Styles.opacity : {},
                         ]}
                         textStyle={Styles.backSpaceText}
-                        onPress={() => this.setState({dialogVisible_1: true})}
+                        onPress={() => this.showConfirmAlert()}
                         disabled={code.indexOf(' ') > -1 ? true : false}
                       />
                     </View>
@@ -900,26 +913,6 @@ class NPCModal extends React.Component {
             negativeButton={{
               title: '再想想',
               onPress: () => this.setState({dialogVisible_2: false}),
-              titleStyle: Styles.negativeButtonText,
-            }}
-          />
-          <ConfirmDialog
-            title="確認輸入"
-            message={'最後一次機會可以反悔，確定一樣是 ' + code.join('') + ' ?'}
-            visible={dialogVisible_3}
-            animationType={'fade'}
-            onTouchOutside={() => this.setState({dialogVisible_3: false})}
-            positiveButton={{
-              title: '對！我要過關！',
-              onPress: () => {
-                this.setState({dialogVisible_3: false});
-                this.handleSubmmitCode();
-              },
-              titleStyle: Styles.positiveButtonText,
-            }}
-            negativeButton={{
-              title: '再想想',
-              onPress: () => this.setState({dialogVisible_3: false}),
               titleStyle: Styles.negativeButtonText,
             }}
           />
