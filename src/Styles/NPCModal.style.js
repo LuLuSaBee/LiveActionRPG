@@ -98,4 +98,33 @@ export default StyleSheet.create({
     fontWeight: '600',
     fontSize: 18,
   },
+  alertContentContainer: {
+    height: isIphoneX() ? '30%' : '40%',
+    width: '80%',
+  },
+  alertContent: {
+    height: '100%',
+  },
+  alertTitle: {
+    flex: 0.2,
+  },
+  alertCustomView: {
+    flex: 0.8,
+    height: '90%',
+    width: '90%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  alertItemImage: {
+    height: '100%',
+    width: '100%',
+    resizeMode: 'contain',
+  },
+  alertMultipleItemImage: {
+    flex: 0.5,
+    height: '100%',
+    width: '100%',
+    resizeMode: 'contain',
+  },
 });

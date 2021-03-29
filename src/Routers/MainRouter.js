@@ -8,7 +8,16 @@ import StoryRecordPage from '../Pages/StoryRecordPage';
 import CustomTabBar from '../Views/CustomTabBar';
 import NPCModal from '../Pages/NPCModal';
 
+import CustAlert from '../Views/CustAlert';
+
 export default function MainRouter() {
+  const custAlertRef = useRef({});
+  const openAlert = (data) => {
+    custAlertRef.current.open(data);
+  };
+  const closeAlert = () => {
+    custAlertRef.current.close();
+  };
   const modalizeRef = useRef(null);
   const openModal = () => {
     modalizeRef.current.open();
@@ -48,7 +57,10 @@ export default function MainRouter() {
         modalizeRef={modalizeRef}
         openModal={openModal}
         closeModal={closeModal}
+        openAlert={openAlert}
+        closeAlert={closeAlert}
       />
+      <CustAlert custAlertRef={custAlertRef} />
     </>
   );
 }

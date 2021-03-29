@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, Text, TouchableOpacity, View} from 'react-native';
+import {Dimensions, Image, Text, TouchableOpacity, View} from 'react-native';
 import {Modalize} from 'react-native-modalize';
 import NPCTitle from '../Views/NPCTitle';
 import NPCImage from '../Views/NPCImage';
@@ -44,6 +44,26 @@ class NPCModal extends React.Component {
         key="option"
         conversation={{line: npcData.nothing.line}}
       />,
+      // <TouchableOpacity
+      //   onPress={() =>
+      //     this.openAlert({
+      //       show: true,
+      //       title: '獲得道具 ' + '道具',
+      //       contentContainerStyle: Styles.alertContentContainer,
+      //       contentStyle: Styles.alertContent,
+      //       titleStyle: Styles.alertTitle,
+      //       customView: (
+      //         <View style={Styles.alertCustomView}>
+      //           <Image
+      //             style={Styles.alertItemImage}
+      //             source={itemsData.bible.img}
+      //           />
+      //         </View>
+      //       ),
+      //     })
+      //   }>
+      //   <Text>click</Text>
+      // </TouchableOpacity>,
     ];
     this.state = {
       visiableView: this.nothingView,
@@ -56,9 +76,11 @@ class NPCModal extends React.Component {
     this.modalState = 'close';
     this.beaconState = 'nothing'; //避免掉短時間內一直更新state
 
-    const {openModal, closeModal} = props;
+    const {openModal, closeModal, openAlert, closeAlert} = props;
     this.openModal = openModal;
     this.closeModal = closeModal;
+    this.openAlert = openAlert;
+    this.closeAlert = closeAlert;
 
     // var tmp = [];
     // for (let index = 0; index < 16; index++) {
@@ -116,8 +138,10 @@ class NPCModal extends React.Component {
           console.log('檢測到館長室');
           this.beaconState = 'room';
           this.modalState = 'open';
-          this.addBackpackItem(itemsData.firstHalfInterference.key);
-          this.addBackpackItem(itemsData.secondHalf.key);
+          this.addBackpackItem([
+            itemsData.firstHalfInterference.key,
+            itemsData.secondHalf.key,
+          ]);
           this.unLockAchievement(achievementData[8]);
           this.handlePoint(checkPointDataList[8]);
         } else if (this.modalState !== 'open') {
@@ -399,16 +423,16 @@ class NPCModal extends React.Component {
           data = npc.clearVideo[times];
           //等於0是第一次來 不等於0為第二次來
           dataNumber = times === 0 ? -1 : 9;
-          if (times !== 0) {
-            this.addBackpackItem(itemsData.paper.key);
-          }
           extra = () => {
             //redux
             initAchievement(newAchievement);
             //firebase
             updateAchievement(userData.uid, newAchievement);
             if (times !== 0) {
-              this.addBackpackItem(itemsData.firstHalf.key);
+              this.addBackpackItem([
+                itemsData.firstHalf.key,
+                itemsData.paper.key,
+              ]);
             }
           };
           times === 0 ? handleInProcess(() => lineLoop()) : lineLoop();
@@ -474,9 +498,7 @@ class NPCModal extends React.Component {
             this.setOtherView(
               <Game2
                 back={onGameFail}
-                start={() => {
-                  this.unLockAchievement(achievementData[15]);
-                }}
+                start={() => {}}
                 finish={() => onGameSuccess()}
               />,
             );
@@ -664,10 +686,43 @@ class NPCModal extends React.Component {
 
   addBackpackItem = (key) => {
     const {backpackItem, userData} = this.props;
-    //redux
-    this.props.addBackpackItem(key);
-    //firebase
-    updateBackpackItem(userData.uid, [...backpackItem, key]);
+    var itemsName = '';
+    var itemsImage = <View />;
+    if (Array.isArray(key)) {
+      //redux
+      this.props.addBackpackItem(key[0]);
+      this.props.addBackpackItem(key[1]);
+      //firebase
+      updateBackpackItem(userData.uid, [...backpackItem, ...key]);
+      //set
+      itemsName = itemsData[key[0]].name + '與' + itemsData[key[1]].name;
+      itemsImage = key.map((id) => (
+        <Image
+          key={id}
+          style={Styles.alertMultipleItemImage}
+          source={itemsData[id].img}
+        />
+      ));
+    } else {
+      //redux
+      this.props.addBackpackItem(key);
+      //firebase
+      updateBackpackItem(userData.uid, [...backpackItem, key]);
+      //set
+      itemsName = itemsData[key].name;
+      itemsImage = (
+        <Image style={Styles.alertItemImage} source={itemsData[key].img} />
+      );
+    }
+    //show alert
+    this.openAlert({
+      show: true,
+      title: itemsName + '已放入背包',
+      contentContainerStyle: Styles.alertContentContainer,
+      contentStyle: Styles.alertContent,
+      titleStyle: Styles.alertTitle,
+      customView: <View style={Styles.alertCustomView}>{itemsImage}</View>,
+    });
   };
 
   reduceBackpackItem = (key) => {
