@@ -70,9 +70,10 @@ export default StyleSheet.create({
   button: {
     borderRadius: 10,
     width: '40%',
-    height: '100%',
+    height: isIphoneX() ? '80%' : '100%',
     marginHorizontal: 10,
     ...centerVH,
+    marginBottom: isIphoneX() ? 30 : 0,
   },
   backSpace: {
     backgroundColor: '#CB1B45',
