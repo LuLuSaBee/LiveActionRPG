@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, Text, View} from 'react-native';
+import {Dimensions, Text, TouchableOpacity, View} from 'react-native';
 import {Modalize} from 'react-native-modalize';
 import NPCTitle from '../Views/NPCTitle';
 import NPCImage from '../Views/NPCImage';
@@ -11,6 +11,7 @@ import firestore from '@react-native-firebase/firestore';
 import Styles from '../Styles/NPCModal.style';
 import Button from '../Views/Elements/Button';
 import InfoBox from '../Views/Elements/InfoBox';
+import Toast from 'react-native-toast-message';
 import {ConfirmDialog} from 'react-native-simple-dialogs';
 import Game1 from '../Games/Game1'; // 拼圖
 import Game2 from '../Games/Game2'; // 翻牌
@@ -234,7 +235,7 @@ class NPCModal extends React.Component {
         }
         break;
       case NPCIDlist[3]: // 主席
-        if (this.props.progressRate === 5) {
+        if (this.props.progressRate <= 5) {
           // 還沒找章魚哥就來找他的話
           this.handleStoryRecordDataFlow(npcID, npc.first[0].line);
           this.setNormalView(
@@ -644,15 +645,21 @@ class NPCModal extends React.Component {
 
   unLockAchievement = (data) => {
     const {achievement, userData} = this.props;
-    //redux
-    this.props.updateAchievement(data.id);
-    //firebase
-    updateAchievement(
-      userData.uid,
-      achievement.map((element) =>
-        element.id === data.id ? {...element, lock: false} : element,
-      ),
-    );
+    if (achievement[data.id].lock) {
+      Toast.show({
+        type: 'success',
+        text2: data.name,
+      });
+      //redux
+      this.props.updateAchievement(data.id);
+      //firebase
+      updateAchievement(
+        userData.uid,
+        achievement.map((element) =>
+          element.id === data.id ? {...element, lock: false} : element,
+        ),
+      );
+    }
   };
 
   addBackpackItem = (key) => {

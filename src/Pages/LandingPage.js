@@ -18,7 +18,7 @@ class LandingPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      teamName: 'TestTeam1',
+      teamName: '資工系學會',
     };
   }
 

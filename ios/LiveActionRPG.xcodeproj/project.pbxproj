@@ -21,7 +21,7 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A5135601260F582800E3C1C2 /* index.ios.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = A51355FF260F582800E3C1C2 /* index.ios.jsbundle */; };
 		A51356A0260F6CBC00E3C1C2 /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = A513569F260F6CBC00E3C1C2 /* bundle */; };
-		A5392AFD25DC01B400554550 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5392AFC25DC01B400554550 /* GoogleService-Info.plist */; };
+		A527013C26108F4A004A08DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A527013B26108F4A004A08DE /* GoogleService-Info.plist */; };
 		E82204D11B35EAD8E72D0F43 /* libPods-LiveActionRPG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 179797D0FCB508CB3BB5D938 /* libPods-LiveActionRPG.a */; };
 /* End PBXBuildFile section */
 
@@ -67,7 +67,7 @@
 		9B565A0B7178614DDD6ECB30 /* Pods-LiveActionRPG-LiveActionRPGTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveActionRPG-LiveActionRPGTests.release.xcconfig"; path = "Target Support Files/Pods-LiveActionRPG-LiveActionRPGTests/Pods-LiveActionRPG-LiveActionRPGTests.release.xcconfig"; sourceTree = "<group>"; };
 		A51355FF260F582800E3C1C2 /* index.ios.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = index.ios.jsbundle; path = bundle/index.ios.jsbundle; sourceTree = "<group>"; };
 		A513569F260F6CBC00E3C1C2 /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
-		A5392AFC25DC01B400554550 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A527013B26108F4A004A08DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BDE5A1C5B278BC778E976D05 /* Pods-LiveActionRPG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveActionRPG.release.xcconfig"; path = "Target Support Files/Pods-LiveActionRPG/Pods-LiveActionRPG.release.xcconfig"; sourceTree = "<group>"; };
 		D51A6C97C06C840A3020CDBA /* libPods-LiveActionRPG-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiveActionRPG-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -182,7 +182,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				A5392AFC25DC01B400554550 /* GoogleService-Info.plist */,
+				A527013B26108F4A004A08DE /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* LiveActionRPG */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* LiveActionRPGTests */,
@@ -352,9 +352,9 @@
 			files = (
 				A51356A0260F6CBC00E3C1C2 /* bundle in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				A527013C26108F4A004A08DE /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				A5135601260F582800E3C1C2 /* index.ios.jsbundle in Resources */,
-				A5392AFD25DC01B400554550 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -693,7 +693,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.LiveActionRPG;
 				PRODUCT_NAME = LiveActionRPG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -718,7 +718,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.LiveActionRPG;
 				PRODUCT_NAME = LiveActionRPG;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
