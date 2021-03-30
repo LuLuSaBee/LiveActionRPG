@@ -4,7 +4,7 @@ import Styles from '../Styles/landingPage.style';
 import {landingPageData as pageData} from '../data.source';
 import InputBox from '../Views/Elements/InputBox';
 import Button from '../Views/Elements/Button';
-import {replaceToTabs} from '../utils/routerAction';
+import {replaceToTabs, pushToHostHomePage} from '../utils/routerAction';
 import {connect} from 'react-redux';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import * as actionCreators from '../redux/actions';
@@ -12,6 +12,7 @@ import {
   checkIsUser,
   initPlayerData,
   snapshotChatList,
+  snapshotPlayer,
 } from '../utils/firebaseActions';
 
 class LandingPage extends React.Component {
@@ -35,11 +36,29 @@ class LandingPage extends React.Component {
       console.log('--------------');
       console.log('用戶不存在');
       console.log('--------------');
-    } else {
+    } else if (user.type === 'player') {
+      const {updateTimeLeft, initChatList} = this.props;
       replaceToTabs();
       this.initReduxState(user);
       //add linster for chatList
-      snapshotChatList(user.uid, this.props.initChatList);
+      snapshotChatList(user.uid, initChatList, updateTimeLeft);
+    } else if (user.type === 'host') {
+      const {
+        initChatList,
+        initStoryRecord,
+        updateProgressRate,
+        updateTimeLeft,
+      } = this.props;
+      const uid = 'tjkrdJLNtcgflAZEMnrT';
+      pushToHostHomePage();
+      this.initReduxState({type: 'host', uid: uid});
+      snapshotPlayer(
+        uid,
+        initChatList,
+        initStoryRecord,
+        updateProgressRate,
+        updateTimeLeft,
+      );
     }
   };
 

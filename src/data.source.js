@@ -6,6 +6,7 @@ export const routerKey = {
   InformationPage: 'InformationPage',
   StoryRecordPage: 'StoryRecordPage',
   CheckListPage: 'CheckListPage',
+  HostHomePage: 'HostHomePage',
 };
 
 export const landingPageData = {

@@ -8,6 +8,7 @@ import StoryRecordPage from '../Pages/StoryRecordPage';
 import CustomTabBar from '../Views/CustomTabBar';
 import NPCModal from '../Pages/NPCModal';
 import CheckListPage from '../Pages/CheckListPage';
+import HostHomePage from '../Pages/HostHomePage';
 
 import CustAlert from '../Views/CustAlert';
 
@@ -53,6 +54,7 @@ export default function MainRouter() {
           </Tabs>
           <Scene key={routerKey.StoryRecordPage} component={StoryRecordPage} />
           <Scene key={routerKey.CheckListPage} component={CheckListPage} />
+          <Scene key={routerKey.HostHomePage} component={HostHomePage} />
         </Scene>
       </Router>
       <NPCModal

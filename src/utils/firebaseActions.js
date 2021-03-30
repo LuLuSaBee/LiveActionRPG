@@ -79,14 +79,45 @@ export function initPlayerData(
  * @param {String} uid - Player UID
  * @param {function} initChatList - to reload ChatList
  */
-export function snapshotChatList(uid, initChatList) {
+export function snapshotChatList(uid, initChatList, updateTimeLeft) {
   player.doc(uid).onSnapshot((data) => {
     const source = data.metadata.hasPendingWrites ? 'Local' : 'Server';
     if (source === 'Local') {
-      return;
+      const {endTime} = data._data;
+      const time = endTime.seconds * 1000 + endTime.nanoseconds / 1000000;
+      updateTimeLeft(time - moment());
+    } else {
+      const {chatList} = data._data;
+      initChatList(chatList);
     }
-    const {chatList} = data._data;
-    initChatList(chatList);
+  });
+}
+
+/**
+ *
+ * @param {String} uid - Player UID
+ * @param {Function} initChatList - function that init ChatList
+ * @param {Function} initStoryRecord  - function that init StoryRecord
+ * @param {Function} initProgressRate  - function that init ProgressRate
+ * @param {Function} updateTimeLeft  - function that init TimeLeft
+ */
+export function snapshotPlayer(
+  uid,
+  initChatList,
+  initStoryRecord,
+  initProgressRate,
+  updateTimeLeft,
+) {
+  player.doc(uid).onSnapshot((data) => {
+    const source = data.metadata.hasPendingWrites ? 'Local' : 'Server';
+    if (source === 'Server') {
+      const {endTime, chatList, storyRecord, progressRate} = data._data;
+      const time = endTime.seconds * 1000 + endTime.nanoseconds / 1000000;
+      updateTimeLeft(time - moment());
+      initChatList(chatList);
+      initStoryRecord(storyRecord);
+      initProgressRate(progressRate);
+    }
   });
 }
 
