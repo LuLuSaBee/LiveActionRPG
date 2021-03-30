@@ -10,6 +10,7 @@ import {Dialog} from 'react-native-simple-dialogs';
 import {
   pushToStoryRecordPage,
   pushToCheckListPage,
+  pushToAchievementPage,
 } from '../utils/routerAction';
 
 class BackpackPage extends React.Component {
@@ -23,6 +24,7 @@ class BackpackPage extends React.Component {
       terms: () => this.setState({dialogVisible: true}),
       book: () => pushToStoryRecordPage(),
       checkList: () => pushToCheckListPage(),
+      achievement: () => pushToAchievementPage(),
     };
   }
 

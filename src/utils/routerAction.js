@@ -17,6 +17,10 @@ export function pushToCheckListPage(props) {
   Actions.push(routerKey.CheckListPage, {...props});
 }
 
+export function pushToAchievementPage(props) {
+  Actions.push(routerKey.AchievementPage, {...props});
+}
+
 export function pushToHostHomePage(props) {
   Actions.push(routerKey.HostHomePage, {...props});
 }

@@ -6,6 +6,7 @@ export const routerKey = {
   InformationPage: 'InformationPage',
   StoryRecordPage: 'StoryRecordPage',
   CheckListPage: 'CheckListPage',
+  AchievementPage: 'AchievementPage',
   HostHomePage: 'HostHomePage',
 };
 
@@ -522,23 +523,108 @@ export const checkPointDataList = [
 ];
 
 export const achievementData = [
-  {id: 0, name: checkPointDataList[0].name, img: '', description: ''},
-  {id: 1, name: checkPointDataList[1].name, img: '', description: ''},
-  {id: 2, name: checkPointDataList[2].name, img: '', description: ''},
-  {id: 3, name: checkPointDataList[3].name, img: '', description: ''},
-  {id: 4, name: checkPointDataList[4].name, img: '', description: ''},
-  {id: 5, name: checkPointDataList[5].name, img: '', description: ''},
-  {id: 6, name: checkPointDataList[6].name, img: '', description: ''},
-  {id: 7, name: checkPointDataList[7].name, img: '', description: ''},
-  {id: 8, name: checkPointDataList[8].name, img: '', description: ''},
-  {id: 9, name: checkPointDataList[9].name, img: '', description: ''},
-  {id: 10, name: checkPointDataList[10].name, img: '', description: ''},
-  {id: 11, name: checkPointDataList[11].name, img: '', description: ''},
-  {id: 12, name: '小白目', img: '', description: ''},
-  {id: 13, name: '嘗試拼圖', img: '', description: ''},
-  {id: 14, name: '乖小孩是不可以騙人的喔', img: '', description: ''},
-  {id: 15, name: '記憶力待加強', img: '', description: ''},
-  {id: 16, name: '和事佬', img: '', description: ''},
+  {
+    id: 0,
+    name: checkPointDataList[0].name,
+    img: require('./assets/achievement/jesus.png'),
+    description: '接受耶穌尋找聖經的請求',
+  },
+  {
+    id: 1,
+    name: checkPointDataList[1].name,
+    img: require('./assets/achievement/friend.png'),
+    description: '接受耶帶蒙娜麗莎去找章魚哥的請求',
+  },
+  {
+    id: 2,
+    name: checkPointDataList[2].name,
+    img: require('./assets/achievement/writer.png'),
+    description: '接受主席尋找照片的請求',
+  },
+  {
+    id: 3,
+    name: checkPointDataList[3].name,
+    img: require('./assets/achievement/compliant.png'),
+    description: '完成摩艾石像的拼圖挑戰',
+  },
+  {
+    id: 4,
+    name: checkPointDataList[4].name,
+    img: require('./assets/achievement/chat.png'),
+    description: '發現主席話術了自己',
+  },
+  {
+    id: 5,
+    name: checkPointDataList[5].name,
+    img: require('./assets/achievement/witch.png'),
+    description: '摩艾石像 == 小魔女DoReMi ?',
+  },
+  {
+    id: 6,
+    name: checkPointDataList[6].name,
+    img: require('./assets/achievement/lightning-bolt.png'),
+    description: '以為只有宙斯才會用閃電',
+  },
+  {
+    id: 7,
+    name: checkPointDataList[7].name,
+    img: require('./assets/achievement/snap.png'),
+    description: '輕鬆完成兵馬俑的請求',
+  },
+  {
+    id: 8,
+    name: checkPointDataList[8].name,
+    img: require('./assets/achievement/key.png'),
+    description: '分分鐘解開密碼根本不在話下',
+  },
+  {
+    id: 9,
+    name: checkPointDataList[9].name,
+    img: require('./assets/achievement/television.png'),
+    description: '獲得被小魔女DoReMi 變得清晰的監視錄影',
+  },
+  {
+    id: 10,
+    name: checkPointDataList[10].name,
+    img: require('./assets/achievement/failure.png'),
+    description: '沒有正確將章魚哥的好朋友帶去找他',
+  },
+  {
+    id: 11,
+    name: checkPointDataList[11].name,
+    img: require('./assets/achievement/eye.png'),
+    description: '順利完成遊戲',
+  },
+  {
+    id: 12,
+    name: '小白目',
+    img: require('./assets/achievement/stupid.png'),
+    description: '詢問摩艾石像奇怪的問題',
+  },
+  {
+    id: 13,
+    name: '嘗試拼圖',
+    img: require('./assets/achievement/jigsaw.png'),
+    description: '接受摩艾石像拼圖的挑戰',
+  },
+  {
+    id: 14,
+    name: '乖小孩是不可以騙人的喔',
+    img: require('./assets/achievement/lie.png'),
+    description: '將錯誤的書籍帶給耶穌',
+  },
+  {
+    id: 15,
+    name: '記憶力待加強',
+    img: require('./assets/achievement/amnesia.png'),
+    description: '翻牌遊戲失敗',
+  },
+  {
+    id: 16,
+    name: '和事佬',
+    img: require('./assets/achievement/peace.png'),
+    description: '謝謝你將摩艾石像的道歉信帶給兵馬俑，好人一生平安！',
+  },
 ];
 
 export const musicData = {
@@ -610,7 +696,7 @@ export const itemsData = {
     key: 'achievement',
     name: '成就',
     img: require('./assets/item/achievement.png'),
-    description: 'description',
+    description: '',
     buttonType: 'open',
   },
   book: {
