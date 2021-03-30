@@ -42,18 +42,19 @@ class CheckListPage extends React.Component {
 
   render() {
     const {checkPoint} = this.props;
+    const length = checkPoint.length;
     return (
       <View style={Styles.container}>
         <StepIndicator
           customStyles={this.customStyles}
-          currentPosition={checkPoint.length}
+          currentPosition={length}
           labels={this.labels.map((label, index) =>
-            index < checkPoint.length
-              ? checkPoint[index].name.padEnd(9, '　') +
+            index < length
+              ? checkPoint[length - index - 1].name.padEnd(9, '　') +
                 '' +
                 moment(
-                  checkPoint[index].time.seconds * 1000 +
-                    checkPoint[index].time.nanoseconds / 1000000,
+                  checkPoint[length - index - 1].time.seconds * 1000 +
+                    checkPoint[length - index - 1].time.nanoseconds / 1000000,
                 ).format('HH:mm:ss')
               : label,
           )}
