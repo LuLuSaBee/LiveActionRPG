@@ -8,6 +8,7 @@ import Video from 'react-native-video';
 export default function ItemPreview(props) {
   const {previewItem, openItem} = props;
   const data = itemsData[previewItem];
+
   return (
     <View style={Styles.box}>
       <View key="title" style={Styles.container}>

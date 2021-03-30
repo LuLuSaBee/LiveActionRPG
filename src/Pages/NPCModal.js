@@ -87,6 +87,7 @@ class NPCModal extends React.Component {
       }
       this.beaconScanner.initBeacon();
       this.beaconScanner.startScan(this.beaconUpdate);
+      this.handleNPCShowUp(1, 2);
     }
   }
 
@@ -224,15 +225,16 @@ class NPCModal extends React.Component {
           this.handleStoryRecordDataFlow(npcID, data.line);
           this.setOtherView('final');
         } else {
-          this.handleStoryRecordDataFlow(npcID, npc.wait.line);
-          this.setNormalView(
-            {name: npc.name, img: npc.img},
-            {
-              line: npc.wait.line,
-              options: npc.wait.options,
-              onPress: this.closeModal,
-            },
-          );
+          // this.handleStoryRecordDataFlow(npcID, npc.wait.line);
+          // this.setNormalView(
+          //   {name: npc.name, img: npc.img},
+          //   {
+          //     line: npc.wait.line,
+          //     options: npc.wait.options,
+          //     onPress: this.closeModal,
+          //   },
+          // );
+          this.setOtherView('final');
         }
         break;
       case NPCIDlist[3]: // 主席

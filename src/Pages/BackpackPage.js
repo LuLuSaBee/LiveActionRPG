@@ -1,6 +1,5 @@
 import React from 'react';
-import {View, SafeAreaView, Image, Text, TouchableOpacity} from 'react-native';
-import {pushToStoryRecordPage} from '../utils/routerAction';
+import {View, SafeAreaView, Text} from 'react-native';
 import Styles from '../Styles/BackpackPage.style';
 import {itemsData} from '../data.source';
 import {connect} from 'react-redux';
@@ -8,6 +7,10 @@ import * as actionCreators from '../redux/actions';
 import BagView from '../Views/BagView';
 import ItemPreview from '../Views/ItemPreview';
 import {Dialog} from 'react-native-simple-dialogs';
+import {
+  pushToStoryRecordPage,
+  pushToCheckListPage,
+} from '../utils/routerAction';
 
 class BackpackPage extends React.Component {
   constructor(props) {
@@ -19,6 +22,7 @@ class BackpackPage extends React.Component {
     this.openItem = {
       terms: () => this.setState({dialogVisible: true}),
       book: () => pushToStoryRecordPage(),
+      checkList: () => pushToCheckListPage(),
     };
   }
 

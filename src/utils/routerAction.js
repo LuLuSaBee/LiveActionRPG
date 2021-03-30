@@ -13,6 +13,10 @@ export function pushToStoryRecordPage(props) {
   Actions.push(routerKey.StoryRecordPage, {...props});
 }
 
+export function pushToCheckListPage(props) {
+  Actions.push(routerKey.CheckListPage, {...props});
+}
+
 export function pop() {
   Actions.pop();
 }

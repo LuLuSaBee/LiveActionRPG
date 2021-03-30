@@ -29,6 +29,7 @@
     "react-native-screens": "^2.17.1",
     "react-native-simple-dialogs": "^1.4.0",
     "react-native-sound": "^0.11.0",
+    "react-native-step-indicator": "^1.0.3",
     "react-native-toast-message": "^1.4.9",
     "react-native-video": "^5.1.1",
     "react-redux": "^7.2.2",

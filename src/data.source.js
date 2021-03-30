@@ -5,6 +5,7 @@ export const routerKey = {
   BackpackPage: 'BackpackPage',
   InformationPage: 'InformationPage',
   StoryRecordPage: 'StoryRecordPage',
+  CheckListPage: 'CheckListPage',
 };
 
 export const landingPageData = {
@@ -601,7 +602,7 @@ export const itemsData = {
     key: 'checkList',
     name: '進度紀錄',
     img: require('./assets/item/checklist.png'),
-    description: 'description',
+    description: '目前的遊戲進度紀錄',
     buttonType: 'open',
   },
   achievement: {
