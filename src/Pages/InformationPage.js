@@ -141,7 +141,13 @@ class InformationPage extends React.Component {
                               ? Styles.ownMessage
                               : Styles.otherMessage,
                           ]}>
-                          <Text style={[Styles.text, Styles.ownMessageText]}>
+                          <Text
+                            style={[
+                              Styles.text,
+                              chat.sendFrom === userData.type
+                                ? Styles.ownMessageText
+                                : {},
+                            ]}>
                             {chat.message}
                           </Text>
                         </View>

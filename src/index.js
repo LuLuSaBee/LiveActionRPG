@@ -3,6 +3,7 @@ import {View} from 'react-native';
 import Styles from './Styles/index.style';
 import Toast, {BaseToast} from 'react-native-toast-message';
 import MainRouter from './Routers/MainRouter';
+import {initUser} from './utils/firebaseActions';
 import {playerBackgroundMusic} from './utils/musicPlayer';
 import rootReducer from './redux/reducers';
 import {Provider} from 'react-redux';
@@ -10,6 +11,7 @@ import {createStore} from 'redux';
 const store = createStore(rootReducer);
 
 export default function App() {
+  //initUser('YKSVnfNDDNOQETh6P8eq');
   playerBackgroundMusic();
   return (
     <Provider store={store}>

@@ -15,6 +15,11 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {connect} from 'react-redux';
 import * as actionCreators from '../redux/actions';
 import {addMessage} from '../utils/firebaseActions';
+import {
+  pushToAchievementPage,
+  pushToCheckListPage,
+  pushToStoryRecordPage,
+} from '../utils/routerAction';
 
 class HostHomePage extends React.Component {
   constructor(props) {
@@ -44,7 +49,7 @@ class HostHomePage extends React.Component {
 
   render() {
     const {message} = this.state;
-    const {chatList, userData, progressRate, timeLeft} = this.props;
+    const {chatList, userData, progressRate} = this.props;
 
     return (
       <View style={Styles.page}>
@@ -69,6 +74,7 @@ class HostHomePage extends React.Component {
                         height={20}
                         borderRadius={40}
                         animationType={'timing'}
+                        color={'#4F6D7A'}
                       />
                     </View>
                     <Text style={Styles.progressNumber}>{progressRate}%</Text>
@@ -77,7 +83,23 @@ class HostHomePage extends React.Component {
               />
               <InfoBox
                 boxStyle={[Styles.box, Styles.timeLeftBox]}
-                content={<View />}
+                content={[
+                  <TouchableOpacity
+                    key="1"
+                    onPress={() => pushToAchievementPage()}>
+                    <Text>成就</Text>
+                  </TouchableOpacity>,
+                  <TouchableOpacity
+                    key="2"
+                    onPress={() => pushToCheckListPage()}>
+                    <Text>進度</Text>
+                  </TouchableOpacity>,
+                  <TouchableOpacity
+                    key="3"
+                    onPress={() => pushToStoryRecordPage()}>
+                    <Text>紀錄</Text>
+                  </TouchableOpacity>,
+                ]}
               />
               <InfoBox
                 boxStyle={[Styles.box, Styles.supportRoom]}

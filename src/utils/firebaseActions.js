@@ -12,7 +12,7 @@ export function initUser(id) {
   achievement.push({id: 16, lock: true, progress: 0});
   const nowTime = new Date();
   const endTime = new Date();
-  endTime.setHours(endTime.getHours(), endTime.getMinutes() + 50);
+  endTime.setHours(endTime.getHours(), endTime.getMinutes() + 48);
   player.doc(id).update({
     achievement,
     storyRecord: [],

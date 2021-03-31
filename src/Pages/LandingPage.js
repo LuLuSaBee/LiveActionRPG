@@ -19,7 +19,7 @@ class LandingPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      teamName: '呂薄誘旅蘊折沉雁輔過來報一下',
+      teamName: 'WSJ口交惡徒—我叫你吹！',
     };
   }
 
@@ -49,7 +49,7 @@ class LandingPage extends React.Component {
         updateProgressRate,
         updateTimeLeft,
       } = this.props;
-      const uid = 'tjkrdJLNtcgflAZEMnrT';
+      const uid = 'YKSVnfNDDNOQETh6P8eq';
       pushToHostHomePage();
       this.initReduxState({type: 'host', uid: uid});
       snapshotPlayer(
