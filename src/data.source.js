@@ -8,6 +8,7 @@ export const routerKey = {
   CheckListPage: 'CheckListPage',
   AchievementPage: 'AchievementPage',
   HostHomePage: 'HostHomePage',
+  SettlementPage: 'SettlementPage',
 };
 
 export const landingPageData = {
@@ -71,6 +72,12 @@ export const npcModalPageData = {
       cancel: '再想想',
     },
   ],
+};
+
+export const SettlementPageData = {
+  progress: {
+    title: '遊戲完成度',
+  },
 };
 
 import {ifIphoneX} from 'react-native-iphone-x-helper';
@@ -207,9 +214,11 @@ export const npcData = {
     },
     fail: {
       line: '這不是我的好朋友，你把我的好朋友帶去哪了，給我滾出去',
+      options: ['前往遊戲結算'],
     },
     success: {
       line: '蒙娜麗莎，你終於回來了，我好想你',
+      options: ['前往遊戲結算'],
     },
   },
   10003: {

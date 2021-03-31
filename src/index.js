@@ -10,7 +10,7 @@ import {createStore} from 'redux';
 const store = createStore(rootReducer);
 
 export default function App() {
-  //playerBackgroundMusic();
+  playerBackgroundMusic();
   return (
     <Provider store={store}>
       <View style={Styles.page}>

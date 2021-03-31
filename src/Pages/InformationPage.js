@@ -16,6 +16,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {connect} from 'react-redux';
 import * as actionCreators from '../redux/actions';
 import {addMessage} from '../utils/firebaseActions';
+import {replaceToSettlementPage} from '../utils/routerAction';
 /*
 進度
 時間
@@ -28,7 +29,6 @@ class InformationPage extends React.Component {
       message: '',
     };
   }
-  // + 183594
 
   componentDidMount() {
     const interval = 1000;
@@ -39,6 +39,7 @@ class InformationPage extends React.Component {
         return;
       }
       clearInterval(this.timer);
+      replaceToSettlementPage();
     }, interval);
   }
 
@@ -87,6 +88,7 @@ class InformationPage extends React.Component {
                         height={20}
                         borderRadius={40}
                         animationType={'timing'}
+                        color={'#4F6D7A'}
                       />
                     </View>
                     <Text style={Styles.progressNumber}>{progressRate}%</Text>

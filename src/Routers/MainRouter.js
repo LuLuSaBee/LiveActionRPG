@@ -10,6 +10,7 @@ import NPCModal from '../Pages/NPCModal';
 import CheckListPage from '../Pages/CheckListPage';
 import HostHomePage from '../Pages/HostHomePage';
 import AchievementPage from '../Pages/AchievementPage';
+import SettlementPage from '../Pages/SettlementPage';
 
 import CustAlert from '../Views/CustAlert';
 
@@ -56,6 +57,7 @@ export default function MainRouter() {
           <Scene key={routerKey.StoryRecordPage} component={StoryRecordPage} />
           <Scene key={routerKey.CheckListPage} component={CheckListPage} />
           <Scene key={routerKey.AchievementPage} component={AchievementPage} />
+          <Scene key={routerKey.SettlementPage} component={SettlementPage} />
           <Scene key={routerKey.HostHomePage} component={HostHomePage} />
         </Scene>
       </Router>

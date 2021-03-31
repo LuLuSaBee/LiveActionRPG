@@ -73,8 +73,10 @@ export function initPlayerData(
       initBackpackItem(backpackItem);
       initStartTime(startTime.seconds * 1000 + startTime.nanoseconds / 1000000);
 
-      const time = endTime.seconds * 1000 + endTime.nanoseconds / 1000000;
-      updateTimeLeft(time - moment());
+      var time =
+        endTime.seconds * 1000 + endTime.nanoseconds / 1000000 - moment();
+      time = time < 0 ? 0 : time;
+      updateTimeLeft(time);
     });
 }
 
@@ -88,8 +90,10 @@ export function snapshotChatList(uid, initChatList, updateTimeLeft) {
     const source = data.metadata.hasPendingWrites ? 'Local' : 'Server';
     if (source === 'Local') {
       const {endTime} = data._data;
-      const time = endTime.seconds * 1000 + endTime.nanoseconds / 1000000;
-      updateTimeLeft(time - moment());
+      var time =
+        endTime.seconds * 1000 + endTime.nanoseconds / 1000000 - moment();
+      time = time < 0 ? 0 : time;
+      updateTimeLeft(time);
     } else {
       const {chatList} = data._data;
       initChatList(chatList);
@@ -116,8 +120,10 @@ export function snapshotPlayer(
     const source = data.metadata.hasPendingWrites ? 'Local' : 'Server';
     if (source === 'Server') {
       const {endTime, chatList, storyRecord, progressRate} = data._data;
-      const time = endTime.seconds * 1000 + endTime.nanoseconds / 1000000;
-      updateTimeLeft(time - moment());
+      var time =
+        endTime.seconds * 1000 + endTime.nanoseconds / 1000000 - moment();
+      time = time < 0 ? 0 : time;
+      updateTimeLeft(time);
       initChatList(chatList);
       initStoryRecord(storyRecord);
       initProgressRate(progressRate);

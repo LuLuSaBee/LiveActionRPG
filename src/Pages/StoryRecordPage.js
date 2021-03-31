@@ -11,9 +11,12 @@ import moment from 'moment';
 class StoryRecordPage extends React.Component {
   constructor(props) {
     super(props);
+    this.props = props;
   }
 
   render() {
+    const {checkPoint, startTime} = this.props;
+    const length = checkPoint.length;
     return (
       <View style={Styles.page}>
         <FlatList
@@ -51,8 +54,10 @@ class StoryRecordPage extends React.Component {
                       <Text>
                         {moment(
                           record.time.seconds * 1000 +
-                            record.time.nanoseconds / 1000000,
-                        ).format('HH:mm:ss')}
+                            record.time.nanoseconds / 1000000 -
+                            startTime -
+                            28800000,
+                        ).format('mm:ss')}
                       </Text>
                     </View>
                   </View>,

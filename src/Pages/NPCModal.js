@@ -88,6 +88,8 @@ class NPCModal extends React.Component {
       this.beaconScanner.initBeacon();
       this.beaconScanner.startScan(this.beaconUpdate);
       this.handleNPCShowUp(1, 2);
+    } else if (this.props.timeLeft === 0) {
+      this.beaconScanner.stopScan();
     }
   }
 
@@ -773,14 +775,31 @@ class NPCModal extends React.Component {
       this.handlePoint(checkPointDataList[11]);
       this.setNormalView(
         {name: npc.name, img: npc.img},
-        {line: npc.success.line},
+        {
+          line: npc.success.line,
+          options: npc.success.options,
+          onPress: () => {
+            this.props.updateTimeLeft(0);
+            this.closeModal();
+          },
+        },
       );
       playSuccess();
     } else {
       this.handleStoryRecordDataFlow(10002, npc.fail.line);
       this.unLockAchievement(achievementData[10]);
       this.handlePoint(checkPointDataList[10]);
-      this.setNormalView({name: npc.name, img: npc.img}, {line: npc.fail.line});
+      this.setNormalView(
+        {name: npc.name, img: npc.img},
+        {
+          line: npc.fail.line,
+          options: npc.success.options,
+          onPress: () => {
+            this.props.updateTimeLeft(0);
+            this.closeModal();
+          },
+        },
+      );
       playFail();
     }
   };

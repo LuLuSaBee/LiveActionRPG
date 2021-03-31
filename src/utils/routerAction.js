@@ -25,6 +25,10 @@ export function pushToHostHomePage(props) {
   Actions.push(routerKey.HostHomePage, {...props});
 }
 
+export function replaceToSettlementPage(props) {
+  Actions.replace(routerKey.SettlementPage, {...props});
+}
+
 export function pop() {
   Actions.pop();
 }
