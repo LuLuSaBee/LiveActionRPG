@@ -10,7 +10,9 @@ export function initUser(id) {
     achievement.push({id: index, lock: true});
   }
   achievement.push({id: 16, lock: true, progress: 0});
-
+  const nowTime = new Date();
+  const endTime = new Date();
+  endTime.setHours(endTime.getHours(), endTime.getMinutes() + 50);
   player.doc(id).update({
     achievement,
     storyRecord: [],
@@ -18,8 +20,8 @@ export function initUser(id) {
     progressRate: 0,
     backpackItem: ['terms', 'checkList', 'achievement', 'book'],
     chatList: [],
-    endTime: firestore.Timestamp.fromDate(new Date()),
-    startTime: firestore.Timestamp.fromDate(new Date()),
+    endTime: firestore.Timestamp.fromDate(endTime),
+    startTime: firestore.Timestamp.fromDate(nowTime),
   });
 }
 
