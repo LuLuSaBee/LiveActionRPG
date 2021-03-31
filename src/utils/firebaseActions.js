@@ -38,6 +38,7 @@ export async function checkIsUser(text) {
  * @param {Function} updateTimeLeft  - function that init TimeLeft
  * @param {Function} initAchievement - function that init Achievement
  * @param {Function} initBackpackItem -function that init BackpackItem
+ * @param {Function} initStartTime -function that init StartTime
  */
 export function initPlayerData(
   uid,
@@ -48,6 +49,7 @@ export function initPlayerData(
   updateTimeLeft,
   initAchievement,
   initBackpackItem,
+  initStartTime,
 ) {
   player
     .doc(uid)
@@ -61,6 +63,7 @@ export function initPlayerData(
         endTime,
         progressRate,
         storyRecord,
+        startTime,
       } = data._data;
       initChatList(chatList);
       initStoryRecord(storyRecord);
@@ -68,6 +71,7 @@ export function initPlayerData(
       initProgressRate(progressRate);
       initAchievement(achievement);
       initBackpackItem(backpackItem);
+      initStartTime(startTime.seconds * 1000 + startTime.nanoseconds / 1000000);
 
       const time = endTime.seconds * 1000 + endTime.nanoseconds / 1000000;
       updateTimeLeft(time - moment());

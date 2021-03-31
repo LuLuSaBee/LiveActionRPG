@@ -12,6 +12,7 @@ export const UPDATE_ACHIEVENENT = 'UPDATE_ACHIEVENENT';
 export const INIT_BACKPACKITEM = 'INIT_BACKPACKITEM';
 export const ADD_BACKPACKITEM = 'ADD_BACKPACKITEM';
 export const REDUCE_BACKPACKITEM = 'REDUCE_BACKPACKITEM';
+export const INIT_STARTTIME = 'INIT_STARTTIME';
 
 export const updateCheckPoint = (checkPoint) => ({
   type: UPDATE_CHECKPOINT,
@@ -86,4 +87,9 @@ export const addBackpackItem = (backpackItem) => ({
 export const reduceBackpackItem = (backpackItem) => ({
   type: REDUCE_BACKPACKITEM,
   backpackItem,
+});
+
+export const initStartTime = (startTime) => ({
+  type: INIT_STARTTIME,
+  startTime,
 });

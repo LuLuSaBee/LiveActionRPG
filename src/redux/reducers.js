@@ -13,6 +13,7 @@ import {
   INIT_BACKPACKITEM,
   ADD_BACKPACKITEM,
   REDUCE_BACKPACKITEM,
+  INIT_STARTTIME,
 } from './actions';
 import {combineReducers} from 'redux';
 
@@ -102,6 +103,15 @@ const backpackItem = (state = [], action) => {
   }
 };
 
+const startTime = (state = 0, action) => {
+  switch (action.type) {
+    case INIT_STARTTIME:
+      return action.startTime;
+    default:
+      return state;
+  }
+};
+
 const rootReducer = combineReducers({
   checkPoint,
   timeLeft,
@@ -111,6 +121,7 @@ const rootReducer = combineReducers({
   progressRate,
   achievement,
   backpackItem,
+  startTime,
 });
 
 export default rootReducer;

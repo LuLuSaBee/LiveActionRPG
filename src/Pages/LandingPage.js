@@ -72,6 +72,7 @@ class LandingPage extends React.Component {
       updateTimeLeft,
       initAchievement,
       initBackpackItem,
+      initStartTime,
     } = this.props;
 
     //at reducer
@@ -87,6 +88,7 @@ class LandingPage extends React.Component {
       updateTimeLeft,
       initAchievement,
       initBackpackItem,
+      initStartTime,
     );
   };
 

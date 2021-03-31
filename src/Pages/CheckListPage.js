@@ -41,7 +41,7 @@ class CheckListPage extends React.Component {
   }
 
   render() {
-    const {checkPoint} = this.props;
+    const {checkPoint, startTime} = this.props;
     const length = checkPoint.length;
     return (
       <View style={Styles.container}>
@@ -54,8 +54,10 @@ class CheckListPage extends React.Component {
                 '' +
                 moment(
                   checkPoint[length - index - 1].time.seconds * 1000 +
-                    checkPoint[length - index - 1].time.nanoseconds / 1000000,
-                ).format('HH:mm:ss')
+                    checkPoint[length - index - 1].time.nanoseconds / 1000000 -
+                    startTime -
+                    28800000,
+                ).format('mm:ss')
               : label,
           )}
           direction={'vertical'}
