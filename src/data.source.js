@@ -50,7 +50,7 @@ export const informationPageData = {
     title: '支援',
     submit: '發送',
     placeholder: '請輸入...',
-    supportItems: ['需要幫忙', '請求支援', '找不到物品', '找不到展覽品'],
+    supportItems: ['需要幫忙', '找不到展覽品', '找不到NPC', '解不開密碼'],
   },
 };
 

@@ -141,7 +141,9 @@ class InformationPage extends React.Component {
                               ? Styles.ownMessage
                               : Styles.otherMessage,
                           ]}>
-                          <Text style={Styles.text}>{chat.message}</Text>
+                          <Text style={[Styles.text, Styles.ownMessageText]}>
+                            {chat.message}
+                          </Text>
                         </View>
                       ))}
                     </ScrollView>
@@ -170,7 +172,7 @@ class InformationPage extends React.Component {
                         <TouchableOpacity
                           style={Styles.roomSubmit}
                           onPress={() => this.onSummitMessage(message)}>
-                          <Text style={Styles.text}>
+                          <Text style={[Styles.text, Styles.submitText]}>
                             {pageData.supportRoom.submit}
                           </Text>
                         </TouchableOpacity>

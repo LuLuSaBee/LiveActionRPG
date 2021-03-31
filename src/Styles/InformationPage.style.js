@@ -95,9 +95,10 @@ export default StyleSheet.create({
     marginBottom: 5,
   },
   ownMessage: {
-    backgroundColor: 'red',
+    backgroundColor: '#4F6D7A',
     alignSelf: 'flex-end',
   },
+  ownMessageText: {color: 'white'},
   otherMessage: {
     backgroundColor: 'white',
   },
@@ -131,7 +132,7 @@ export default StyleSheet.create({
     marginRight: 10,
     marginVertical: 5,
     borderRadius: 5,
-    backgroundColor: 'red',
+    backgroundColor: '#4F6D7A',
   },
   supportSuggsetion: {
     maxHeight: 33,
@@ -150,5 +151,8 @@ export default StyleSheet.create({
   },
   text: {
     fontSize: 20,
+  },
+  submitText: {
+    color: 'white',
   },
 });

@@ -19,7 +19,7 @@ class LandingPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      teamName: '',
+      teamName: '呂薄誘旅蘊折沉雁輔過來報一下',
     };
   }
 
