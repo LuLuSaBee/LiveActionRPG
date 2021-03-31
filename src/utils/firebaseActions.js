@@ -4,6 +4,25 @@ import moment from 'moment';
 const host = firestore().collection('host');
 const player = firestore().collection('player');
 
+export function initUser(id) {
+  var achievement = [];
+  for (let index = 0; index < 16; index++) {
+    achievement.push({id: index, lock: true});
+  }
+  achievement.push({id: 16, lock: true, progress: 0});
+
+  player.doc(id).update({
+    achievement,
+    storyRecord: [],
+    checkPoint: [],
+    progressRate: 0,
+    backpackItem: ['terms', 'checkList', 'achievement', 'book'],
+    chatList: [],
+    endTime: '',
+    startTime: '',
+  });
+}
+
 /**
  *
  * @param {String} text - host name or player name

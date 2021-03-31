@@ -58,23 +58,6 @@ class NPCModal extends React.Component {
     this.closeModal = closeModal;
     this.openAlert = openAlert;
     this.closeAlert = closeAlert;
-
-    // var tmp = [];
-    // for (let index = 0; index < 16; index++) {
-    //   tmp.push({id: index, lock: true});
-    // }
-    // tmp.push({id: 16, lock: true, progress: 0});
-    // firestore()
-    //   .collection('player')
-    //   .doc('tjkrdJLNtcgflAZEMnrT')
-    //   .update({
-    //     achievement: tmp,
-    //     storyRecord: [],
-    //     checkPoint: [],
-    //     progressRate: 0,
-    //     backpackItem: ['terms', 'checkList', 'achievement', 'book'],
-    //     chatList: [],
-    //   });
   }
 
   componentDidUpdate() {
@@ -227,16 +210,15 @@ class NPCModal extends React.Component {
           this.handleStoryRecordDataFlow(npcID, data.line);
           this.setOtherView('final');
         } else {
-          // this.handleStoryRecordDataFlow(npcID, npc.wait.line);
-          // this.setNormalView(
-          //   {name: npc.name, img: npc.img},
-          //   {
-          //     line: npc.wait.line,
-          //     options: npc.wait.options,
-          //     onPress: this.closeModal,
-          //   },
-          // );
-          this.setOtherView('final');
+          this.handleStoryRecordDataFlow(npcID, npc.wait.line);
+          this.setNormalView(
+            {name: npc.name, img: npc.img},
+            {
+              line: npc.wait.line,
+              options: npc.wait.options,
+              onPress: this.closeModal,
+            },
+          );
         }
         break;
       case NPCIDlist[3]: // 主席
