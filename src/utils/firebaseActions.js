@@ -18,8 +18,8 @@ export function initUser(id) {
     progressRate: 0,
     backpackItem: ['terms', 'checkList', 'achievement', 'book'],
     chatList: [],
-    endTime: '',
-    startTime: '',
+    endTime: firestore.Timestamp.fromDate(new Date()),
+    startTime: firestore.Timestamp.fromDate(new Date()),
   });
 }
 
